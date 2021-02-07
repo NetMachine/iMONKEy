@@ -7,29 +7,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pifardi</title>
     <style>
-     
+      .responsive-container {
+    position: relative;
+    width: 100%;
+    border: 1px solid black;
+}
 
-    .myImage {
-        width: 60%
+.dummy {
+    padding-top: 100%; /* forces 1:1 aspect ratio */
+}
+
+.img-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.img-container > img {  
+  margin-top:-50%;
+  margin-left:-50%;
+}
+img {
+  width:300px;
+  height:300px;
+  background-color:red;
+  
+}
+    </style>
     
-   
-      
-         
-    }
-
-
-
-</style>
-    
-    <body bgcolor="#000000">
-    
-    <image src="pifardi.jpg" class="myImage">
-   
-</body>
-      
 
 
 
   </head>
+      <body bgcolor="#000000">
+        <div class="responsive-container">
+          <div class="dummy"></div>
+          <div class="img-container">
+             <image src="pifardi.jpg" class="img">
+          </div>
+        </div>
+      </body>
+    
 </html>
 
