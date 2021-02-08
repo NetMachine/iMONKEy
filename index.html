@@ -52,13 +52,25 @@
     transform:translate(-50%,-50%);
     }
   }
+  
+  .box img {
+    -webkit-transition: opacity .5s ease-in-out;
+}
+.box img.clicked{
+    opacity: 0.0;
+ }
 </style>
+<script>
+  $('.box img').on('click', function() {
+    $(this).toggleClass('clicked');
+  });
+</script>
 </head>
       
   <body bgcolor="#000000">
-      
-    <img src="https://pifardi.cl/pifardi.jpg" alt="pifardi">
-      
+    <div class="box"> 
+      <img src="https://pifardi.cl/pifardi.jpg" alt="pifardi">
+    </div>  
   </body>
     
 </html>
