@@ -14,12 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
   
-    img {
-    -webkit-transition: opacity .5s ease-in-out;
-}
-img.clicked{
-    opacity: 0.0;
- }
+
   @media only screen and (orientation:landscape) { img {
     position: absolute;
     width:50%;
@@ -64,15 +59,18 @@ img.clicked{
 
 </style>
 <script>
-  $('.box img').on('click', function() {
-    $(this).toggleClass('clicked');
+$(document).ready(function(){
+  $("img").click(function(){
+    $("#imageFade").fadeIn();
+   
   });
+});
 </script>
 </head>
       
   <body bgcolor="#000000">
      
-      <img src="https://pifardi.cl/pifardi.jpg" alt="pifardi">
+      <img src="https://pifardi.cl/pifardi.jpg" id="imageFade" alt="pifardi">
      
   </body>
     
