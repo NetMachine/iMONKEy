@@ -16,11 +16,12 @@
   <script>
 $(document).ready(function(){
   $("#div1").click(function(){
-    blurElement("img", 2);
+    blurElement("#div1", 2);
    
   });
   
-  function blurElement(element, size) {
+});
+function blurElement(element, size) {
      var filterVal = 'blur(' + size + 'px)';
       $(element).css({
         'filter':filterVal,
@@ -33,7 +34,8 @@ $(document).ready(function(){
         '-moz-transition':'all 0.5s ease-out',
         '-o-transition':'all 0.5s ease-out'
     });
-});
+
+ }
     
     
 </script>
