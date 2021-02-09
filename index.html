@@ -66,6 +66,50 @@ $(document).ready(function(){
     }
   }
   
+  
+  
+  
+  @media only screen and (orientation:landscape) { img2 {
+    position: absolute;
+    width:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%); 
+  
+    
+    } }
+  @media only screen and (max-width: 850px) {
+  
+  img2 {
+    position: absolute;
+    width:100%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%); 
+  
+    
+    }
+  }
+  @media only screen and (min-width: 850px) {
+    img2 {
+      position: absolute;
+    width:70%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    }
+  }
+  
+  @media only screen and (min-width: 1200px) {
+    img2 {
+      position: absolute;
+    width:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    }
+  }
+  
 
 </style>
 
@@ -74,8 +118,9 @@ $(document).ready(function(){
   <body bgcolor="#000000">
      <div id="div1">
       <img src="https://pifardi.cl/pifardi.jpg" alt="pifardi">
-      <img src="https://pifardi.cl/pifardi_blur.jpg" alt="pifardi">
+      
     </div>
+      <img2 src="https://pifardi.cl/pifardi_blur.jpg" alt="pifardi">
      
      
   </body>
