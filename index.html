@@ -16,7 +16,7 @@
   <script>
 $(document).ready(function(){
   $("#div1").click(function(){
-    blurElement("img", 10);
+    blurElement("#logo", 10);
    
   });
   
@@ -89,11 +89,15 @@ function blurElement(element, size) {
 </head>
       
   <body bgcolor="#000000">
-     <div id="div1">
-      <img src="https://pifardi.cl/pifardi.jpg" alt="pifardi">     
+    <div id="div1">
+      <img src="https://pifardi.cl/pifardi.jpg" id="logo" alt="pifardi">     
     </div>
     
-    <img2 src="https://pifardi.cl/button.png" alt="">     
+    <div class="container">
+      <button <img src="https://pifardi.cl/button.png"> class="btn"></button>     
+    </div>
+    
+         
       
      
      
