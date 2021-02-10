@@ -42,15 +42,27 @@ function blurElement(element, size) {
 <style>
   
 
-  @media only screen and (orientation:landscape) { .container_logo .logo {
-    position: absolute;
-    width:50%;
-    top:50%;
+  @media only screen and (orientation:landscape) { 
+    .container_logo .logo {
+    
+      position: absolute;
+      width:50%;
+      top:50%;
     left:50%;
     transform:translate(-50%,-50%); 
   
     
-    } }
+    } 
+    .container .info {
+    position: absolute;
+    width:60%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,350%);
+    
+    
+  }
+  }
   @media only screen and (max-width: 850px) {
   
   .container_logo .logo {
@@ -62,6 +74,15 @@ function blurElement(element, size) {
   
     
     }
+    .container .info {
+    position: absolute;
+    width:40%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,350%);
+    
+    
+  }
   }
   @media only screen and (min-width: 850px) {
     .container_logo .logo {
@@ -71,6 +92,15 @@ function blurElement(element, size) {
     left:50%;
     transform:translate(-50%,-50%);
     }
+    .container .info {
+    position: absolute;
+    width:20%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,350%);
+    
+    
+  }
   }
   
   @media only screen and (min-width: 1200px) {
@@ -81,11 +111,7 @@ function blurElement(element, size) {
     left:50%;
     transform:translate(-50%,-50%);
     }
-  }
-  .container_logo .logo {
-     z-index: -1;
-  }
-  .container .info {
+    .container .info {
     position: absolute;
     width:5%;
     top:50%;
@@ -94,6 +120,11 @@ function blurElement(element, size) {
     
     
   }
+  }
+  .container_logo .logo {
+     z-index: -1;
+  }
+
 </style>
 
 </head>
