@@ -24,6 +24,15 @@ $(document).ready(function(){
    
   });
   
+  $("#info2").click(function(){
+    blurElement("#logo", 0);
+    $("#info2").fadeOut();
+    $("#info").fadeIn();
+    
+    
+   
+  });
+  
 });
 function blurElement(element, size) {
      var filterVal = 'blur(' + size + 'px)';
