@@ -58,9 +58,51 @@ function blurElement(element, size) {
 <style>
 
   
-
+  .container_logo .logo {
+     z-index: -1;
+  }
+  
   .container .info {
-  cursor: pointer;
+    cursor: pointer;
+  }
+  
+   @media only screen and (max-width: 600px) {
+  
+    .container_logo .logo {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%); 
+    }
+     
+    .container .info {
+      position: absolute;
+      width:9%;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,500%);
+    }
+    
+    .container2 {
+      position: absolute;
+      width:100%;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%); 
+    
+    }
+     
+    .col-sm-2{
+      width:20%;
+      float: left;
+      margin: 0 -0.5%;
+    }
+    
+    .social_image {
+      width:500%;
+      height:auto;
+    }
   }
   
   @media only screen and (max-width: 800px) {
@@ -98,7 +140,7 @@ function blurElement(element, size) {
   margin: 0 -0.5%;
 }
       .social_image {
-  width:450%;
+  width:250%;
   height:auto;
 }
   }
@@ -175,9 +217,7 @@ function blurElement(element, size) {
 }
   }
   
-  .container_logo .logo {
-     z-index: -1;
-  }
+
   
 
 
