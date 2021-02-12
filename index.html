@@ -152,6 +152,11 @@ function blurElement(element, size) {
   .container_logo .logo {
      z-index: -1;
   }
+  
+  .social_image {
+  width:100%;
+  height:auto;
+}
 
 </style>
 
@@ -167,31 +172,31 @@ function blurElement(element, size) {
   <div class="row text-center">
     <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
       <figure>
-        <img src="https://pifardi.cl/instagram.png" style="width:50%;"/>
+        <img class="social_image"src="https://pifardi.cl/instagram.png"/>
         <figcaption></figcaption>
       </figure>
     </div>
     <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
       <figure>
-        <img src="https://pifardi.cl/facebook.png" style="width:50%;"/>
+        <img class="social_image" src="https://pifardi.cl/facebook.png"/>
         <figcaption></figcaption>
       </figure>
     </div>
     <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
       <figure>
-        <img src="https://pifardi.cl/twitter.png" style="width:50%;"/>
+        <img class="social_image" src="https://pifardi.cl/twitter.png"/>
         <figcaption></figcaption>
       </figure>
     </div>
     <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
       <figure>
-        <img src="https://pifardi.cl/messenger.png" style="width:50%;"/>
+        <img class="social_image" src="https://pifardi.cl/messenger.png"/>
         <figcaption></figcaption>
       </figure>
     </div>
     <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
       <figure>
-        <img src="https://pifardi.cl/whatsapp.png" style="width:50%;"/>
+        <img class="social_image" src="https://pifardi.cl/whatsapp.png"/>
         <figcaption></figcaption>
       </figure>
     </div>    
