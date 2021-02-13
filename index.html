@@ -38,6 +38,9 @@
   function blurElement(element, size) {
        var filterVal = 'blur(' + size + 'px)';
        $(element).css({
+         '-webkit-transform': 'translateZ(0)',
+'-webkit-backface-visibility': 'hidden',
+'-webkit-perspective': '1000',
           'filter':filterVal,
           'webkitFilter':filterVal,
           'mozFilter':filterVal,
