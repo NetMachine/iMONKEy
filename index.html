@@ -2,62 +2,58 @@
 <html lang="en" class="h-100">
   
 <head>
+
 <meta charset="utf-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <title>Pifardi</title>
+
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#000000">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-$(document).ready(function(){
-  $("#info").click(function(){
-    blurElement("#logo", 15);
-    $("#info").fadeOut();
-    $("#info2").fadeIn();
-    
-    $("#container2").fadeIn();
-    
-    
-   
-  });
-  
-  $("#info2").click(function(){
-    blurElement("#logo", 0);
-    $("#info2").fadeOut();
-    $("#info").fadeIn();
-    $("#container2").fadeOut();
-    
-    
-   
-  });
-  
-});
-function blurElement(element, size) {
-     var filterVal = 'blur(' + size + 'px)';
-      $(element).css({
-        'filter':filterVal,
-        'webkitFilter':filterVal,
-        'mozFilter':filterVal,
-        'oFilter':filterVal,
-        'msFilter':filterVal,
-        'transition':'all 0.5s ease-out',
-        '-webkit-transition':'all 0.5s ease-out',
-        '-moz-transition':'all 0.5s ease-out',
-        '-o-transition':'all 0.5s ease-out'
-    });
 
- }
-    
-    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+  $(document).ready(function(){
+    $("#info").click(function(){
+      blurElement("#logo", 15);
+      $("#info").fadeOut();
+      $("#info2").fadeIn();  
+      $("#container2").fadeIn();
+    });  
+    $("#info2").click(function(){
+      blurElement("#logo", 0);
+      $("#info2").fadeOut();
+      $("#info").fadeIn();
+      $("#container2").fadeOut(); 
+    });  
+  });
+  
+  function blurElement(element, size) {
+       var filterVal = 'blur(' + size + 'px)';
+       $(element).css({
+          'filter':filterVal,
+          'webkitFilter':filterVal,
+          'mozFilter':filterVal,
+          'oFilter':filterVal,
+          'msFilter':filterVal,
+          'transition':'all 0.5s ease-out',
+          '-webkit-transition':'all 0.5s ease-out',
+          '-moz-transition':'all 0.5s ease-out',
+          '-o-transition':'all 0.5s ease-out'
+        });
+  }
+
 </script>
+
 <style>
 
-  
   .container_logo .logo {
      z-index: -1;
   }
@@ -66,8 +62,73 @@ function blurElement(element, size) {
     cursor: pointer;
   }
   
-   @media only screen and (max-width: 600px) {
+   @media only screen and (max-width: 400px) {
+    .container_logo .logo {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%); 
+    }     
+    .container .info {
+        position: absolute;
+        width:9%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,500%);
+    }  
+    .container2 {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:53.5%;
+        transform:translate(-50%,-50%);   
+    }     
+    .col-sm-2{
+        width:20%;
+        float: left;
+        margin: 0 0%;
+    }  
+    .social_image {
+        width:65%;
+        height:auto;
+    }
+  }
+
+  @media only screen and (min-width: 400px) {
+    .container_logo .logo {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);       
+    }
+    .container .info {
+        position: absolute;
+        width:9%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,500%);        
+    }    
+    .container2 {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:54.5%;
+        transform:translate(-50%,-50%);   
+    }
+    .col-sm-2{
+        width:20%;
+        float: left;
+        margin: 0 0%;
+    }
+    .social_image {
+        width:55%;
+        height:auto;
+    }
+  }
   
+  @media only screen and (min-width: 600px) {
     .container_logo .logo {
         position: absolute;
         width:100%;
@@ -75,216 +136,132 @@ function blurElement(element, size) {
         left:50%;
         transform:translate(-50%,-50%); 
     }
-     
     .container .info {
-      position: absolute;
-      width:9%;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,500%);
+        position: absolute;
+        width:9%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,500%);    
     }
-    
     .container2 {
-      position: absolute;
-      width:100%;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%); 
-    
+        position: absolute;
+        width:80%;
+        top:50%;
+        left:53.5%;
+        transform:translate(-50%,-50%); 
     }
-     
     .col-sm-2{
-      width:20%;
-      float: left;
-      margin: 0 -0.5%;
+        width:20%;
+        float: left;
+        margin: 0 0;
     }
-    
     .social_image {
-      width:450%;
-      height:auto;
+        width:60%;
+        height:auto;
     }
   }
   
-  @media only screen and (min-width: 600px) {
-  
-  .container_logo .logo {
-    position: absolute;
-    width:100%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%); 
-  
-    
-    }
-    .container .info {
-    position: absolute;
-    width:9%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,500%);
-    
-    
-    }
-    
-    .container2 {
-      position: absolute;
-    width:80%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%); 
-    
-    }
-      .col-sm-2{
-  width:20%;
-  float: left;
-  margin: 0 -0.5%;
-}
-      .social_image {
-  width:250%;
-  height:auto;
-}
-  }
   @media only screen and (min-width: 800px) {
     .container_logo .logo {
-      position: absolute;
-    width:70%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+        position: absolute;
+        width:70%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
     }
     .container .info {
-    position: absolute;
-    width:4%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,620%);
-    
-    
+        position: absolute;
+        width:4%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,620%);
     }
-    
     .container2{
-      position: absolute;
-    width:80%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%); 
-    
+        position: absolute;
+        width:60%;
+        top:50%;
+        left:52.5%;
+        transform:translate(-50%,-50%); 
     }
-      .col-sm-2{
-  width:20%;
-  float: left;
-}
-      .social_image {
-  width:100%;
-  height:auto;
-}
+    .col-sm-2{
+        width:20%;
+        float: left;
+        margin: 0 0;
+    }
+    .social_image {
+        width:60%;
+        height:auto;
+    }
   }
   
   @media only screen and (min-width: 1200px) {
     .container_logo .logo {
-      position: absolute;
-    width:50%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+        position: absolute;
+        width:50%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
     }
     .container .info {
-    position: absolute;
-    width:3%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,620%);
-    
-    
-    }
-    
+        position: absolute;
+        width:3%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,620%);
+    }  
     .container2 {
-      position: absolute;
-    width:50%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%); 
-    
+        position: absolute;
+        width:40%;
+        top:50%;
+        left:51.5%;
+        transform:translate(-50%,-50%); 
     }
-    
-      .col-sm-2{
-  width:20%;
-  float: left;
-}
-      .social_image {
-  width:100%;
-  height:auto;
-}
+    .col-sm-2{
+        width:20%;
+        float: left;
+    }
+    .social_image {
+        width:60%;
+        height:auto;
+    }
   }
-  
-
-  
-
 
 </style>
 
 </head>
       
   <body bgcolor="#000000">
-    <div id="div1" class="container_logo">
-      
+
+    <div id="div1" class="container_logo">      
       <img src="https://pifardi.cl/pifardi.jpg" id="logo" class="logo" alt="pifardi">
     </div>
     
-  <div class="container2" id="container2" style="display:none;">
-  <div class="row text-center">
-    <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
-      <figure>
-        <img class="social_image"src="https://pifardi.cl/instagram.png"/>
-        <figcaption></figcaption>
-      </figure>
+    <div class="container2" id="container2" style="display:none;">
+      <!--<div class="row text-center">-->
+        <div class="col-sm-2">
+            <img class="social_image"src="https://pifardi.cl/instagram.png"/>  
+        </div>
+        <div class="col-sm-2">  
+            <img class="social_image" src="https://pifardi.cl/facebook.png"/>  
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="https://pifardi.cl/twitter.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="https://pifardi.cl/messenger.png"/>  
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="https://pifardi.cl/whatsapp.png"/>
+        </div>   
+      <!--</div>--> 
     </div>
-    <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
-      <figure>
-        <img class="social_image" src="https://pifardi.cl/facebook.png"/>
-        <figcaption></figcaption>
-      </figure>
-    </div>
-    <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
-      <figure>
-        <img class="social_image" src="https://pifardi.cl/twitter.png"/>
-        <figcaption></figcaption>
-      </figure>
-    </div>
-    <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
-      <figure>
-        <img class="social_image" src="https://pifardi.cl/messenger.png"/>
-        <figcaption></figcaption>
-      </figure>
-    </div>
-    <div class="col-sm-2" *ngFor="let smiley of agtContentService.smileys">
-      <figure>
-        <img class="social_image" src="https://pifardi.cl/whatsapp.png"/>
-        <figcaption></figcaption>
-      </figure>
-    </div>    
-  </div>
-</div>
-    
-  <!-- // <div id="div1" class="container_button">  
-    //  <img src="https://pifardi.cl/instagram.png" id="instagram" class="social_button" alt="instagram" style="transform:translate(-100%,0%);">
-    //  <img src="https://pifardi.cl/facebook.png" id="facebook" class="social_button" alt="facebook">
-   //   <img src="https://pifardi.cl/twitter.png" id="twitter" class="social_button" alt="twitter">
-    //  <img src="https://pifardi.cl/messenger.png" id="messenger" class="social_button" alt="messenger">
-    //  <img src="https://pifardi.cl/whatsapp.png" id="whatsapp" class="social_button" alt="whatsapp">
-      
-    //</div> -->
+       
     
     <div id="div2"class="container">
       <img src="https://pifardi.cl/button.png" id="info" alt="" class="info">
       <img src="https://pifardi.cl/button2.png" id="info2" style="display:none;" alt="" class="info"> 
-    </div>
-    
-         
-      
-     
+    </div>           
      
   </body>
     
 </html>
-
