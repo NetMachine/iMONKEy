@@ -1,0 +1,212 @@
+body {
+       animation: fadeInAnimation ease 5s;
+       animation-iteration-count: 1;
+       animation-fill-mode: forwards;
+   }
+   @keyframes fadeInAnimation {
+       0% {
+           opacity: 0;
+       }
+       100% {
+           opacity: 1;
+       }
+   }
+/* .container_logo{
+  width: 30%;
+} */
+.container_logo i {
+  position: absolute;
+  background: #ffff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #fff;
+  animation: animate linear infinite;
+  z-index: 20
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+
+}
+
+  .container_logo .logo {
+     z-index: -1;
+  }
+
+  .container .info {
+    cursor: pointer;
+  }
+
+   @media only screen and (max-width: 400px) {
+    .container_logo .logo {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+    }
+    .container .info {
+        position: absolute;
+        width:9%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,500%);
+    }
+    .container2 {
+        position: absolute;
+        width:80%;
+        top:50%;
+        left:54%;
+        transform:translate(-50%,-50%);
+    }
+    .col-sm-2{
+        width:20%;
+        float: left;
+        margin: 0 0%;
+    }
+    .social_image {
+        width:65%;
+        height:auto;
+    }
+  }
+
+  @media only screen and (min-width: 400px) {
+    .container_logo .logo {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+    }
+    .container .info {
+        position: absolute;
+        width:9%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,500%);
+    }
+    .container2 {
+        position: absolute;
+        width:90%;
+        top:50%;
+        left:55%;
+        transform:translate(-50%,-50%);
+    }
+    .col-sm-2{
+        width:20%;
+        float: left;
+        margin: 0 0%;
+    }
+    .social_image {
+        width:55%;
+        height:auto;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    .container_logo .logo {
+        position: absolute;
+        width:100%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+    }
+    .container .info {
+        position: absolute;
+        width:9%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,500%);
+    }
+    .container2 {
+        position: absolute;
+        width:80%;
+        top:50%;
+        left:53.5%;
+        transform:translate(-50%,-50%);
+    }
+    .col-sm-2{
+        width:20%;
+        float: left;
+        margin: 0 0;
+    }
+    .social_image {
+        width:60%;
+        height:auto;
+    }
+  }
+
+  @media only screen and (min-width: 800px) {
+    .container_logo .logo {
+        position: absolute;
+        width:70%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+    }
+    .container .info {
+        position: absolute;
+        width:4%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,620%);
+    }
+    .container2{
+        position: absolute;
+        width:60%;
+        top:50%;
+        left:52.5%;
+        transform:translate(-50%,-50%);
+    }
+    .col-sm-2{
+        width:20%;
+        float: left;
+        margin: 0 0;
+    }
+    .social_image {
+        width:60%;
+        height:auto;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .container_logo .logo {
+        position: absolute;
+        width:50%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+    }
+    .container .info {
+        position: absolute;
+        width:3%;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,620%);
+    }
+    .container2 {
+        position: absolute;
+        width:40%;
+        top:50%;
+        left:51.5%;
+        transform:translate(-50%,-50%);
+    }
+    .col-sm-2{
+        width:20%;
+        float: left;
+    }
+    .social_image {
+        width:60%;
+        height:auto;
+    }
+  }
