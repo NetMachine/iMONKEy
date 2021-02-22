@@ -19,19 +19,26 @@
 <script>
 
   $(document).ready(function(){
-
+//const section = document.querySelector('.circle');
 
     $("#info").click(function(){
       blurElement("#logo", 15);
       $("#info").fadeOut();
       $("#info2").delay(250).fadeIn();
       $("#container2").delay(250).fadeIn();
+      $("#copyright_text").delay(350).fadeIn("slow");
+//       document.getElementById('circle').style.animationPlayState='stop';
+// document.getElementById('circle').style.webkitAnimationPlayState='stop';
+      //section.style.animationPlayState: 'paused';
     });
     $("#info2").click(function(){
       blurElement("#logo", 0);
       $("#info2").fadeOut();
       $("#info").delay(250).fadeIn();
       $("#container2").fadeOut();
+      $("#copyright_text").delay(150).fadeOut("slow");
+//       document.getElementById('circle').style.animationPlayState='initial';
+// document.getElementById('circle').style.webkitAnimationPlayState='initial';
     });
   });
 
@@ -85,7 +92,9 @@
       <div class="circle" id="circle"></div>
     </div>
 
-
+    <div id="copyright" class="copyright">
+      <h3 class="copyright_text" id="copyright_text" style="display:none;">Pifardi Art & Design 2021. Todos los derechos reservados.</h3>
+    </div>
 
 
     <script type="module">
