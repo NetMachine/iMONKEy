@@ -1,5 +1,5 @@
 body {
-       animation: fadeInAnimation ease 5s;
+       animation: fadeInAnimation ease 4s;
        animation-iteration-count: 1;
        animation-fill-mode: forwards;
    }
@@ -28,10 +28,13 @@ body {
     opacity: 0;
   }
   10% {
-    opacity: 0.8;
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.2;
   }
   90% {
-    opacity: 0.6;
+    opacity: 0.4;
   }
   100% {
     opacity: 0;
