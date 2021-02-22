@@ -1,338 +1,127 @@
-body {
-       animation: fadeInAnimation ease 5s;
-       animation-iteration-count: 1;
-       animation-fill-mode: forwards;
-   }
-   @keyframes fadeInAnimation {
-       0% {
-           opacity: 0;
-       }
-       100% {
-           opacity: 1;
-       }
-   }
-/* .container_logo{
-  width: 30%;
-} */
-.container_logo i {
-  position: absolute;
-  background: #ffff;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #fff;
-  animation: animate linear infinite;
-  z-index: 20
-}
+<!doctype html>
+<html lang="es" class="h-100">
+<head>
 
-@keyframes animate {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 0;
-  }
+<meta charset="utf-8">
 
-}
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  .container_logo .logo {
-     z-index: -1;
-  }
-  .info{
-    z-index: 100;
-  }
-.info2{
-  z-index: 100;
-}
-  .container .info {
-    cursor: pointer;
-  }
-  .container .circle {
-    cursor: pointer;
+<title>Pifardi</title>
+<link rel="stylesheet" href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#000000">
+<script src="engine.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+  $(document).ready(function(){
+
+
+    $("#info").click(function(){
+      blurElement("#logo", 15);
+      $("#info").fadeOut();
+      $("#info2").fadeIn();
+      $("#container2").delay(250).fadeIn();
+    });
+    $("#info2").click(function(){
+      blurElement("#logo", 0);
+      $("#info2").fadeOut();
+      $("#info").fadeIn();
+      $("#container2").fadeOut();
+    });
+  });
+
+  function blurElement(element, size) {
+       var filterVal = 'blur(' + size + 'px)';
+       $(element).css({
+          'filter':filterVal,
+          'webkitFilter':filterVal,
+          'mozFilter':filterVal,
+          'oFilter':filterVal,
+          'msFilter':filterVal,
+          'transition':'all 0.5s ease-out',
+          '-webkit-transition':'all 0.5s ease-out',
+          '-moz-transition':'all 0.5s ease-out',
+          '-o-transition':'all 0.5s ease-out'
+        });
   }
 
-   @media only screen and (max-width: 400px) {
-    .container_logo .logo {
-        position: absolute;
-        width:100%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-    }
-    .container .info {
-        position: absolute;
-        width:9%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,500%);
-    }
-    .container2 {
-        position: absolute;
-        width:80%;
-        top:50%;
-        left:54%;
-        transform:translate(-50%,-50%);
-    }
-    .col-sm-2{
-        width:20%;
-        float: left;
-        margin: 0 0%;
-    }
-    .social_image {
-        width:65%;
-        height:auto;
-    }
-    .container .circle {
-      width: 10vw;
-      height: 10vw;
-      background-color: white;
-      animation: pulse 1.8s infinite;
-      border-radius: 50%;
-      position: absolute;
+</script>
+</head>
 
-      left:45%;
-      bottom:-54.5vw;
+  <body bgcolor="#000000">
+    <div id="div1" class="container_logo">
+      <img src="https://pifardi.cl/pifardi.jpg" id="logo" class="logo" alt="pifardi">
+    </div>
 
-    }
-    .container {
-      background-color: red;
-      position: absolute;
-      width:100%;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-    }
-  }
+    <div class="container2" id="container2" style="display:none;">
+      <!--<div class="row text-center">-->
+        <div class="col-sm-2">
+            <img class="social_image"src="https://pifardi.cl/instagram.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="https://pifardi.cl/facebook.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="https://pifardi.cl/twitter.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="https://pifardi.cl/messenger.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="https://pifardi.cl/whatsapp.png"/>
+        </div>
+      <!--</div>-->
+    </div>
 
-  @media only screen and (min-width: 400px) {
-    .container_logo .logo {
-        position: absolute;
-        width:100%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-    }
-    .container .info {
-        position: absolute;
-        width:9%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,500%);
-    }
-    .container2 {
-        position: absolute;
-        width:90%;
-        top:50%;
-        left:55%;
-        transform:translate(-50%,-50%);
-    }
-    .col-sm-2{
-        width:20%;
-        float: left;
-        margin: 0 0%;
-    }
-    .social_image {
-        width:55%;
-        height:auto;
-    }
-    .container .circle {
-      width: 11vw;
-      height: 11vw;
-      background-color: white;
-      animation: pulse 1.8s infinite;
-      border-radius: 50%;
-      position: absolute;
 
-      left:44.5%;
-      bottom:-55vw;
+    <div id="div2"class="container">
+      <img src="https://pifardi.cl/button.png" id="info" alt="" class="info">
+      <img src="https://pifardi.cl/button2.png" id="info2" style="display:none;" alt="" class="info">
+      <div class="circle" id="circle"></div>
+    </div>
 
-    }
-    .container {
-      background-color: red;
-      position: absolute;
-      width:100%;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-    }
-  }
 
-  @media only screen and (min-width: 600px) {
-    .container_logo .logo {
-        position: absolute;
-        width:100%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-    }
-    .container .info {
-        position: absolute;
-        width:9%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,500%);
-    }
-    .container2 {
-        position: absolute;
-        width:80%;
-        top:50%;
-        left:53.5%;
-        transform:translate(-50%,-50%);
-    }
-    .col-sm-2{
-        width:20%;
-        float: left;
-        margin: 0 0;
-    }
-    .social_image {
-        width:60%;
-        height:auto;
-    }
-    .container .circle {
-      width: 10vw;
-      height: 10vw;
-      background-color: white;
-      animation: pulse 1.8s infinite;
-      border-radius: 50%;
-      position: absolute;
 
-      left:44.9%;
-      bottom:-54.4vw;
 
-    }
-    .container {
-      background-color: red;
-      position: absolute;
-      width:100%;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-    }
-  }
+    <script type="module">
 
-  @media only screen and (min-width: 800px) {
-    .container_logo .logo {
-        position: absolute;
-        width:70%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-    }
-    .container .info {
-        position: absolute;
-        width:4%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,620%);
-    }
-    .container2{
-        position: absolute;
-        width:60%;
-        top:50%;
-        left:52.5%;
-        transform:translate(-50%,-50%);
-    }
-    .col-sm-2{
-        width:20%;
-        float: left;
-        margin: 0 0;
-    }
-    .social_image {
-        width:60%;
-        height:auto;
-    }
-    .container .circle {
-      width: 5vw;
-      height: 5vw;
-      background-color: white;
-      animation: pulse 1.8s infinite;
-      border-radius: 50%;
-      position: absolute;
+      function stars(){
+        const count = 150;
+        const section = document.querySelector('.container_logo');
+        var i = 0;
 
-      left:47.5%;
-      bottom:-29.3vw;
+        while (i < count){
+          const star = document.createElement('i');
+          // const x = document.querySelector('.container_logo').naturalWidth;
+          // const y = document.querySelector('.container_logo').naturalHeight;
+          const x = Math.floor(Math.random() * window.innerWidth)
+          const y = Math.floor(Math.random() * window.innerHeight)
 
-    }
-    .container {
-      background-color: red;
-      position: absolute;
-      width:100%;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-    }
-  }
+          const size = Math.random() * 2.5;
+          //const chu = 50vw
+          star.style.left = x+'px';
+          star.style.top = y+'px';
+          star.style.width = size+'px';
+          star.style.height = size+'px';
 
-  @media only screen and (min-width: 1200px) {
-    .container_logo .logo {
-        position: absolute;
-        width:50%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-    }
-    .container .info {
-        position: absolute;
-        width:3%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,620%);
-    }
-    .container2 {
-        position: absolute;
-        width:40%;
-        top:50%;
-        left:51.5%;
-        transform:translate(-50%,-50%);
-    }
-    .col-sm-2{
-        width:20%;
-        float: left;
-    }
-    .social_image {
-        width:60%;
-        height:auto;
-    }
-    .container .circle {
-      width: 4vw;
-      height: 4vw;
-      background-color: white;
-      animation: pulse 1.8s infinite;
-      border-radius: 50%;
-      position: absolute;
+          const duration = Math.random()*8;
 
-      left:48%;
-      bottom:-22vw;
+          star.style.animationDuration = 8+duration+'s';
+          star.style.animationDelay = duration+'s';
 
-    }
-    .container {
-      background-color: red;
-      position: absolute;
-      width:100%;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-    }
-  }
+          section.appendChild(star);
 
-  @keyframes pulse {
-    0% {
-      transform: scale(0);
-      opacity: 1;
+          i++
+        }
+      }
+      //stars();
+    </script>
 
-    }
-    60% {
-      transform: scale(1);
-      opacity: 0.9;
+  </body>
 
-    }
-    100% {
-      transform: scale(2.3);
-      opacity: 0;
-
-    }
-  }
+</html>
