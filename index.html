@@ -1,8 +1,7 @@
 <!doctype html>
-<html lang="en" class="h-100">
-
+<html lang="es" class="h-100">
 <head>
-  
+
 <meta charset="utf-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -55,7 +54,6 @@
 </head>
 
   <body bgcolor="#000000">
-
     <div id="div1" class="container_logo">
       <img src="https://pifardi.cl/pifardi.jpg" id="logo" class="logo" alt="pifardi">
     </div>
@@ -84,7 +82,10 @@
     <div id="div2"class="container">
       <img src="https://pifardi.cl/button.png" id="info" alt="" class="info">
       <img src="https://pifardi.cl/button2.png" id="info2" style="display:none;" alt="" class="info">
+      <div class="circle" id="circle"></div>
     </div>
+
+
 
 
     <script type="module">
@@ -110,11 +111,11 @@
 
           const duration = Math.random()*8;
 
-          star.style.animationDuration = 6+duration+'s';
+          star.style.animationDuration = 8+duration+'s';
           star.style.animationDelay = duration+'s';
-          
+
           section.appendChild(star);
-        
+
           i++
         }
       }
