@@ -56,6 +56,15 @@ body {
   }
 
    @media only screen and (max-width: 300px) {
+     .copyright{
+
+       position:absolute;
+       width:100%;
+       bottom: 0%;
+       left:50%;
+       transform:translate(-50%,-50%);
+
+     }
      .copyright .copyright_text {
 
        color: white;
@@ -117,6 +126,15 @@ body {
   }
 
   @media only screen and (min-width: 300px) {
+    .copyright{
+
+      position:absolute;
+      width:100%;
+      bottom: 10%;
+      left:50%;
+      transform:translate(-50%,-50%);
+
+    }
     .copyright .copyright_text {
 
       color: white;
@@ -177,6 +195,15 @@ body {
   }
 
   @media only screen and (min-width: 500px) {
+    .copyright{
+
+      position:absolute;
+      width:100%;
+      bottom: 0%;
+      left:50%;
+      transform:translate(-50%,-50%);
+
+    }
     .copyright .copyright_text {
 
       color: white;
@@ -237,6 +264,15 @@ body {
   }
 
   @media only screen and (min-width: 600px) {
+    .copyright{
+
+      position:absolute;
+      width:100%;
+      bottom: 0%;
+      left:50%;
+      transform:translate(-50%,-50%);
+
+    }
     .copyright .copyright_text {
 
       color: white;
@@ -297,6 +333,15 @@ body {
   }
 
   @media only screen and (min-width: 1000px) {
+    .copyright{
+
+      position:absolute;
+      width:100%;
+      bottom: 0%;
+      left:50%;
+      transform:translate(-50%,-50%);
+
+    }
     .copyright .copyright_text {
 
       color: white;
@@ -372,13 +417,3 @@ body {
 
     }
   }
-
-.copyright{
-
-  position:absolute;
-  width:100%;
-  bottom: 0%;
-  left:50%;
-  transform:translate(-50%,-50%);
-
-}
