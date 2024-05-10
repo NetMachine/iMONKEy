@@ -7,7 +7,9 @@
 }
 
 img {
-    max-width: 80%;  /* Ancho máximo de la imagen (puedes ajustarlo) 
+    max-width: 80%;  
+    width: 100%;
+    /* Ancho máximo de la imagen (puedes ajustarlo) 
     height: auto;     Altura automática para mantener la proporción */
     margin: 0 auto;   /* Elimina márgenes predeterminados para centrar mejor */
 }
