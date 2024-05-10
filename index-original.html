@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es" class="h-100">
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<title>Pifardi</title>
+<link rel="stylesheet" href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#000000">
+<script src="engine.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+  $(document).ready(function(){
+//const section = document.querySelector('.circle');
+
+    $("#info").click(function(){
+      blurElement("#logo", 15);
+      $("#info").fadeOut();
+      $("#info2").delay(250).fadeIn();
+      $("#container2").delay(250).fadeIn();
+      $("#copyright_text").delay(350).fadeIn("slow");
+//       document.getElementById('circle').style.animationPlayState='stop';
+// document.getElementById('circle').style.webkitAnimationPlayState='stop';
+      //section.style.animationPlayState: 'paused';
+    });
+    $("#info2").click(function(){
+      blurElement("#logo", 0);
+      $("#info2").fadeOut();
+      $("#info").delay(250).fadeIn();
+      $("#container2").fadeOut();
+      $("#copyright_text").delay(150).fadeOut("slow");
+//       document.getElementById('circle').style.animationPlayState='initial';
+// document.getElementById('circle').style.webkitAnimationPlayState='initial';
+    });
+  });
+
+  function blurElement(element, size) {
+       var filterVal = 'blur(' + size + 'px)';
+       $(element).css({
+          'filter':filterVal,
+          'webkitFilter':filterVal,
+          'mozFilter':filterVal,
+          'oFilter':filterVal,
+          'msFilter':filterVal,
+          'transition':'all 0.5s ease-out',
+          '-webkit-transition':'all 0.5s ease-out',
+          '-moz-transition':'all 0.5s ease-out',
+          '-o-transition':'all 0.5s ease-out'
+        });
+  }
+
+</script>
+</head>
+
+  <body bgcolor="#000000">
+    <div id="div1" class="container_logo">
+      <img src="pifardi.jpg" id="logo" class="logo" alt="pifardi">
+    </div>
+
+    <div class="container2" id="container2" style="display:none;">
+      <!--<div class="row text-center">-->
+        <div class="col-sm-2">
+            <img class="social_image"src="instagram.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="facebook.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="twitter.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="messenger.png"/>
+        </div>
+        <div class="col-sm-2">
+            <img class="social_image" src="whatsapp.png"/>
+        </div>
+      <!--</div>-->
+    </div>
+
+
+    <div id="div2"class="container">
+      <img src="button.png" id="info" alt="" class="info">
+      <img src="button2.png" id="info2" style="display:none;" alt="" class="info">
+      <div class="circle" id="circle"></div>
+    </div>
+
+    <div id="copyright" class="copyright">
+      <div class="copyright_text" id="copyright_text" style="display:none;">Pifardi Art & Design 2021. Todos los derechos reservados.</div>
+    </div>
+
+
+    <script type="module">
+
+      function stars(){
+        const count = 150;
+        const section = document.querySelector('.container_logo');
+        var i = 0;
+
+        while (i < count){
+          const star = document.createElement('i');
+          // const x = document.querySelector('.container_logo').naturalWidth;
+          // const y = document.querySelector('.container_logo').naturalHeight;
+          const x = Math.floor(Math.random() * window.innerWidth)
+          const y = Math.floor(Math.random() * window.innerHeight)
+
+          const size = Math.random() * 2.5;
+          //const chu = 50vw
+          star.style.left = x+'px';
+          star.style.top = y+'px';
+          star.style.width = size+'px';
+          star.style.height = size+'px';
+
+          const duration = Math.random()*8;
+
+          star.style.animationDuration = 8+duration+'s';
+          star.style.animationDelay = duration+'s';
+
+          section.appendChild(star);
+
+          i++
+        }
+      }
+      //stars();
+    </script>
+
+  </body>
+
+</html>
