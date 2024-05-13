@@ -12,10 +12,10 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 	overflow: hidden;
-	/*display: flex;
-  /*justify-content: center;
-  /*align-items: center;
-  /*height: 100vh; /* Altura del contenedor 100% del viewport */
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Altura del contenedor 100% del viewport */
 }
 
 /* Estilos para pantallas pequeñas (típico de móviles) */
