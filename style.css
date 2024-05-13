@@ -2,4 +2,15 @@ body {
     background-color: black;
 
 }
+#contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Altura del contenedor 100% del viewport */
+}
+
+#contenedor img {
+  max-width: 80%; /* Ancho máximo de la imagen (personalízalo) */
+  max-height: 80%; /* Altura máxima de la imagen (personalízalo) */
+}
 

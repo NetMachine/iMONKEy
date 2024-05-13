@@ -2,33 +2,6 @@
 <html lang="es">
 <head>
 
-function ajustarImagen() {
-  const contenedorImagen = document.getElementById('contenedor');
-  const imagen = contenedorImagen.querySelector('img');
-  const anchoContenedor = contenedorImagen.clientWidth;
-  const altoContenedor = contenedorImagen.clientHeight;
-  const relacionAspectoImagen = imagen.naturalWidth / imagen.naturalHeight;
-
-  // Calcular el nuevo ancho y alto de la imagen
-  let nuevoAncho = anchoContenedor;
-  let nuevoAlto = anchoContenedor / relacionAspectoImagen;
-
-  // Ajustar el tamaño si la imagen es demasiado alta
-  if (nuevoAlto > altoContenedor) {
-    nuevoAlto = altoContenedor;
-    nuevoAncho = nuevoAlto * relacionAspectoImagen;
-  }
-
-  // Centrar la imagen horizontal y verticalmente
-  imagen.style.width = nuevoAncho + 'px';
-  imagen.style.height = nuevoAlto + 'px';
-  imagen.style.left = (anchoContenedor - nuevoAncho) / 2 + 'px';
-  imagen.style.top = (altoContenedor - nuevoAlto) / 2 + 'px';
-}
-
-window.addEventListener('resize', ajustarImagen);
-ajustarImagen(); // Ejecutar
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imagen centrada responsive</title>
