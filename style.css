@@ -33,8 +33,8 @@ body {
 /* Estilos para pantallas grandes (escritorio) */
 @media only screen and (min-width: 1024px) {
 	#contenedor img {
-  max-width: 95%; /* Ancho máximo de la imagen (personalízalo) */
-  max-height: 95%; /* Altura máxima de la imagen (personalízalo) */
+  max-width: 85%; /* Ancho máximo de la imagen (personalízalo) */
+  max-height: 85%; /* Altura máxima de la imagen (personalízalo) */
 	
 }
 
