@@ -11,6 +11,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+	overflow: hidden;
 	/*display: flex;
   /*justify-content: center;
   /*align-items: center;
@@ -22,6 +23,7 @@ body {
 	#contenedor img {
   max-width: 140%; /* Ancho máximo de la imagen (personalízalo) */
   max-height: 140%; /* Altura máxima de la imagen (personalízalo) */
+	
 }
 }
 
