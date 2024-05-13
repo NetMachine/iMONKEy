@@ -2,20 +2,17 @@ body {
     background-color: black;
 
 }
-.contenedor {
-    position:absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    /*min-height: 100vh;*/
-    
+
+#contenedor{
+  position: relative;
+  height: 100vh; /* Altura del contenedor 100% del viewport */
 }
 
-img {
-    /*max-width: 80%;*/  
-    width: 80%;
-    /* Ancho máximo de la imagen (puedes ajustarlo) 
-    height: auto;     Altura automática para mantener la proporción */
-    margin: 0 auto;   /* Elimina márgenes predeterminados para centrar mejor */
+#contenedor img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%; /* Ancho máximo de la imagen (personalízalo) */
+  max-height: 80%; /* Altura máxima de la imagen (personalízalo) */
 }
