@@ -3,16 +3,3 @@ body {
 
 }
 
-#contenedor{
-  position: relative;
-  height: 100vh; /* Altura del contenedor 100% del viewport */
-}
-
-#contenedor img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 80%; /* Ancho máximo de la imagen (personalízalo) */
-  max-height: 80%; /* Altura máxima de la imagen (personalízalo) */
-}
