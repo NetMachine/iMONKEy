@@ -14,3 +14,12 @@ body {
   max-height: 80%; /* Altura máxima de la imagen (personalízal) */
 }
 
+/* Verificar si el dispositivo es táctil */
+if (navigator.userAgent.includes('touch')) {
+  /* Estilos específicos para dispositivos táctiles */
+}
+
+/* Verificar si el dispositivo es de alta resolución */
+if (window.devicePixelRatio > 1) {
+  /* Estilos específicos para dispositivos de alta resolución */
+}
