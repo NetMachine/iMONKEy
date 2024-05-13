@@ -18,8 +18,8 @@ body {
 }
 
 #contenedor img {
-  max-width: 80%; /* Ancho máximo de la imagen (personalízal) */
-  max-height: 80%; /* Altura máxima de la imagen (personalízal) */
+  /*max-width: 80%; /* Ancho máximo de la imagen (personalízal) */
+ /* max-height: 80%; /* Altura máxima de la imagen (personalízal) */
 }
 
 /* Verificar si el dispositivo es táctil */
