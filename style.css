@@ -20,8 +20,8 @@ body {
 /* Estilos para pantallas pequeñas (típico de móviles) */
 @media only screen and (max-width: 768px) {
 	#contenedor img {
-  max-width: 95%; /* Ancho máximo de la imagen (personalízalo) */
-  max-height: 95%; /* Altura máxima de la imagen (personalízalo) */
+  max-width: 99%; /* Ancho máximo de la imagen (personalízalo) */
+  max-height: 99%; /* Altura máxima de la imagen (personalízalo) */
 }
 }
 
