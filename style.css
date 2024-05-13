@@ -17,13 +17,14 @@ body {
   height: 100vh; /* Altura del contenedor 100% del viewport */
 }
 
-#contenedor img {
-  /*max-width: 80%; /* Ancho máximo de la imagen (personalízal) */
- /* max-height: 80%; /* Altura máxima de la imagen (personalízal) */
-}
 
 /* Verificar si el dispositivo es táctil */
 if (navigator.userAgent.includes('touch')) {
+	#contenedor img {
+  max-width: 80%; /* Ancho máximo de la imagen (personalízal) */
+  max-height: 80%; /* Altura máxima de la imagen (personalízal) */
+}
+
   /* Estilos específicos para dispositivos táctiles */
 }
 
