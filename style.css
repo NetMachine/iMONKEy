@@ -17,18 +17,21 @@ body {
   height: 100vh; /* Altura del contenedor 100% del viewport */
 }
 
-
-/* Verificar si el dispositivo es táctil */
-if (navigator.userAgent.includes('touch')) {
+/* Estilos para pantallas pequeñas (típico de móviles) */
+@media only screen and (max-width: 768px) {
 	#contenedor img {
-  max-width: 80%; /* Ancho máximo de la imagen (personalízal) */
-  max-height: 80%; /* Altura máxima de la imagen (personalízal) */
+  max-width: 80%; /* Ancho máximo de la imagen (personalízalo) */
+  max-height: 80%; /* Altura máxima de la imagen (personalízalo) */
+}
 }
 
-  /* Estilos específicos para dispositivos táctiles */
+/* Estilos para pantallas medianas (típico de tablets) */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  
 }
 
-/* Verificar si el dispositivo es de alta resolución */
-if (window.devicePixelRatio > 1) {
-  /* Estilos específicos para dispositivos de alta resolución */
+/* Estilos para pantallas grandes (escritorio) */
+@media only screen and (min-width: 1024px) {
+	
 }
+
