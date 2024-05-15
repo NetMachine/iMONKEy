@@ -16,9 +16,11 @@ fetch(repoUrl)
         downloadBtn.classList.add('download-btn');
         downloadBtn.textContent = 'Descargar';
         downloadBtn.addEventListener('click', () => {
-          // Generar un enlace de descarga temporal
+          // Generar la URL de descarga manualmente
+          const downloadUrl = `https://raw.githubusercontent.com/NetMachine/iMONKEy/pif-pages/download/${encodeURIComponent(file.name)}`;
+          // Crear un enlace de descarga temporal
           const downloadLink = document.createElement('a');
-          downloadLink.href = file.download_url;
+          downloadLink.href = downloadUrl;
           downloadLink.setAttribute('download', file.name);
           downloadLink.style.display = 'none';
           document.body.appendChild(downloadLink);
