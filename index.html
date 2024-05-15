@@ -9,7 +9,6 @@
 </head>
 <body>
     <div id="contenedor">
-        
         <div id="animation-container"></div>
     </div>
 
@@ -24,8 +23,8 @@
         const animation = lottie.loadAnimation({
             container: animationContainer,
             renderer: 'svg',
-            loop: true, // Establecemos loop en false para poder controlarlo manualmente
-            // autoplay: false, // Evitamos que se reproduzca automáticamente
+            loop: true, // Establecemos loop en true para que se reproduzca en un loop
+            autoplay: false, // Evitamos que se reproduzca automáticamente
             path: 'iMONKEy.json'
         });
 
@@ -41,14 +40,19 @@
 
         // Función para reproducir el loop
         function playLoop() {
+            // Reproducir la animación
             animation.play();
 
             // Obtener valores aleatorios para la duración y la pausa
-            const loopDuration = getRandomDuration(500, 1000); // Entre 3 y 7 segundos
-            const pauseDuration = getRandomPause(500, 2000); // Entre 1 y 3 segundos
+            const loopDuration = getRandomDuration(3000, 7000); // Entre 3 y 7 segundos
+            const pauseDuration = getRandomPause(1000, 3000); // Entre 1 y 3 segundos
 
+            // Esperar hasta que la animación complete su ciclo
             setTimeout(() => {
+                // Pausar la animación
                 animation.pause();
+
+                // Esperar la pausa aleatoria antes de volver a reproducir el loop
                 setTimeout(playLoop, pauseDuration);
             }, loopDuration);
         }
