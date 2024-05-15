@@ -11,7 +11,7 @@ const animation = lottie.loadAnimation({
     path: 'iMONKEy.json'
 });
 
-let currentPlaySpeed = 6;
+let currentPlaySpeed = 6.5;
 
 function playAnimation() {
     animation.play();
@@ -19,11 +19,11 @@ function playAnimation() {
 
     animation.addEventListener('complete', () => {
         // Aumentar o disminuir la velocidad de la animación
-        currentPlaySpeed = getRandomPlaySpeed(6, 6.5);
+        currentPlaySpeed = getRandomPlaySpeed(6.5, 6.5);
         animation.setSpeed(currentPlaySpeed);
 
         // Generar una pausa aleatoria antes de volver a reproducir la animación
-        const pauseDuration = getRandomPause(50, 6000); // Entre 10 y 5000 milisegundos
+        const pauseDuration = getRandomPause(100, 7000); // Entre 10 y 5000 milisegundos
         setTimeout(() => {
             // Volver a reproducir la animación
             animation.goToAndPlay(0, true);
