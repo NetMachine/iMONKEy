@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMONKEy</title>
+     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
 </head>
@@ -15,76 +16,5 @@
     <!-- Incluir la biblioteca Lottie -->
     <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
 
-    <script>
-        // Obtener el elemento HTML donde se mostrará la animación
-        const animationContainer = document.getElementById('animation-container');
-
-        // Configurar la animación
-        const animation = lottie.loadAnimation({
-            container: animationContainer,
-            renderer: 'svg',
-            loop: false, // No se repetirá en bucle
-            autoplay: false,
-            path: 'iMONKEy.json'
-        });
-
-        let currentPlaySpeed = 4; // Velocidad inicial de la animación
-
-        function playAnimation() {
-            animation.play();
-            animation.setSpeed(currentPlaySpeed); // Establecer la velocidad inicial a 4
-
-            animation.addEventListener('complete', () => {
-                // Aumentar o disminuir la velocidad de la animación
-                currentPlaySpeed = getRandomPlaySpeed(3, 6);
-                animation.setSpeed(currentPlaySpeed);
-
-                // Generar una pausa aleatoria antes de volver a reproducir la animación
-                const pauseDuration = getRandomPause(10, 5000); // Entre 10 y 5000 milisegundos
-                setTimeout(() => {
-                    // Volver a reproducir la animación
-                    animation.goToAndPlay(0, true);
-                }, pauseDuration);
-            });
-        }
-
-        function getRandomPlaySpeed(min, max) {
-            // Generar una velocidad aleatoria entre un rango
-            return Math.random() * (max - min) + min;
-        }
-
-        function getRandomPause(min, max) {
-            // Generar una pausa aleatoria entre un rango
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        function resizeAnimation() {
-            const containerWidth = animationContainer.offsetWidth;
-            const containerHeight = animationContainer.offsetHeight;
-
-            // Calcular el factor de escala para ajustar la animación al contenedor
-            const scaleX = containerWidth / animation.totalFrames;
-            const scaleY = containerHeight / animation.totalFrames;
-            const scale = Math.min(scaleX, scaleY, 1); // Asegurarse de que la escala no supere 1 (100%)
-
-            animation.setTransform({
-                a: scale, // Escala horizontal
-                b: 0,
-                c: 0,
-                d: scale, // Escala vertical
-                tx: 0,
-                ty: 0
-            });
-        }
-
-        // Iniciar la reproducción de la animación después de 5 segundos
-        setTimeout(playAnimation, 5000);
-
-        // Ajustar el tamaño de la animación al contenedor
-        resizeAnimation();
-
-        // Escuchar el evento 'resize' y ajustar la animación cuando se redimensiona la ventana
-        window.addEventListener('resize', resizeAnimation);
-    </script>
 </body>
 </html>
