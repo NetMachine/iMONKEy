@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMONKEy</title>
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
-</head>
-<body>
-    <div id="contenedor">
-        
-        <div id="animation-container"></div>
-    </div>
-
-    <!-- Incluir la biblioteca Lottie -->
-    <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
-
     <script>
         // Obtener el elemento HTML donde se mostrará la animación
         const animationContainer = document.getElementById('animation-container');
@@ -44,8 +35,8 @@
             animation.play();
 
             // Obtener valores aleatorios para la duración y la pausa
-            const loopDuration = getRandomDuration(500, 2000); // Entre 3 y 7 segundos
-            const pauseDuration = getRandomPause(1000, 3000); // Entre 1 y 3 segundos
+            const loopDuration = getRandomDuration(500, 1000); // Entre 3 y 7 segundos
+            const pauseDuration = getRandomPause(500, 2000); // Entre 1 y 3 segundos
 
             setTimeout(() => {
                 animation.pause();
@@ -56,5 +47,15 @@
         // Iniciar el loop
         playLoop();
     </script>
+</head>
+<body>
+    <div id="contenedor">
+        
+        <div id="animation-container"></div>
+    </div>
+
+    
+
+    
 </body>
 </html>
