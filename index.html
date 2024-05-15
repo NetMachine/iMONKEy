@@ -16,6 +16,26 @@
     <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
 
     <script>
+    
+    function resizeAnimation() {
+            const containerWidth = animationContainer.offsetWidth;
+            const containerHeight = animationContainer.offsetHeight;
+
+            // Calcular el factor de escala para ajustar la animación al contenedor
+            const scaleX = containerWidth / animation.totalFrames;
+            const scaleY = containerHeight / animation.totalFrames;
+            const scale = Math.min(scaleX, scaleY);
+
+            animation.setSpeed(1); // Establecer la velocidad de reproducción a 1
+            animation.setTransform({
+                a: scale, // Escala horizontal
+                b: 0,
+                c: 0,
+                d: scale, // Escala vertical
+                tx: 0,
+                ty: 0
+            });
+        }
         // Obtener el elemento HTML donde se mostrará la animación
         const animationContainer = document.getElementById('animation-container');
 
@@ -28,14 +48,14 @@
             path: 'iMONKEy.json'
         });
 
-        //let isAnimationPlaying = false;
+        let isAnimationPlaying = false;
         let currentPlaySpeed = 4; // Velocidad inicial de la animación
 
         function playAnimation() {
-            //if (!isAnimationPlaying) {
+            if (!isAnimationPlaying) {
                 animation.play();
-                isAnimationPlaying = true;
-
+                //isAnimationPlaying = true;
+}
                 animation.addEventListener('complete', () => {
                     // Aumentar o disminuir la velocidad de la animación
                     currentPlaySpeed = getRandomPlaySpeed(3, 6);
