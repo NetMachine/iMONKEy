@@ -19,7 +19,7 @@ function playAnimation() {
 
     animation.addEventListener('complete', () => {
         // Aumentar o disminuir la velocidad de la animación
-        currentPlaySpeed = getRandomPlaySpeed(5, 7);
+        currentPlaySpeed = getRandomPlaySpeed(6, 7);
         animation.setSpeed(currentPlaySpeed);
 
         // Generar una pausa aleatoria antes de volver a reproducir la animación
