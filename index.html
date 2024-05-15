@@ -1,18 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMONKEy</title>
     <link rel="stylesheet" href="style.css">
-	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
 </head>
 <body>
     <div id="contenedor">
-        <img src="iMONKEy.png" alt="Tu imagen">
+        
+        <div id="animation-container"></div>
     </div>
+
+    <!-- Incluir la biblioteca Lottie -->
+    <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
+
+    <script>
+        // Obtener el elemento HTML donde se mostrará la animación
+        const animationContainer = document.getElementById('animation-container');
+
+        // Configurar la animación
+        const animation = lottie.loadAnimation({
+            container: animationContainer,
+            renderer: 'svg',
+            loop: false, // Establecemos loop en false para poder controlarlo manualmente
+            autoplay: false, // Evitamos que se reproduzca automáticamente
+            path: 'iMONKEy.json'
+        });
+
+        // Función para generar una duración aleatoria entre un rango
+        function getRandomDuration(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Función para generar una pausa aleatoria entre un rango
+        function getRandomPause(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Función para reproducir el loop
+        function playLoop() {
+            animation.play();
+
+            // Obtener valores aleatorios para la duración y la pausa
+            const loopDuration = getRandomDuration(500, 2000); // Entre 3 y 7 segundos
+            const pauseDuration = getRandomPause(1000, 5000); // Entre 1 y 3 segundos
+
+            setTimeout(() => {
+                animation.pause();
+                setTimeout(playLoop, pauseDuration);
+            }, loopDuration);
+        }
+
+        // Iniciar el loop
+        playLoop();
+    </script>
 </body>
-
-
 </html>

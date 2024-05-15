@@ -27,7 +27,7 @@ body {
 
 /* Estilos para pantallas pequeñas (típico de móviles) */
 @media only screen and (max-width: 768px) {
-	#contenedor img {
+	#animation-container {
   max-width: 210%; /* Ancho máximo de la imagen (personalízalo) */
   max-height: 210%; /* Altura máxima de la imagen (personalízalo) */
 	
@@ -41,7 +41,7 @@ body {
 
 /* Estilos para pantallas grandes (escritorio) */
 @media only screen and (min-width: 1024px) {
-	#contenedor img {
+	#animation-container {
   max-width: 85%; /* Ancho máximo de la imagen (personalízalo) */
   max-height: 85%; /* Altura máxima de la imagen (personalízalo) */
 	
