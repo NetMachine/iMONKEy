@@ -2,58 +2,12 @@
 <html>
 <head>
   <title>Descarga de Archivos</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .file-list {
-      list-style-type: none;
-      padding: 0;
-    }
-    .file-list li {
-      margin-bottom: 10px;
-    }
-    .file-list a {
-      text-decoration: none;
-      color: #0077b6;
-    }
-    .file-list a:hover {
-      color: #005185;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Descarga de Archivos</h1>
   <ul class="file-list"></ul>
 
-  <script>
-    // Reemplaza 'username' y 'repositorio' con tus propios datos
-    const repoUrl = 'https://api.github.com/repos/NetMachine/iMONKEy/contents/download';
-    const fileList = document.querySelector('.file-list');
-
-    fetch(repoUrl)
-      .then(response => response.json())
-      .then(files => {
-        files.forEach(file => {
-          if (!file.type || file.type === 'file') {
-            const listItem = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = file.download_url;
-            link.textContent = file.name;
-            listItem.appendChild(link);
-            fileList.appendChild(listItem);
-          }
-        });
-      })
-      .catch(error => {
-        console.error('Error al obtener los archivos:', error);
-        fileList.innerHTML = '<li>No se pudieron cargar los archivos.</li>';
-      });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
