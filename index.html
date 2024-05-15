@@ -48,14 +48,14 @@
             path: 'iMONKEy.json'
         });
 
-        let isAnimationPlaying = false;
+        //let isAnimationPlaying = false;
         let currentPlaySpeed = 4; // Velocidad inicial de la animación
 
         function playAnimation() {
-            if (!isAnimationPlaying) {
+            //if (!isAnimationPlaying) {
                 animation.play();
                 //isAnimationPlaying = true;
-}
+//}
                 animation.addEventListener('complete', () => {
                     // Aumentar o disminuir la velocidad de la animación
                     currentPlaySpeed = getRandomPlaySpeed(3, 6);
@@ -82,7 +82,8 @@
         }
 
         // Iniciar la reproducción de la animación
-        playAnimation();
+        setTimeout(playAnimation, 5000);
+        //playAnimation();
     </script>
 </body>
 </html>
