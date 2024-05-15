@@ -44,13 +44,6 @@
         function resizeAnimation() {
             const containerWidth = animationContainer.offsetWidth;
             const containerHeight = animationContainer.offsetHeight;
-            const animationWidth = animation.preloadedImages[0].width;
-            const animationHeight = animation.preloadedImages[0].height;
-
-            // Calcular los factores de escala para mantener el aspect ratio de la animación
-            const scaleX = containerWidth / animationWidth;
-            const scaleY = containerHeight / animationHeight;
-            const scale = Math.min(scaleX, scaleY);
 
             // Establecer el tamaño del contenedor de la animación
             animationContainer.style.width = `${containerWidth}px`;
@@ -58,12 +51,12 @@
 
             // Ajustar la escala de la animación
             animation.setTransform({
-                a: scale,
+                a: containerWidth / animation.totalFrames,
                 b: 0,
                 c: 0,
-                d: scale,
-                tx: (containerWidth - animationWidth * scale) / 2,
-                ty: (containerHeight - animationHeight * scale) / 2
+                d: containerHeight / animation.totalFrames,
+                tx: 0,
+                ty: 0
             });
         }
 
