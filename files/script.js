@@ -10,14 +10,20 @@ fetch(repoUrl)
         const listItem = document.createElement('li');
         const linkWrapper = document.createElement('div');
         const link = document.createElement('a');
-        link.href = file.download_url;
+        link.href = '#'; // Usamos # para que no abra la página
         link.textContent = file.name;
         const downloadBtn = document.createElement('button');
         downloadBtn.classList.add('download-btn');
         downloadBtn.textContent = 'Descargar';
         downloadBtn.addEventListener('click', () => {
-          // Redirigir a la URL de descarga directamente
-          window.location.href = file.download_url;
+          // Generar un enlace de descarga temporal
+          const downloadLink = document.createElement('a');
+          downloadLink.href = file.download_url;
+          downloadLink.setAttribute('download', file.name);
+          downloadLink.style.display = 'none';
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
         });
         linkWrapper.appendChild(link);
         listItem.appendChild(linkWrapper);
