@@ -8,7 +8,7 @@
             renderer: 'svg',
             loop: false, // No se repetirá en bucle
             autoplay: false,
-            path: '/iMONKEy.json'
+            path: 'iMONKEy.json'
         });
 
         let currentPlaySpeed = 4; // Velocidad inicial de la animación
