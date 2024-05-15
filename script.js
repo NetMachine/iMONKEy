@@ -23,7 +23,7 @@ function playAnimation() {
         animation.setSpeed(currentPlaySpeed);
 
         // Generar una pausa aleatoria antes de volver a reproducir la animación
-        const pauseDuration = getRandomPause(0.5, 5000); // Entre 10 y 5000 milisegundos
+        const pauseDuration = getRandomPause(20, 5500); // Entre 10 y 5000 milisegundos
         setTimeout(() => {
             // Volver a reproducir la animación
             animation.goToAndPlay(0, true);
