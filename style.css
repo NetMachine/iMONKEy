@@ -26,7 +26,7 @@ body {
   height: 100vh; /* Altura del contenedor 100% del viewport */
   width: 100vw; /* Ancho del contenedor 100% del viewport */
   opacity: 0;
-  animation: fade-in 1s ease-in-out 1s forwards;
+  animation: fade-in 1.5s ease-in-out 0.2s forwards;
 }
 
 #animation-container {
