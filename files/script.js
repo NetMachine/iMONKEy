@@ -15,7 +15,10 @@ fetch(repoUrl)
         const downloadBtn = document.createElement('button');
         downloadBtn.classList.add('download-btn');
         downloadBtn.textContent = 'Descargar';
-        downloadBtn.onclick = () => window.location.href = file.download_url;
+        downloadBtn.addEventListener('click', () => {
+          // Redirigir a la URL de descarga directamente
+          window.location.href = file.download_url;
+        });
         linkWrapper.appendChild(link);
         listItem.appendChild(linkWrapper);
         listItem.appendChild(downloadBtn);
