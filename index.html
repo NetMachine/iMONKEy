@@ -65,7 +65,7 @@
             // Calcular el factor de escala para ajustar la animación al contenedor
             const scaleX = containerWidth / animation.totalFrames;
             const scaleY = containerHeight / animation.totalFrames;
-            const scale = Math.min(scaleX, scaleY);
+            const scale = Math.min(scaleX, scaleY, 1); // Asegurarse de que la escala no supere 1 (100%)
 
             animation.setTransform({
                 a: scale, // Escala horizontal
