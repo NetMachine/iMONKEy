@@ -1,6 +1,6 @@
 :root {
   touch-action: pan-x pan-y;
-  height: 100% 
+  height: 100%;
 }
 
 html {
@@ -8,42 +8,26 @@ html {
 }
 
 body {
-    box-sizing: border-box;
-    background-color: black;
-    overflow: hidden
-
+  box-sizing: border-box;
+  background-color: black;
+  overflow: hidden;
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el relleno predeterminado */
 }
+
 #contenedor {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-	/*overflow: hidden;*/
-	display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh; /* Altura del contenedor 100% del viewport */
+  width: 100vw; /* Ancho del contenedor 100% del viewport */
 }
 
-/* Estilos para pantallas pequeñas (típico de móviles) */
-@media only screen and (max-width: 768px) {
-	#animation-container {
-  max-width: 300%; /* Ancho máximo de la imagen (personalízalo) */
-  max-height: 300%; /* Altura máxima de la imagen (personalízalo) */
-	
+#animation-container {
+  width: 100%;
+  height: 100%;
 }
-}
-
-/* Estilos para pantallas medianas (típico de tablets) */
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-  
-}
-
-/* Estilos para pantallas grandes (escritorio) */
-@media only screen and (min-width: 1024px) {
-	#animation-container {
-  max-width: 85%; /* Ancho máximo de la imagen (personalízalo) */
-  max-height: 85%; /* Altura máxima de la imagen (personalízalo) */
-	
-}
-
