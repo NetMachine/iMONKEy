@@ -25,11 +25,23 @@ body {
   align-items: center;
   height: 100vh; /* Altura del contenedor 100% del viewport */
   width: 100vw; /* Ancho del contenedor 100% del viewport */
+  opacity: 0;
+  animation: fade-in 1s ease-in-out 1s forwards;
 }
 
 #animation-container {
   width: 90%;
   height: 90%;
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 
