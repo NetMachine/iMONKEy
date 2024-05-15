@@ -28,8 +28,8 @@ body {
 /* Estilos para pantallas pequeñas (típico de móviles) */
 @media only screen and (max-width: 768px) {
 	#animation-container {
-  max-width: 250%; /* Ancho máximo de la imagen (personalízalo) */
-  max-height: 250%; /* Altura máxima de la imagen (personalízalo) */
+  max-width: 300%; /* Ancho máximo de la imagen (personalízalo) */
+  max-height: 300%; /* Altura máxima de la imagen (personalízalo) */
 	
 }
 }
