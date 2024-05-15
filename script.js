@@ -23,7 +23,7 @@ function playAnimation() {
         animation.setSpeed(currentPlaySpeed);
 
         // Generar una pausa aleatoria antes de volver a reproducir la animación
-        const pauseDuration = getRandomPause(5, 7000); // Entre 10 y 5000 milisegundos
+        const pauseDuration = getRandomPause(0.5, 5000); // Entre 10 y 5000 milisegundos
         setTimeout(() => {
             // Volver a reproducir la animación
             animation.goToAndPlay(0, true);
@@ -68,7 +68,7 @@ function resizeAnimation() {
 }
 
 // Iniciar la reproducción de la animación después de 5 segundos
-setTimeout(playAnimation, 5000);
+setTimeout(playAnimation, 4000);
 
 // Ajustar el tamaño de la animación al contenedor
 resizeAnimation();
