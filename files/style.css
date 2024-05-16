@@ -1,8 +1,8 @@
 
-body {
+html, body {
   background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
+  margin: 0.01rem;
+  padding: 0.01rem;
 }
 
 h1 {
@@ -13,26 +13,35 @@ h1 {
 }
 
 
+.section {
+  
+  height:100%;
+  align-items: center;
+  margin: 0;
+padding: 0;
 
+}
 
 .content {
   background-color: #f5f5f5;
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0
 }
 
 
 .file-list {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 2rem;
   
   
 }
 
-
+.back-btn {
+ margin:2rem;
+}
 
 .file-item {
   display: flex;
@@ -43,12 +52,14 @@ h1 {
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   margin-bottom: 1rem;
+border: none;
   
 }
 
 .file-name {
   //flex-grow: 1;
   margin-right: 0.5rem;
+  border: none;
  
 }
 
@@ -92,4 +103,13 @@ h1 {
   right: 1rem;
 }
 
+@media only screen and (max-width: 850px) {
+  .file-name {
+    font-size: 0.8rem; /* Reducir el tamaño de fuente para pantallas de iPhone */
+  }
+
+  h1 {
+    font-size: 0.8rem; /* Reducir el tamaño de fuente del título */
+  }
+}
 
