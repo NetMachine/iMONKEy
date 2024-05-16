@@ -27,7 +27,10 @@ function displayFiles(path) {
           viewBtn.textContent = 'Ver';
           viewBtn.classList.add('view-btn');
           viewBtn.setAttribute('href', item.download_url); // Add the download URL as an attribute
-          viewBtn.addEventListener('click', () => viewFile(item.download_url, item.name));
+          viewBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Evitar que la página se recargue
+            viewFile(item.download_url, item.name);
+          });
 
           // Add loading indicator for file view (optional)
           const viewLoading = document.createElement('span');
@@ -59,18 +62,61 @@ function displayFiles(path) {
 
 // Function to view a file
 function viewFile(url, fileName) {
-  const viewBtn = document.querySelector('.view-btn[href="' + url + '"]'); // Get the corresponding view button
-  const viewLoading = viewBtn.querySelector('.view-loading'); // Get the loading indicator
+  const viewBtn = document.querySelector('.view-btn[href="' + url + '"]');
+  const viewLoading = viewBtn.querySelector('.view-loading');
 
   // Show loading indicator
   viewLoading.style.display = 'block';
 
   fetch(url)
-    .then(response => response.text())
+    .then(response => {
+      // Check if the file is an image
+      const contentType = response.headers.get('Content-Type');
+      if (contentType.startsWith('image/')) {
+        return response.blob();
+      } else {
+        return response.text();
+      }
+    })
     .then(content => {
-      const viewWindow = window.open('', '_blank', 'width=800,height=600');
-      viewWindow.document.write(`<pre>${content}</pre>`);
-      viewWindow.document.title = fileName;
+      // Create a new container element to hold the file content
+      const fileContainer = document.createElement('div');
+      fileContainer.classList.add('file-container');
+
+      // Create a close button
+      const closeBtn = document.createElement('button');
+      closeBtn.classList.add('close-btn');
+      closeBtn.textContent = 'Cerrar';
+      closeBtn.addEventListener('click', () => {
+        fileContainer.remove();
+      });
+
+      // Create a heading for the file name
+      const fileHeader = document.createElement('h2');
+      fileHeader.textContent = fileName;
+
+      // Create an image element to display the image
+      if (content instanceof Blob) {
+        const imageUrl = URL.createObjectURL(content);
+        const image = document.createElement('img');
+        image.src = imageUrl;
+        image.alt = fileName;
+        image.style.maxWidth = '100%';
+        image.style.maxHeight = '500px';
+        fileContainer.appendChild(image);
+      } else {
+        // For non-image files, display the text content
+        const fileContent = document.createElement('pre');
+        fileContent.textContent = content;
+        fileContainer.appendChild(fileContent);
+      }
+
+      // Append the close button and file header
+      fileContainer.appendChild(closeBtn);
+      fileContainer.appendChild(fileHeader);
+
+      // Append the file container to the page
+      document.body.appendChild(fileContainer);
 
       // Hide loading indicator
       viewLoading.style.display = 'none';
