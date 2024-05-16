@@ -23,19 +23,20 @@ function displayFiles(path) {
         itemName.textContent = item.name;
 
         if (item.type === 'file') {
-          const downloadBtn = document.createElement('button');
-          downloadBtn.textContent = 'Descargar';
-          downloadBtn.classList.add('download-btn');
-          downloadBtn.addEventListener('click', () => downloadFile(item.download_url));
+          const viewBtn = document.createElement('button');
+          viewBtn.textContent = 'Ver';
+          viewBtn.classList.add('view-btn');
+          viewBtn.setAttribute('href', item.download_url); // Add the download URL as an attribute
+          viewBtn.addEventListener('click', () => viewFile(item.download_url, item.name));
 
-          // Add loading indicator for file download (optional)
-          const downloadLoading = document.createElement('span');
-          downloadLoading.classList.add('download-loading');
-          downloadLoading.style.display = 'none';
-          downloadBtn.appendChild(downloadLoading);
+          // Add loading indicator for file view (optional)
+          const viewLoading = document.createElement('span');
+          viewLoading.classList.add('view-loading');
+          viewLoading.style.display = 'none';
+          viewBtn.appendChild(viewLoading);
 
           listItem.appendChild(itemName);
-          listItem.appendChild(downloadBtn);
+          listItem.appendChild(viewBtn);
         } else if (item.type === 'dir') {
           const folderIcon = document.createElement('i');
           folderIcon.className = 'fas fa-folder'; // Ensure Font Awesome is included if using this icon
@@ -56,31 +57,28 @@ function displayFiles(path) {
     });
 }
 
-// Function to download a file
-function downloadFile(url) {
-  const downloadBtn = document.querySelector('.download-btn[href="' + url + '"]'); // Get the corresponding download button
-  const downloadLoading = downloadBtn.querySelector('.download-loading'); // Get the loading indicator
+// Function to view a file
+function viewFile(url, fileName) {
+  const viewBtn = document.querySelector('.view-btn[href="' + url + '"]'); // Get the corresponding view button
+  const viewLoading = viewBtn.querySelector('.view-loading'); // Get the loading indicator
 
   // Show loading indicator
-  downloadLoading.style.display = 'block';
+  viewLoading.style.display = 'block';
 
   fetch(url)
-    .then(response => response.blob())
-    .then(blob => {
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = url.split('/').pop();
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
+    .then(response => response.text())
+    .then(content => {
+      const viewWindow = window.open('', '_blank', 'width=800,height=600');
+      viewWindow.document.write(`<pre>${content}</pre>`);
+      viewWindow.document.title = fileName;
 
       // Hide loading indicator
-      downloadLoading.style.display = 'none';
+      viewLoading.style.display = 'none';
     })
     .catch(error => {
-      console.error('Error al descargar el archivo:', error);
+      console.error('Error al ver el archivo:', error);
       // Hide loading indicator
-      downloadLoading.style.display = 'none';
+      viewLoading.style.display = 'none';
     });
 }
 
