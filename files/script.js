@@ -3,9 +3,33 @@ const fileList = document.getElementById('file-list');
 const backButton = document.querySelector('.back-btn');
 const sortButton = document.querySelector('.sort-btn');
 const sortFoldersButton = document.querySelector('.sort-folders-btn');
+const passwordInput = document.querySelector('.password-input');
+const passwordButton = document.querySelector('.password-btn');
+const contentContainer = document.getElementById('content');
+const buttonGroup = document.querySelector('.button-group');
+
 let currentPath = 'download';
 let sortDirection = 1; // 1 for ascending, -1 for descending
-let sortFolders = false;
+let sortFolders = true;
+let isPasswordCorrect = false;
+
+function checkPassword() {
+  const password = passwordInput.value;
+  if (password === '1') { // Reemplaza 'mypassword' con la contraseña correcta
+    isPasswordCorrect = true;
+    passwordInput.disabled = true;
+    passwordInput.style.display = 'none';
+    passwordButton.style.display = 'none';
+    backButton.style.display = 'none';
+    buttonGroup.style.display = 'flex';
+    sortButton.style.display = 'block';
+    sortFoldersButton.style.display = 'block';
+    contentContainer.style.display = 'block';
+    displayFiles(currentPath);
+  } else {
+    alert('Contraseña incorrecta. Por favor, inténtelo de nuevo.');
+  }
+}
 
 function displayFiles(path) {
   fileList.innerHTML = ''; // Clear previous content
@@ -192,4 +216,11 @@ backButton.addEventListener('click', () => {
   displayFiles(currentPath);
 });
 
-displayFiles(currentPath);
+passwordButton.addEventListener('click', checkPassword);
+
+// Ocultar inicialmente el contenido y los botones de ordenar y carpetas hasta que se ingrese la contraseña correcta
+contentContainer.style.display = 'none';
+sortButton.style.display = 'none';
+sortFoldersButton.style.display = 'none';
+buttonGroup.style.display = 'none';
+backButton.style.display = 'none';

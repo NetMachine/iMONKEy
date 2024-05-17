@@ -112,6 +112,22 @@ h1 {
   right: 1rem;
 }
 
+.password-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.password-input {
+  width: 300px;
+  margin-bottom: 1rem;
+}
+.sort-folders-btn.is-primary {
+  background-color: #4a4a4a;
+  color: #fff;
+}
+
 @media only screen and (max-width: 850px) {
   .file-name {
     font-size: 0.8rem; /* Reducir el tamaño de fuente para pantallas de iPhone */
