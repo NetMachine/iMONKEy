@@ -62,7 +62,7 @@ section {
 .services-content,
 .testimonials-content,
 .contact-content {
-  max-width: 800px;
+  max-width: 100%;
   text-align: center;
 }
 
