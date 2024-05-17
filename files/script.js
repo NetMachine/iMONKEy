@@ -1,7 +1,11 @@
 const repoUrl = 'https://api.github.com/repos/NetMachine/iMONKEy/contents'; // Replace with your repo URL
 const fileList = document.getElementById('file-list');
 const backButton = document.querySelector('.back-btn');
+const sortButton = document.querySelector('.sort-btn');
+const sortFoldersButton = document.querySelector('.sort-folders-btn');
 let currentPath = 'download';
+let sortDirection = 1; // 1 for ascending, -1 for descending
+let sortFolders = false;
 
 function displayFiles(path) {
   fileList.innerHTML = ''; // Clear previous content
@@ -16,6 +20,14 @@ function displayFiles(path) {
       return response.json();
     })
     .then(files => {
+      files.sort((a, b) => {
+        if (sortFolders) {
+          if (a.type === 'dir' && b.type === 'file') return -1;
+          if (a.type === 'file' && b.type === 'dir') return 1;
+        }
+        return a.name.localeCompare(b.name) * sortDirection;
+      });
+
       files.forEach(item => {
         const listItem = document.createElement('li');
         listItem.classList.add('file-item');
@@ -63,7 +75,10 @@ function displayFiles(path) {
           folderIcon.appendChild(folderIconImage);
           folderBtn.appendChild(folderIcon);
           folderBtn.appendChild(itemName);
-          folderBtn.addEventListener('click', () => displayFiles(`${path}/${item.name}`));
+          folderBtn.addEventListener('click', () => {
+            currentPath = `${path}/${item.name}`;
+            displayFiles(currentPath);
+          });
 
           fileActions.appendChild(folderBtn);
         }
@@ -156,8 +171,24 @@ function formatFileSize(size) {
   return `${size.toFixed(2)} ${units[index]}`;
 }
 
+sortButton.addEventListener('click', () => {
+  sortDirection *= -1;
+  displayFiles(currentPath);
+});
+
+sortFoldersButton.addEventListener('click', () => {
+  sortFolders = !sortFolders;
+  displayFiles(currentPath);
+});
+
 backButton.addEventListener('click', () => {
-  currentPath = 'download';
+  const pathParts = currentPath.split('/');
+  if (pathParts.length > 1) {
+    pathParts.pop();
+    currentPath = pathParts.join('/');
+  } else {
+    currentPath = 'download';
+  }
   displayFiles(currentPath);
 });
 
