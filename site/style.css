@@ -3,7 +3,7 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #191919;
+  background-color: #181818;
   color: #fff;
 }
 
@@ -24,6 +24,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.20);
 }
 
 nav ul {
@@ -56,6 +57,21 @@ section {
   justify-content: center;
   align-items: center;
   padding: 0 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome::before,
+.services::before,
+.testimonials::before,
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .welcome-content,
@@ -71,13 +87,23 @@ h1, h2 {
 }
 
 /* Sección de Bienvenida */
-.welcome {
-  background-color: #222;
+.welcome::before {
+  background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
 }
 
 /* Sección de Servicios */
-.services {
-  background-color: #333;
+.services::before {
+  background: linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+}
+
+/* Sección de Testimonios */
+.testimonials::before {
+  background: linear-gradient(to bottom, #2c2c2c, #3d3d3d);
+}
+
+/* Sección de Contacto */
+.contact::before {
+  background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
 }
 
 .services ul {
@@ -86,12 +112,8 @@ h1, h2 {
 }
 
 /* Sección de Testimonios */
-.testimonials {
-  background-color: #444;
-}
-
 blockquote {
-  background-color: #555;
+  background-color: #6d6d6d;
   padding: 20px;
   border-radius: 5px;
   margin: 20px 0;
@@ -107,13 +129,6 @@ blockquote cite {
 }
 
 /* Sección de Contacto */
-.contact {
-  background-color: #222;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .contact-content {
   max-width: 600px;
   width: 100%;
