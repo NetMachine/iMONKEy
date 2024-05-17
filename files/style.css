@@ -46,13 +46,13 @@ h1 {
 
 .button-container > .back-btn {
   order: 1;
-  margin-right: auto;
+  margin-right: 0 auto;
   margin-left: 2rem;
 }
 
 .button-container > .button-group {
   order: 2;
-  margin-left: auto;
+  margin-left: 0 auto;
   margin-right: 2rem;
 }
 
