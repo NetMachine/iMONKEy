@@ -14,8 +14,16 @@ a {
 
 /* Encabezado */
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: #333;
-  padding: 20px;
+  padding: 20px 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav ul {
@@ -43,11 +51,23 @@ nav a:hover {
 
 /* Secciones principales */
 section {
-  padding: 60px 20px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.welcome-content,
+.services-content,
+.testimonials-content,
+.contact-content {
+  max-width: 800px;
+  text-align: center;
 }
 
 h1, h2 {
-  text-align: center;
+  margin-top: 0;
 }
 
 /* Sección de Bienvenida */
@@ -91,32 +111,34 @@ blockquote cite {
   background-color: #222;
 }
 
-form {
-  max-width: 500px;
-  margin: 0 auto;
+.contact-content {
+  max-width: 600px;
+  width: 100%;
 }
 
-label, input, textarea, button {
+.contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-input, textarea {
-  padding: 10px;
+.contact-content input, .contact-content textarea {
+  padding: 15px;
   border: none;
   border-radius: 5px;
   background-color: #333;
   color: #fff;
+  font-size: 16px;
 }
 
-button {
+.contact-content button {
   background-color: #555;
   color: #fff;
-  padding: 10px 20px;
+  padding: 15px 30px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 /* Pie de página */
@@ -134,11 +156,17 @@ footer {
   }
 
   section {
-    padding: 40px 10px;
+    padding: 0 10px;
   }
 
-  form {
-    max-width: 100%;
+  .contact-content input, .contact-content textarea {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .contact-content button {
+    padding: 12px 25px;
+    font-size: 14px;
   }
 }
 
@@ -150,11 +178,21 @@ footer {
   }
 
   section {
-    padding: 50px 15px;
+    padding: 0 15px;
   }
 
   blockquote {
     padding: 25px;
+  }
+
+  .contact-content input, .contact-content textarea {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .contact-content button {
+    padding: 14px 28px;
+    font-size: 15px;
   }
 }
 
@@ -165,11 +203,21 @@ footer {
   }
 
   section {
-    padding: 60px 20px;
+    padding: 0 20px;
   }
 
   blockquote {
     padding: 30px;
+  }
+
+  .contact-content input, .contact-content textarea {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .contact-content button {
+    padding: 16px 32px;
+    font-size: 16px;
   }
 }
 
@@ -180,11 +228,21 @@ footer {
   }
 
   section {
-    padding: 70px 25px;
+    padding: 0 25px;
   }
 
   blockquote {
     padding: 35px;
+  }
+
+  .contact-content input, .contact-content textarea {
+    padding: 18px;
+    font-size: 17px;
+  }
+
+  .contact-content button {
+    padding: 18px 36px;
+    font-size: 17px;
   }
 }
 
@@ -195,10 +253,20 @@ footer {
   }
 
   section {
-    padding: 30px 8px;
+    padding: 0 8px;
   }
 
   blockquote {
     padding: 15px;
+  }
+
+  .contact-content input, .contact-content textarea {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .contact-content button {
+    padding: 10px 20px;
+    font-size: 12px;
   }
 }

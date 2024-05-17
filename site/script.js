@@ -68,3 +68,18 @@ const mobileMenu = document.getElementById('mobile-menu');
 mobileMenuButton.addEventListener('click', () => {
   mobileMenu.classList.toggle('show');
 });
+
+// Función para agregar un evento de scroll suave
+const scrollLinks = document.querySelectorAll('a[href^="#"]');
+
+scrollLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const targetId = event.target.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+    targetElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  });
+});
