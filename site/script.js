@@ -3,10 +3,41 @@ function scrollToSection(event) {
   event.preventDefault();
   const targetId = event.target.getAttribute('href');
   const targetElement = document.querySelector(targetId);
-  targetElement.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
+
+  // Verificar si el navegador admite scrollIntoView() con 'smooth'
+  if ('scrollBehavior' in document.documentElement.style) {
+    targetElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } else {
+    // Desplazamiento suave manual para navegadores antiguos
+    const currentPosition = window.pageYOffset;
+    const targetPosition = targetElement.offsetTop;
+    const distance = targetPosition - currentPosition;
+    const duration = 500; // Duración de la animación en milisegundos
+
+    let start = null;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const scrollY = easeInOutQuad(progress, currentPosition, distance, duration);
+      window.scrollTo(0, scrollY);
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }
+}
+
+// Función de easing para la animación de desplazamiento suave
+function easeInOutQuad(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1) return (c / 2) * t * t + b;
+  t--;
+  return (-c / 2) * (t * (t - 2) - 1) + b;
 }
 
 // Añadir event listeners a los enlaces del menú
