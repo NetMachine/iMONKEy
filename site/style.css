@@ -1,0 +1,204 @@
+/* Estilos generales */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Encabezado */
+header {
+  background-color: #333;
+  padding: 20px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 20px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ccc;
+}
+
+/* Secciones principales */
+section {
+  padding: 60px 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+/* Sección de Bienvenida */
+.welcome {
+  background-color: #222;
+}
+
+/* Sección de Servicios */
+.services {
+  background-color: #333;
+}
+
+.services ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Sección de Testimonios */
+.testimonials {
+  background-color: #444;
+}
+
+blockquote {
+  background-color: #555;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+blockquote p {
+  margin-top: 0;
+}
+
+blockquote cite {
+  font-style: italic;
+  color: #ccc;
+}
+
+/* Sección de Contacto */
+.contact {
+  background-color: #222;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+label, input, textarea, button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+input, textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+}
+
+button {
+  background-color: #555;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Pie de página */
+footer {
+  background-color: #333;
+  padding: 20px;
+  text-align: center;
+  color: #ccc;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  nav li {
+    margin: 0 10px;
+  }
+
+  section {
+    padding: 40px 10px;
+  }
+
+  form {
+    max-width: 100%;
+  }
+}
+
+/* Estilos para dispositivos Apple */
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
+  /* Ajustes específicos para iPhone X, XS, 11 Pro */
+  nav li {
+    margin: 0 15px;
+  }
+
+  section {
+    padding: 50px 15px;
+  }
+
+  blockquote {
+    padding: 25px;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* Ajustes específicos para iPad */
+  nav li {
+    margin: 0 20px;
+  }
+
+  section {
+    padding: 60px 20px;
+  }
+
+  blockquote {
+    padding: 30px;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* Ajustes específicos para iPad en modo landscape */
+  nav li {
+    margin: 0 25px;
+  }
+
+  section {
+    padding: 70px 25px;
+  }
+
+  blockquote {
+    padding: 35px;
+  }
+}
+
+@media only screen and (min-device-width: 42mm) and (max-device-width: 44mm) {
+  /* Ajustes específicos para Apple Watch */
+  nav li {
+    margin: 0 8px;
+  }
+
+  section {
+    padding: 30px 8px;
+  }
+
+  blockquote {
+    padding: 15px;
+  }
+}
