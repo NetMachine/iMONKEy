@@ -3,23 +3,41 @@ const fileList = document.getElementById('file-list');
 const backButton = document.querySelector('.back-btn');
 const sortButton = document.querySelector('.sort-btn');
 const sortFoldersButton = document.querySelector('.sort-folders-btn');
-const passwordInput = document.querySelector('.password-input');
-const passwordButton = document.querySelector('.password-btn');
+const atomIn = document.querySelector('.password-input');
+const atomButton = document.querySelector('.password-btn');
 const contentContainer = document.getElementById('content');
 const buttonGroup = document.querySelector('.button-group');
 
 let currentPath = 'download';
 let sortDirection = 1; // 1 for ascending, -1 for descending
 let sortFolders = true;
-let isPasswordCorrect = false;
+let isAtomCorrect = false;
 
-function checkPassword() {
-  const password = passwordInput.value;
-  if (password === '1') { // Reemplaza 'mypassword' con la contraseña correcta
-    isPasswordCorrect = true;
-    passwordInput.disabled = true;
-    passwordInput.style.display = 'none';
-    passwordButton.style.display = 'none';
+async function getAtom() {
+  try {
+    const response = await fetch('https://imonkey.store/e.json');
+    if (response.ok) {
+      const data = await response.json();
+      const atomValue = 1001; // Posición donde comienza la contraseña
+      const atomInt = 6; // Longitud de la contraseña
+      const atom = data.data.substring(atomValue, atomValue + atomInt);
+      return atom;
+    } else {
+      throw new Error('Error');
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function checkAtom() {
+  const atom = await getAtom();
+  if (atom && atom === atomIn.value) {
+    isAtomCorrect = true;
+    atomIn.disabled = true;
+    atomIn.style.display = 'none';
+    atomButton.style.display = 'none';
     backButton.style.display = 'none';
     buttonGroup.style.display = 'flex';
     sortButton.style.display = 'block';
@@ -27,7 +45,7 @@ function checkPassword() {
     contentContainer.style.display = 'block';
     displayFiles(currentPath);
   } else {
-    alert('Contraseña incorrecta. Por favor, inténtelo de nuevo.');
+    alert('Error!');
   }
 }
 
@@ -216,7 +234,7 @@ backButton.addEventListener('click', () => {
   displayFiles(currentPath);
 });
 
-passwordButton.addEventListener('click', checkPassword);
+atomButton.addEventListener('click', checkAtom);
 
 // Ocultar inicialmente el contenido y los botones de ordenar y carpetas hasta que se ingrese la contraseña correcta
 contentContainer.style.display = 'none';
