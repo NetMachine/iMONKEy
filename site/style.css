@@ -18,13 +18,20 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #191919;
-  padding: 20px 0;
+  background-color: #181818;
+  
+  padding: 15px 0;
   z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.20);
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav ul {
@@ -36,14 +43,21 @@ nav ul {
 }
 
 nav li {
-  margin: 0 20px;
+  margin: 0 10px;
 }
 
 nav a {
-  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+}
+
+nav a i {
+  font-size: 20px;
+  margin-bottom: 5px;
 }
 
 nav a:hover {
@@ -88,23 +102,40 @@ h1, h2 {
 
 /* Sección de Bienvenida */
 .welcome::before {
+  background: #1a1a1a; /* Fallback para navegadores antiguos */
   background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Safari y otros navegadores WebKit */
+  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Firefox */
+  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Opera */
 }
 
 /* Sección de Servicios */
 .services::before {
+  background: #3b3b3b; /* Fallback para navegadores antiguos */
   background: linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -webkit-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -moz-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -o-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
 }
 
 /* Sección de Testimonios */
 .testimonials::before {
+  background: #2c2c2c; /* Fallback para navegadores antiguos */
   background: linear-gradient(to bottom, #2c2c2c, #3d3d3d);
+  background: -webkit-linear-gradient(to bottom, #2c2c2c, #3d3d3d);
+  background: -moz-linear-gradient(to bottom, #2c2c2c, #3d3d3d);
+  background: -o-linear-gradient(to bottom, #2c2c2c, #3d3d3d);
 }
 
 /* Sección de Contacto */
 .contact::before {
+  background: #1a1a1a; /* Fallback para navegadores antiguos */
   background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
 }
+
 
 .services ul {
   list-style-type: none;
@@ -177,8 +208,16 @@ footer {
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
+  header {
+    padding: 10px 0;
+  }
+
   nav li {
-    margin: 0 10px;
+    margin: 0 8px;
+  }
+
+  nav a i {
+    font-size: 18px;
   }
 
   section {
@@ -199,8 +238,16 @@ footer {
 /* Estilos para dispositivos Apple */
 @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
   /* Ajustes específicos para iPhone X, XS, 11 Pro */
+  header {
+    padding: 12px 0;
+  }
+
   nav li {
-    margin: 0 15px;
+    margin: 0 12px;
+  }
+
+  nav a i {
+    font-size: 20px;
   }
 
   section {
@@ -221,6 +268,8 @@ footer {
     font-size: 15px;
   }
 }
+
+/* Resto de los estilos responsivos omitidos para simplificar */
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   /* Ajustes específicos para iPad */
