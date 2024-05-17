@@ -109,16 +109,26 @@ blockquote cite {
 /* Sección de Contacto */
 .contact {
   background-color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contact-content {
   max-width: 600px;
   width: 100%;
+  padding: 0 20px;
+}
+
+.contact-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
-  display: block;
   width: 100%;
+  max-width: 500px;
   margin-bottom: 20px;
 }
 
