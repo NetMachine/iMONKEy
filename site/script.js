@@ -1,7 +1,7 @@
 // Función para desplazarse suavemente a una sección
 function scrollToSection(event) {
   event.preventDefault();
-  const targetId = event.target.getAttribute('href');
+  const targetId = event.currentTarget.getAttribute('href');
   const targetElement = document.querySelector(targetId);
 
   // Verificar si el navegador admite scrollIntoView() con 'smooth'
