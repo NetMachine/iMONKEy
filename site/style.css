@@ -28,7 +28,7 @@ header {
 }
 .blurred {
   -webkit-backdrop-filter: blur(30px);
-  background: rgba(20, 20, 20, 0.6);
+  background: rgba(18, 18, 18, 0.7);
 }
 
 nav {
