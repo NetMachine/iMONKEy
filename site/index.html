@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reparación de iPhone</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMONKEy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+
 </head>
 <body>
-<header class="blurred">
+  <header class="blurred">
   <nav>
     <ul>
       <li><a href="#welcome"><i class="material-icons">home</i></a></li>
@@ -19,14 +24,16 @@
     </ul>
   </nav>
 </header>
-  <main>
-    <section id="welcome" class="welcome">
+<main>
+   <section id="welcome" class="welcome">
       <div class="welcome-content">
+        <div id="contenedor">
+          <div id="animation-container"></div>
+        </div>
         <h1>Bienvenido a Reparación de iPhones</h1>
         <p>Brindamos servicio de reparación especializado para tu iPhone.</p>
       </div>
     </section>
-
     <section id="services" class="services">
       <div class="services-content">
         <h2>Nuestros Servicios</h2>
@@ -70,13 +77,14 @@
         </form>
       </div>
     </section>
-  </main>
 
-  <footer>
+</main>
+<footer>
     <p>&copy; iMONKEy 2024 - iPhone Repair Shop - Todos los derechos reservados.</p>
     <p>Chile Coquimbo - La Serena</p>
-  </footer>
-
-  <script src="script.js"></script>
+</footer>
+<script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
+<script src="script.js"></script>
+ 
 </body>
 </html>
