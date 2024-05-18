@@ -17,11 +17,11 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50%;
+  height: 40%;
 }
 #animation-container {
-  width:200%;
-  height:200%;
+  width:150%;
+  height:150%;
 }
 
 /* Encabezado */
