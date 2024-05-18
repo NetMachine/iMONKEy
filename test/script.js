@@ -125,7 +125,7 @@ const animation = lottie.loadAnimation({
     renderer: 'svg',
     loop: false,
     autoplay: false,
-    path: 'iMONKEy.json'
+    path: 'https://imonkey.store/iMONKEy.json'
 });
 
 let currentPlaySpeed = 6.5;
