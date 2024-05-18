@@ -27,7 +27,7 @@ header {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.20);
 }
 .blurred {
-  -webkit-backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(35px);
   background: rgba(20, 20, 20, 0.6);
 }
 
