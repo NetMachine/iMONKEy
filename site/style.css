@@ -12,6 +12,7 @@ a {
   text-decoration: none;
 }
 #contenedor {
+  background-color: red;
   transform: translate(0%, -10%);
   display: flex;
   justify-content: center;
