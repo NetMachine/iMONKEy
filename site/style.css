@@ -13,7 +13,7 @@ a {
 }
 #contenedor {
  
-
+  transform: translate(0%, -10%);
   display: flex;
   justify-content: center;
   align-items: center;
