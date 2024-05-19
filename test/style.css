@@ -16,7 +16,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vw;
+  //height: 60vw;
 }
 
 #animation-container {
