@@ -1,174 +1,393 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iMONKEy</title>
-<link rel="stylesheet" href="https://use.typekit.net/abc1234.css">
+/* Estilos generales */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #181818;
+  color: #fff;
+}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+a {
+  color: #fff;
+  text-decoration: none;
+}
+#contenedor {
+ 
+  //top: 50%;
+  //left: 50%;
+  position: relative; top: 10px;
+  margin-bottom:0;
+  //transform: translate(0%, 0%);
+  display: flex;
+  //background-color: red;
+  justify-content: center;
+  align-items: center;
+  height: 60vw; /* Altura del contenedor 100% del viewport */
+  //width: 100vw; /* Ancho del contenedor 100% del viewport */
+}
+#animation-container {
+  width:95%;
+  height:95%;
+}
+.head1 {
   
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		
-    <link rel="stylesheet" href="style.css">
-    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
-
-</head>
-<body>
-  <header class="blurred">
-  <nav>
-    <ul>
-      <li><a href="#welcome"><i class="material-icons">home</i></a></li>
-      <li><a href="#services"><i class="material-icons">precision_manufacturing</i></a></li>
-      <li><a href="#testimonials"><i class="material-icons">comment</i></a></li>
-      <li><a href="#contact"><i class="material-icons">mail</i></a></li>
-    </ul>
-  </nav>
-</header>
-<main>
-   <section id="welcome" class="welcome">
-      <div class="welcome-content">
-        <div id="contenedor">
-          <div id="animation-container"></div>
-        </div>
-      <div class="head1">
-        <a class="titulo">Brindamos servicio de reparación especializado para tu iPhone</a></div>
-     <div class="head2">
-        <p class="desc">En iMONKEY, somos expertos en reparación de dispositivos Apple con la más alta calidad. Nuestro equipo de técnicos altamente capacitados utiliza piezas de fábrica para garantizar que su iPhone funcione como nuevo.
-
-Entendemos que su iPhone es más que un simple dispositivo, es una extensión de usted. Por eso, nos comprometemos a brindarle una experiencia de reparación excepcional, con procesos de vanguardia y riguroso control de calidad.
-</p></div>
-      </div>
-    </section>
-    <section id="services" class="services">
-      <div class="services-content">
-        <h2>Nuestros Servicios</h2>
-        <ul>
-          <li>Reparación de pantalla</li>
-          <li>Reparación de batería</li>
-          <li>Reparación de cámara</li>
-          <li>Reparación de puerto de carga</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="testimonials" class="testimonials">
-      <div class="testimonials-content">
-        <h2>Lo que dicen nuestros clientes</h2>
-        <blockquote>
-          <p>"Excelente servicio, repararon mi iPhone en tiempo récord."</p>
-          <cite>- Juan Pérez</cite>
-        </blockquote>
-        <blockquote>
-          <p>"Realmente impresionado por la calidad de la reparación y el trato personalizado."</p>
-          <cite>- María Gómez</cite>
-        </blockquote>
-      </div>
-    </section>
-
-    <section id="contact" class="contact">
-      <div class="contact-content">
-        <h2>Contáctanos</h2>
-        <form>
-          <label for="name">Nombre:</label>
-          <input type="text" id="name" name="name" required>
-
-          <label for="email">Correo electrónico:</label>
-          <input type="email" id="email" name="email" required>
-
-          <label for="message">Mensaje:</label>
-          <textarea id="message" name="message" required></textarea>
-
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
-    </section>
-
-</main>
-<footer>
-    <p>&copy; iMONKEy 2024 - iPhone Repair Shop - Todos los derechos reservados.</p>
-    <p>Chile Coquimbo - La Serena</p>
-</footer>
-<script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
-<script src="script.js"></script>
-<script>
-    const animationContainer = document.getElementById('animation-container');
-
-// Configurar la animación
-const animation = lottie.loadAnimation({
-    container: animationContainer,
-    renderer: 'svg',
-    loop: false,
-    autoplay: false,
-    path: 'https://imonkey.store/site/iMONKEy.json'
-});
-
-let currentPlaySpeed = 6;
-
-function playAnimation() {
-    animation.play();
-    animation.setSpeed(currentPlaySpeed); // Establecer la velocidad inicial a 4
-
-    animation.addEventListener('complete', () => {
-        // Aumentar o disminuir la velocidad de la animación
-        currentPlaySpeed = getRandomPlaySpeed(6, 6.5);
-        animation.setSpeed(currentPlaySpeed);
-
-        // Generar una pausa aleatoria antes de volver a reproducir la animación
-        const pauseDuration = getRandomPause(50, 6000); // Entre 10 y 5000 milisegundos
-        setTimeout(() => {
-            // Volver a reproducir la animación
-            animation.goToAndPlay(0, true);
-        }, pauseDuration);
-    });
+  position: relative; top: -5px;
+  //font-size: 30px;
+  //background-color:yellow;
+  margin-bottom:0;
+  //transform: translate(0,-10px);
 }
 
-function getRandomPlaySpeed(min, max) {
-    // Generar una velocidad aleatoria entre un rango
-    return Math.random() * (max - min) + min;
+.titulo {
+   //font-family: "Montserrat", sans-serif;
+  //font-optical-sizing: auto;
+  //font-weight: 900;
+  //font-style: black;
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  //font-family: "San Francisco", sans-serif;
+  f//ont-weight: 400;
+  font-style: bold;
+
+
+//background-color:red;
+   
+
+}
+.head2{
+  position: relative; top: -5px;
+  //background-color: red;
+
+}
+.desc {
+  font-size: 12px;
+  //font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+box-sizing: border-box;
+text-align: justify;
+font-family: 'Roboto', sans-serif;
+}
+/* Encabezado */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #181818;
+  padding: 15px 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.20);
+}
+.blurred {
+  -webkit-backdrop-filter: blur(30px);
+  background: rgba(20, 20, 20, 0.7);
 }
 
-function getRandomPause(min, max) {
-    // Generar una pausa aleatoria entre un rango
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30px;
 }
 
-function resizeAnimation() {
-    const containerWidth = animationContainer.offsetWidth;
-    const containerHeight = animationContainer.offsetHeight;
-    const animationWidth = animation.preloadedImages[0].width;
-    const animationHeight = animation.preloadedImages[0].height;
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 
-    const scaleX = containerWidth / animationWidth;
-    const scaleY = containerHeight / animationHeight;
-    const scale = Math.min(scaleX, scaleY);
+nav li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+}
 
-    animationContainer.style.width = `${containerWidth}px`;
-    animationContainer.style.height = `${containerHeight}px`;
+nav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
 
-    animation.setTransform({
-        a: scale,
-        b: 0,
-        c: 0,
-        d: scale,
-        tx: (containerWidth - animationWidth * scale) / 2,
-        ty: (containerHeight - animationHeight * scale) / 2
-    });
+nav a i {
+  font-size: 24px;
+}
+
+nav a:hover {
+  color: #ccc;
+}
+
+/* Secciones principales */
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome::before,
+.services::before,
+.testimonials::before,
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.welcome-content,
+.services-content,
+.testimonials-content,
+.contact-content {
+  max-width: 100%;
+  text-align: center;
+}
+.welcome-content h1 {
+  margin-top: auto;
+  
+}
+
+h1, h2 {
+  margin-top: 0;
+}
+
+/* Sección de Bienvenida */
+.welcome::before {
+  background: #1a1a1a; /* Fallback para navegadores antiguos */
+  background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Safari y otros navegadores WebKit */
+  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Firefox */
+  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Opera */
+}
+
+/* Sección de Servicios */
+.services::before {
+  background: #3b3b3b; /* Fallback para navegadores antiguos */
+  background: linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -webkit-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -moz-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -o-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+}
+
+/* Sección de Testimonios */
+.testimonials::before {
+  background: #2c2c2c; /* Fallback para navegadores antiguos */
+  background: linear-gradient(to bottom, #2c2c2c, #3d3d3d);
+  background: -webkit-linear-gradient(to bottom, #2c2c2c, #3d3d3d);
+  background: -moz-linear-gradient(to bottom, #2c2c2c, #3d3d3d);
+  background: -o-linear-gradient(to bottom, #2c2c2c, #3d3d3d);
+}
+
+/* Sección de Contacto */
+.contact::before {
+  background: #1a1a1a; /* Fallback para navegadores antiguos */
+  background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
 }
 
 
-setTimeout(playAnimation, 4500);
+.services ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-resizeAnimation();
+/* Sección de Testimonios */
+blockquote {
+  background-color: #6d6d6d;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
 
-window.addEventListener('resize', resizeAnimation);
+blockquote p {
+  margin-top: 0;
+}
 
+blockquote cite {
+  font-style: italic;
+  color: #ccc;
+}
 
-</script> 
-</body>
-</html>
+/* Sección de Contacto */
+.contact-content {
+  max-width: 600px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.contact-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.contact-content input, .contact-content textarea {
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+}
+
+.contact-content button {
+  background-color: #555;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Pie de página */
+footer {
+  background-color: #333;
+  padding: 20px;
+  text-align: center;
+  color: #ccc;
+  font-size: 12px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  header {
+    padding: 10px 0;
+  }
+
+  nav li {
+    margin: 0 8px;
+  }
+
+  nav a i {
+    font-size: 18px;
+  }
+
+  section {
+    padding: 0 10px;
+  }
+
+  .contact-content input, .contact-content textarea {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .contact-content button {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+}
+
+/* Estilos para dispositivos Apple */
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
+  /* Ajustes específicos para iPhone X, XS, 11 Pro */
+  header {
+    padding: 12px 0;
+  }
+
+  nav li {
+    margin: 0 12px;
+  }
+
+  nav a i {
+    font-size: 20px;
+  }
+
+  section {
+    padding: 0 15px;
+  }
+
+  blockquote {
+    padding: 25px;
+  }
+
+  .contact-content input, .contact-content textarea {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .contact-content button {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+}
+
+/* Resto de los estilos responsivos omitidos para simplificar */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* Ajustes específicos para iPad */
+  nav li {
+    margin: 0 20px;
+  }
+
+  section {
+    padding: 0 20px;
+  }
+
+  blockquote {
+    padding: 30px;
+  }
+
+  .contact-content input, .contact-content textarea {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .contact-content button {
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* Ajustes específicos para iPad en modo landscape */
+  nav li {
+    margin: 0 25px;
+  }
+
+  section {
+    padding: 0 25px;
+  }
+
+  blockquote {
+    padding: 35px;
+  }
+
+  .contact-content input, .contact-content textarea {
+    padding: 18px;
+    font-size: 17px;
+  }
+
+  .contact-content button {
+    padding: 18px 36px;
+    font-size: 17px;
+  }
+}

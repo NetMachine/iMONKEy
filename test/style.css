@@ -15,14 +15,14 @@ a {
  
   //top: 50%;
   //left: 50%;
-  position: relative; top: 30px;
+  position: relative; top: 10px;
   margin-bottom:0;
   //transform: translate(0%, 0%);
   display: flex;
   //background-color: red;
   justify-content: center;
   align-items: center;
-  height: 70vw; /* Altura del contenedor 100% del viewport */
+  height: 60vw; /* Altura del contenedor 100% del viewport */
   //width: 100vw; /* Ancho del contenedor 100% del viewport */
 }
 #animation-container {
@@ -31,7 +31,7 @@ a {
 }
 .head1 {
   
-  position: relative; top: 10px;
+  position: relative; top: -5px;
   //font-size: 30px;
   //background-color:yellow;
   margin-bottom:0;
@@ -43,11 +43,11 @@ a {
   //font-optical-sizing: auto;
   //font-weight: 900;
   //font-style: black;
-  font-size: 22px;
+  font-size: 18px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   //font-family: "San Francisco", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  f//ont-weight: 400;
+  font-style: bold;
 
 
 //background-color:red;
@@ -55,16 +55,16 @@ a {
 
 }
 .head2{
-  position: relative; top: -30px;
+  position: relative; top: -5px;
   //background-color: red;
 
 }
 .desc {
   font-size: 12px;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  //font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 box-sizing: border-box;
 text-align: justify;
-
+font-family: 'Roboto', sans-serif;
 }
 /* Encabezado */
 header {
