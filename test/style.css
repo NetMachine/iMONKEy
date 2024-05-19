@@ -297,7 +297,7 @@ footer {
 }
 
 /* Estilos responsivos */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   header {
     padding: 10px 0;
   }
@@ -375,7 +375,7 @@ footer {
   }
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1024px) {
   .welcome-content,
   .services-content,
   .testimonials-content,
