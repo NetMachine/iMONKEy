@@ -243,43 +243,40 @@ blockquote cite {
 
 /* Sección de Contacto */
 .contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    "title title"
-    "form message"
-    "form button";
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  max-width: 900px;
-}
-
-.contact-content h2 {
-  grid-area: title;
-  text-align: center;
-  margin-bottom: 20px;
+  max-width: 600px;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .contact-content form {
-  grid-area: form;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
+  align-items: center;
 }
 
-.contact-content form label,
-.contact-content form input,
-.contact-content form textarea {
+.contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
   width: 100%;
-  max-width: none;
-  margin-bottom: 15px;
+  max-width: 500px;
+  margin-bottom: 20px;
 }
 
-.contact-content form button {
-  width: 100%;
-  max-width: none;
+.contact-content input, .contact-content textarea {
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+}
+
+.contact-content button {
+  background-color: #555;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .contact-content textarea {
