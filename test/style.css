@@ -446,4 +446,8 @@ footer {
     grid-area: message;
     height: 100%;
   }
+  .titulo {
+  font-size: 25px;
+  font-style: bold;
+}
 }
