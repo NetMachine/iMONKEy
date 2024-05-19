@@ -11,61 +11,43 @@ a {
   color: #fff;
   text-decoration: none;
 }
+
 #contenedor {
- 
-  //top: 50%;
-  //left: 50%;
-  //position: relative; top: 10px;
-  margin-bottom:0;
-  //transform: translate(0%, 0%);
   display: flex;
-  //background-color: red;
   justify-content: center;
   align-items: center;
-  height: 60vw; /* Altura del contenedor 100% del viewport */
-  //width: 100vw; /* Ancho del contenedor 100% del viewport */
+  height: 60vw;
 }
+
 #animation-container {
-  width:95%;
-  height:95%;
+  width: 95%;
+  height: 95%;
 }
+
 .head1 {
-  
-  position: relative; top: -15px;
-  //font-size: 30px;
-  //background-color:yellow;
-  margin-bottom:0;
-  //transform: translate(0,-10px);
+  position: relative;
+  top: -15px;
+  margin-bottom: 0;
 }
 
 .titulo {
-   //font-family: "Montserrat", sans-serif;
-  //font-optical-sizing: auto;
-  //font-weight: 900;
-  //font-style: black;
   font-size: 18px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  //font-family: "San Francisco", sans-serif;
-  f//ont-weight: 400;
   font-style: bold;
-
-
-//background-color:red;
-   
-
 }
-.head2{
-  position: relative; top: -5px;
-  //background-color: red;
 
+.head2 {
+  position: relative;
+  top: -5px;
 }
+
 .desc {
   font-size: 12px;
-  //font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-box-sizing: border-box;
-text-align: justify;
-font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  text-align: justify;
+  font-family: 'Roboto', sans-serif;
 }
+
 /* Encabezado */
 header {
   position: fixed;
@@ -80,6 +62,7 @@ header {
   align-items: center;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.20);
 }
+
 .blurred {
   -webkit-backdrop-filter: blur(30px);
   background: rgba(20, 20, 20, 0.7);
@@ -134,7 +117,6 @@ nav a:hover {
 /* Secciones principales */
 section {
   height: 100vh;
-  //width: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,30 +142,52 @@ section {
 .services-content,
 .testimonials-content,
 .contact-content {
-  max-width: 100%;
-  text-align: center;
-}
-.welcome-content h1 {
-  margin-top: auto;
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-h1, h2 {
-  margin-top: 0;
+.animation-container,
+.content-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+.content-container {
+  width: 50%;
+  text-align: left;
+}
+
+.head1,
+.head2 {
+  margin-bottom: 20px;
 }
 
 /* Sección de Bienvenida */
 .welcome::before {
-  background: #1a1a1a; /* Fallback para navegadores antiguos */
+  background: #1a1a1a;
   background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
-  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Safari y otros navegadores WebKit */
-  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Firefox */
-  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b); /* Para Opera */
+  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
 }
 
 /* Sección de Servicios */
 .services::before {
-  background: #3b3b3b; /* Fallback para navegadores antiguos */
+  background: #3b3b3b;
   background: linear-gradient(to bottom, #3b3b3b, #4c4c4c);
   background: -webkit-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
   background: -moz-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
@@ -192,7 +196,7 @@ h1, h2 {
 
 /* Sección de Testimonios */
 .testimonials::before {
-  background: #2c2c2c; /* Fallback para navegadores antiguos */
+  background: #2c2c2c;
   background: linear-gradient(to bottom, #2c2c2c, #3d3d3d);
   background: -webkit-linear-gradient(to bottom, #2c2c2c, #3d3d3d);
   background: -moz-linear-gradient(to bottom, #2c2c2c, #3d3d3d);
@@ -201,13 +205,12 @@ h1, h2 {
 
 /* Sección de Contacto */
 .contact::before {
-  background: #1a1a1a; /* Fallback para navegadores antiguos */
+  background: #1a1a1a;
   background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
   background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
   background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
   background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
 }
-
 
 .services ul {
   list-style-type: none;
@@ -233,40 +236,48 @@ blockquote cite {
 
 /* Sección de Contacto */
 .contact-content {
-  max-width: 600px;
-  width: 100%;
-  padding: 0 20px;
-}
-
-.contact-content form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "title title"
+    "form message"
+    "form button";
+  justify-content: center;
   align-items: center;
+  gap: 20px;
+  max-width: 900px;
 }
 
-.contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
-  width: 100%;
-  max-width: 500px;
+.contact-content h2 {
+  grid-area: title;
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.contact-content input, .contact-content textarea {
-  padding: 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #333;
-  color: #fff;
-  font-size: 16px;
+.contact-content form {
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
-.contact-content button {
-  background-color: #555;
-  color: #fff;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+.contact-content form label,
+.contact-content form input,
+.contact-content form textarea {
+  width: 100%;
+  max-width: none;
+  margin-bottom: 15px;
+}
+
+.contact-content form button {
+  width: 100%;
+  max-width: none;
+}
+
+.contact-content textarea {
+  grid-area: message;
+  height: 100%;
 }
 
 /* Pie de página */
@@ -296,6 +307,23 @@ footer {
     padding: 0 10px;
   }
 
+  .welcome-content,
+  .services-content,
+  .testimonials-content,
+  .contact-content {
+    flex-direction: column;
+  }
+
+  .animation-container,
+  .content-container {
+    width: 100%;
+  }
+
+  .head1,
+  .head2 {
+    text-align: center;
+  }
+
   .contact-content input, .contact-content textarea {
     padding: 12px;
     font-size: 14px;
@@ -307,7 +335,6 @@ footer {
   }
 }
 
-/* Estilos para dispositivos Apple */
 @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
   /* Ajustes específicos para iPhone X, XS, 11 Pro */
   header {
@@ -341,54 +368,75 @@ footer {
   }
 }
 
-/* Resto de los estilos responsivos omitidos para simplificar */
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  /* Ajustes específicos para iPad */
-  nav li {
-    margin: 0 20px;
+@media (min-width: 1024px) {
+  .welcome-content,
+  .services-content,
+  .testimonials-content,
+  .contact-content {
+    flex-direction: row;
+    justify-content: space-between;
   }
 
-  section {
-    padding: 0 20px;
+  .animation-container,
+  .content-container {
+    width: 45%;
   }
 
-  blockquote {
-    padding: 30px;
+  .head1,
+  .head2 {
+    text-align: left;
   }
 
-  .contact-content input, .contact-content textarea {
-    padding: 16px;
-    font-size: 16px;
+  nav ul {
+    justify-content: space-around;
   }
 
-  .contact-content button {
-    padding: 16px 32px;
-    font-size: 16px;
-  }
-}
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
-  /* Ajustes específicos para iPad en modo landscape */
-  nav li {
-    margin: 0 25px;
+  nav a i {
+    font-size: 28px;
   }
 
-  section {
-    padding: 0 25px;
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "title title"
+      "form message"
+      "form button";
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 900px;
   }
 
-  blockquote {
-    padding: 35px;
+  .contact-content h2 {
+    grid-area: title;
+    text-align: center;
+    margin-bottom: 20px;
   }
 
-  .contact-content input, .contact-content textarea {
-    padding: 18px;
-    font-size: 17px;
+  .contact-content form {
+    grid-area: form;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
   }
 
-  .contact-content button {
-    padding: 18px 36px;
-    font-size: 17px;
+  .contact-content form label,
+  .contact-content form input,
+  .contact-content form textarea {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 15px;
+  }
+
+  .contact-content form button {
+    width: 100%;
+    max-width: none;
+  }
+
+  .contact-content textarea {
+    grid-area: message;
+    height: 100%;
   }
 }
