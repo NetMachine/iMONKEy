@@ -64,9 +64,16 @@ header {
 }
 
 .blurred {
+  background-color: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(30px);
+
+  /* Fallback para navegadores que no soportan backdrop-filter */
   -webkit-backdrop-filter: blur(30px);
-  background: rgba(20, 20, 20, 0.7);
+  -moz-backdrop-filter: blur(30px);
+  -o-backdrop-filter: blur(30px);
+  -ms-backdrop-filter: blur(30px);
 }
+
 
 nav {
   display: flex;
