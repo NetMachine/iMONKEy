@@ -1,0 +1,380 @@
+/* Estilos generales */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #181818;
+    color: #fff;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#contenedor {
+   //margin-top:40%;
+   align-items: center; 
+display: flex;
+  justify-content: center; /* Alineación horizontal */
+  align-items: center; 
+    
+}
+/* Encabezado */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #181818;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.20);
+}
+
+.blurred {
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    background: rgba(20, 20, 20, 0.7);
+}
+
+/* Estilos para el menú */
+#main-nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    height: 50px; /* Altura inicial de la barra de navegación */
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+#main-nav.open {
+    height: 180px; /* Altura cuando se expande la barra de navegación */
+   
+}
+
+.nav-content {
+	margin-top:25px;
+}
+
+
+
+
+.logo {
+    position: fixed;
+    left: 12px;
+    top: 11px;
+    flex: 1;
+}
+
+.logo img {
+    width:42%;
+    height:42%;
+
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    margin-left:20px;
+    list-style-type: none;
+    padding: 20px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#main-nav.open .nav-links {
+    opacity: 1;
+}
+
+.nav-links li {
+    margin-bottom: 10px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a i {
+    margin-right: 8px;
+}
+
+.nav-links a:hover {
+    color: #ccc;
+}
+
+.nav-toggle {
+    position: fixed;
+    top: 0px;
+    right: 10px;
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.nav-toggle div {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle.open .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.nav-toggle.open .line2 {
+    opacity: 0;
+}
+
+.nav-toggle.open .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Secciones principales */
+section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+section.services {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before,
+.services::before,
+.contact::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-content,
+.services-content,
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.animation-container,
+.hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    //padding: 20px;
+    justify-content:center;
+}
+
+.animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 30%;
+}
+
+.hero-text {
+    //width: 80%;
+    text-align: center;
+    justify-content:center;
+    display: flex;
+
+     margin-bottom: 15%;
+     margin-top:-15%;
+}
+
+.hero-text h1 {
+    font-size: 26px;
+    align-items: center;
+    //margin: 0 auto 10px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #555;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #777;
+}
+
+/* Sección de Servicios */
+.services-content {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom:26%;
+    margin-top:12%;
+}
+
+.service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+    width: 100%;
+}
+
+.service-item {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+
+.service-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.service-item p {
+    font-size: 14px;
+}
+
+/* Sección de Contacto */
+/* Sección de Bienvenida */
+.hero::before {
+  background: #1a1a1a;
+  background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+}
+
+/* Sección de Servicios */
+.services::before {
+  background: #3b3b3b;
+  background: linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -webkit-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -moz-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+  background: -o-linear-gradient(to bottom, #3b3b3b, #4c4c4c);
+}
+
+
+/* Sección de Contacto */
+.contact::before {
+    background: #1a1a1a;
+    background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+    background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+    background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+    background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+}
+
+.contact-content {
+    max-width: 600px;
+    width: 100%;
+    padding: 0 30px;
+    flex-direction:column;
+}
+
+.contact-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.contact-content input, .contact-content textarea {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+
+.contact-content button {
+    background-color: #555;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-content button:hover {
+    background-color: #777;
+}
+
+/* Pie de página */
+footer {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+    color: #ccc;
+    font-size: 12px;
+}
+
+.services h2 {
+
+	margin-bottom:30px;
+}
+
+.contact h2 {
+
+	margin-bottom:30px;
+}

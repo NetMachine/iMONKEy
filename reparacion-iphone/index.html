@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMONKEy</title>
+    <link rel="stylesheet" href="https://use.typekit.net/abc1234.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+</head>
+<body>
+<header class="blurred">
+    <nav id="main-nav">
+        <div class="logo">
+            <img src="http://imonkey.store/site/iMONKEy-Logo.svg" alt="Logo">
+
+        </div>
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="#hero"><i class="material-icons">home</i> Inicio</a></li>
+                <li><a href="#services"><i class="material-icons">precision_manufacturing</i> Servicios</a></li>
+                <li><a href="#contact"><i class="material-icons">mail</i> Contacto</a></li>
+            </ul>
+        </div>
+        <div class="nav-toggle">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+</header>
+
+
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <div id="contenedor">
+                    <div id="animation-container"></div>
+                </div>
+                <div class="hero-text">
+                    <h1>Reparación Especializada de iPhone</h1>
+                    
+                  
+                </div>
+            </div>
+        </section>
+        <section id="services" class="services">
+            <div class="services-content">
+                <h2>Nuestros Servicios</h2>
+                <div class="service-list">
+                    <div class="service-item">
+                <i class="material-icons">smartphone</i>
+                <h3>Reparación de Pantalla</h3>
+                <p>Reemplazamos la pantalla dañada de tu iPhone.</p>
+            </div>
+            <div class="service-item">
+                <i class="material-icons">build</i>
+                <h3>Cambio de chasis</h3>
+                <p>Reemplazamos el chasis dañado de tu iPhone.</p>
+            </div>
+                    <div class="service-item">
+                        <i class="material-icons">battery_full</i>
+                        <h3>Reparación de Batería</h3>
+                        <p>Reemplazamos tu batería por una nueva y eficiente.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="material-icons">camera_enhance</i>
+                        <h3>Reparación de Cámara</h3>
+                        <p>Arreglamos problemas en la cámara de tu iPhone.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="material-icons">usb</i>
+                        <h3>Reparación de Puerto</h3>
+                        <p>Solucionamos problemas en el puerto de carga de tu iPhone.</p>
+                    </div>
+                    <!-- Agrega más servicios aquí -->
+                    <div class="service-item">
+                        <i class="material-icons">widgets</i>
+                        <h3>Reparación de Carcasa</h3>
+                        <p>Reemplazamos la carcasa dañada de tu iPhone.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="material-icons">memory</i>
+                        <h3>Actualización de Memoria</h3>
+                        <p>Mejoramos la capacidad de almacenamiento de tu iPhone.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="material-icons">speed</i>
+                        <h3>Optimización de Rendimiento</h3>
+                        <p>Aceleramos el funcionamiento de tu iPhone.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="material-icons">developer_mode</i>
+                        <h3>Desbloqueo de iPhone</h3>
+                        <p>Liberamos tu iPhone de cualquier bloqueo de fábrica.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="contact">
+            <div class="contact-content">
+                <h2>Contáctanos</h2>
+                <form id="contact-form">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; iMONKEy 2024 - Todos los derechos reservados.</p>
+        <p>Chile Coquimbo - La Serena</p>
+    </footer>
+
+<script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
+<script src="script.js"></script>
+<script src="script2.js"></script>
+<script>
+
+const animationContainer = document.getElementById('animation-container');
+
+const animation = lottie.loadAnimation({
+  container: animationContainer,
+  renderer: 'svg',
+  loop: false,
+  autoplay: false,
+  path: 'https://imonkey.store/site/iMONKEy.json'
+});
+
+let currentPlaySpeed = 6;
+
+const playAnimation = () => {
+  animation.play();
+  animation.setSpeed(currentPlaySpeed);
+
+  animation.addEventListener('complete', () => {
+
+    currentPlaySpeed = getRandomPlaySpeed(6, 6.5);
+    animation.setSpeed(currentPlaySpeed);
+    setTimeout(() => animation.goToAndPlay(0, true), getRandomPause(50, 6000));
+  });
+};
+
+const getRandomPlaySpeed = (min, max) => Math.random() * (max - min) + min;
+const getRandomPause = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const resizeAnimation = () => {
+  const { width, height } = animation.preloadedImages[0];
+  const { offsetWidth, offsetHeight } = animationContainer;
+  const scale = Math.min(offsetWidth / width, offsetHeight / height);
+  animationContainer.style.width = `${offsetWidth}px`;
+  animationContainer.style.height = `${offsetHeight}px`;
+  animation.setTransform({ a: scale, b: 0, c: 0, d: scale, tx: (offsetWidth - width * scale) / 2, ty: (offsetHeight - height * scale) / 2 });
+};
+
+setTimeout(playAnimation, 4500);
+resizeAnimation();
+window.addEventListener('resize', resizeAnimation);
+
+
+
+</script> 
