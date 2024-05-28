@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+
 </head>
 <body>
 <header class="blurred">
@@ -23,6 +24,7 @@
         <div class="nav-content">
             <ul class="nav-links">
                 <li><a href="#hero"><i class="material-icons">home</i> Inicio</a></li>
+					<li><a href="#pricing-widget"><i class="material-icons">assessment</i> Presupuesto</a></li>
                 <li><a href="#services"><i class="material-icons">precision_manufacturing</i> Servicios</a></li>
                 <li><a href="#contact"><i class="material-icons">mail</i> Contacto</a></li>
             </ul>
@@ -31,6 +33,7 @@
             <div class="line1"></div>
             <div class="line2"></div>
             <div class="line3"></div>
+
         </div>
     </nav>
 </header>
@@ -44,12 +47,81 @@
                     <div id="animation-container"></div>
                 </div>
                 <div class="hero-text">
-                    <h1>Reparación Especializada de iPhone</h1>
+                    <h1>Brindamos servicio de reparación especializado para tu iPhone</h1>
                     
                   
                 </div>
             </div>
         </section>
+ <section id="pricing-widget" class="pricing-widget">
+    <div class="container">
+     
+      <h3>Obtén tu presupuesto</h3>
+      <p class="hint">Elige el servicio y iPhone que quieres consultar.</p>
+
+
+
+      <div class="form-group">
+        
+        <select class="form-control form-control-dark" id="services-dropdown">
+          <option value="Tipo de servicio técnico" disabled selected >Tipo de servicio técnico</option>
+          <option value="Pantalla agrietada (solo el frente)">Pantalla agrietada (solo el frente)</option>
+          <option value="Daño de vidrio posterior">Daño de vidrio posterior</option>
+<option value="Pantalla agrietada/daño de vidrio posterior">Pantalla agrietada/daño de vidrio posterior</option>
+<option value="Bateria">Bateria</option>
+        
+<option value="Cámara trasera">Cámara trasera</option>
+        <option value="Cambio de chasis">Cambio de chasis</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+  <select class="form-control form-control-dark" id="products-dropdown" onchange="updateIPhoneTypes()">
+    <option value="Producto" disabled selected>Producto</option>
+<option value="iPhone15">iPhone 15</option>
+<option value="iPhone14">iPhone 14</option>
+<option value="iPhone13">iPhone 13</option>
+<option value="iPhone12">iPhone 12</option>
+<option value="iPhone11">iPhone 11</option>
+<option value="iPhoneX">iPhone X</option>
+<option value="iPhone8">iPhone 8</option>
+<option value="iPhone7">iPhone 7</option>
+<option value="iPhone6s">iPhone 6s</option>
+<option value="iPhoneSE">iPhone SE</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <select class="form-control form-control-dark" id="models-details-dropdown">
+    <option value="Modelo" disabled selected>Modelo</option>
+  </select>
+</div>
+<div class="price-display">
+<p>$<span id="service-coverage-value"></span></p>
+</div>
+
+  <div class="pricing-options">
+
+      <button id="estimate-button" class="btn btn-primary btn-block estimate-button">Obtén tu presupuesto</button>
+		<div class="text-center">
+        <a href="https://support.apple.com/es-es/108044" target="_blank" class="help-link">¿Necesitas ayuda para identificar tu modelo?</a>
+      </div>
+    </div>
+
+<!-- 
+<div class="price-info">
+      <p>Servicio: <span id="selected-service-type"></span></p>
+      <p>Producto: <span id="selected-product"></span></p>
+      <p>Modelo: <span id="selected-model"></span></p>
+      <p>Precio del servicio: <span id="service-coverage-value"></span></p>
+    </div>-->
+
+
+  </div>
+</section>
+
+
+
         <section id="services" class="services">
             <div class="services-content">
                 <h2>Nuestros Servicios</h2>
@@ -106,13 +178,14 @@
         <section id="contact" class="contact">
             <div class="contact-content">
                 <h2>Contáctanos</h2>
+<p class="hint">Elige las opciones correspondientes a continuación.</p>
                 <form id="contact-form">
-                    <label for="name">Nombre:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="message">Mensaje:</label>
-                    <textarea id="message" name="message" required></textarea>
+                    
+                    <input type="text" id="name" name="name" placeholder="Nombre" required>
+                  
+                    <input type="email" id="email" name="email" placeholder="Correo" required>
+                    
+                    <textarea id="message" placeholder="Mensaje"name="message" required></textarea>
                     <button type="submit">Enviar</button>
                 </form>
             </div>
@@ -125,7 +198,9 @@
 
 <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
 <script src="script.js"></script>
+
 <script src="script2.js"></script>
+<script src="price-list.js"></script>
 <script>
 
 const animationContainer = document.getElementById('animation-container');
@@ -155,19 +230,14 @@ const playAnimation = () => {
 const getRandomPlaySpeed = (min, max) => Math.random() * (max - min) + min;
 const getRandomPause = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-const resizeAnimation = () => {
-  const { width, height } = animation.preloadedImages[0];
-  const { offsetWidth, offsetHeight } = animationContainer;
-  const scale = Math.min(offsetWidth / width, offsetHeight / height);
-  animationContainer.style.width = `${offsetWidth}px`;
-  animationContainer.style.height = `${offsetHeight}px`;
-  animation.setTransform({ a: scale, b: 0, c: 0, d: scale, tx: (offsetWidth - width * scale) / 2, ty: (offsetHeight - height * scale) / 2 });
-};
 
 setTimeout(playAnimation, 4500);
-resizeAnimation();
-window.addEventListener('resize', resizeAnimation);
-
-
 
 </script> 
+
+<script src="script3.js"></script>
+<script src="script4.js"></script>
+
+
+</body>
+</html>

@@ -48,13 +48,13 @@ header {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
-    height: 50px; /* Altura inicial de la barra de navegación */
+    height: 52px; /* Altura inicial de la barra de navegación */
     overflow: hidden;
     transition: height 0.3s ease;
 }
 
 #main-nav.open {
-    height: 180px; /* Altura cuando se expande la barra de navegación */
+    height: 210px; /* Altura cuando se expande la barra de navegación */
    
 }
 
@@ -68,13 +68,13 @@ header {
 .logo {
     position: fixed;
     left: 12px;
-    top: 11px;
+    top: 12px;
     flex: 1;
 }
 
 .logo img {
-    width:42%;
-    height:42%;
+    width:150px;
+    height:auto;
 
 }
 
@@ -176,9 +176,12 @@ section.services {
     overflow: hidden;
 }
 
+
+
 .hero::before,
 .services::before,
-.contact::before {
+.contact::before,
+.pricing-widget::before {
     content: "";
     position: absolute;
     top: 0;
@@ -190,7 +193,8 @@ section.services {
 
 .hero-content,
 .services-content,
-.contact-content {
+.contact-content,
+.pricing-widget {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -224,13 +228,14 @@ section.services {
     justify-content:center;
     display: flex;
 
-     margin-bottom: 15%;
-     margin-top:-15%;
+     margin-bottom: 16%;
+     margin-top:-12%;
 }
 
 .hero-text h1 {
-    font-size: 26px;
+    font-size: 18px;
     align-items: center;
+    font-width: semi-bold;
     //margin: 0 auto 10px;
 }
 
@@ -288,6 +293,13 @@ section.services {
 }
 
 /* Sección de Contacto */
+.pricing-widget::before {
+  background: #1a1a1a;
+  background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+}
 /* Sección de Bienvenida */
 .hero::before {
   background: #1a1a1a;
@@ -331,21 +343,22 @@ section.services {
 }
 
 .contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
-    width: 100%;
+    width: 98%;
     max-width: 500px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .contact-content input, .contact-content textarea {
     padding: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #333;
     color: #fff;
     font-size: 16px;
 }
 
 .contact-content button {
+    margin-top:20px;
     background-color: #555;
     color: #fff;
     padding: 15px 30px;
@@ -357,8 +370,15 @@ section.services {
 }
 
 .contact-content button:hover {
+    margin-top:20px;
     background-color: #777;
 }
+
+    .contact-content .hint {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #666;
+    }
 
 /* Pie de página */
 footer {
@@ -377,4 +397,226 @@ footer {
 .contact h2 {
 
 	margin-bottom:30px;
+}
+
+
+
+
+/* >>>>>>>>>>>>>>>>>>>>>>> */
+/* >>>>>>>>>>>>>>>>>>>>>>> */
+/* >>>>>>>>>>>>>>>>>>>>>>> */
+/* >>>>>>>>>>>>>>>>>>>>>>> */
+/* >>>>>>>>>>>>>>>>>>>>>>> */
+/* >>>>>>>>>>>>>>>>>>>>>>> */
+
+
+
+  .pricing-widget .btn {
+  display: block;
+  margin: 0.75rem auto 0;
+}
+
+.pricing-widget .container {
+  max-width: 800px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: height 0.5s ease;
+  margin-bottom: -40px;
+}
+
+.pricing-widget h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 25px;
+  margin-top: 120px;
+}
+
+.pricing-widget .hint {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.pricing-widget .form-group {
+  margin-bottom: 15px;
+}
+
+.pricing-widget .form-control {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.pricing-widget .form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+}
+
+.pricing-widget .form-control-dark {
+  margin-top: 1px;
+  border-radius: 12px;
+  border-width: 2.5px;
+  background-color: #1a1a1a;
+  border-color: #2b2b2b;
+  color: #6e6e6e;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23f0f0f0' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M7.5 8.5l3 3a.5.5 0 0 0 .5-.5v-6a.5.5 0 0 0-.5-.5l-3 3z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  padding-right: 2rem;
+}
+
+.pricing-widget .form-control-dark:focus {
+  margin-top: 1px;
+  border-width: 2.5px;
+  border-radius: 12px;
+  background-color: #2b2b2b;
+  border-color: #3b3b3b;
+  color: #fff;
+  box-shadow: 0 0 0 0.2rem rgba(75, 75, 75, .5);
+  outline: none;
+}
+
+.pricing-widget .help-link {
+  display: block;
+  text-align: center;
+  margin-bottom: 170px;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 25px;
+}
+
+.pricing-widget .help-link:hover {
+  color: #0056b3;
+}
+
+
+.pricing-widget .estimate-button {
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 6px;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega sombra */
+}
+
+/*
+.pricing-widget .estimate-button:hover {
+  background-color: #0056b3;
+  border-color: #004d99;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+*/
+
+.pricing-widget .estimate-button:active {
+  background-color: #004d99;
+  border-color: #003b75;
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Reduce la sombra en active */
+}
+
+
+.pricing-widget .cost-section-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-widget .cost-section {
+  margin-bottom: 30px;
+}
+
+.pricing-widget .cost-type {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pricing-widget .cost-description {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.pricing-widget .cost-amount {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.pricing-widget .get-service-button {
+  background-color: #28a745;
+  color: #fff;
+  border-color: #28a745;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 6px;
+  transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.pricing-widget .get-service-button:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.price-info {
+  height: 200px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.price-info.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section.pricing-widget.expanded {
+  height: auto;
+}
+
+section.pricing-widget {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: height 0.5s ease;
+}
+
+.price-display {
+  display: block;
+  justify-content: center;
+  text-align: center;
+  margin-top: -40px;
+  margin-bottom: -40px;
+}
+
+.price-display p {
+  font-size: 60px;
+  font-weight: semi-bold;
 }
