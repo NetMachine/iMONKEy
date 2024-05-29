@@ -26,7 +26,7 @@ document.getElementById('estimate-button').addEventListener('click', () => {
 });
 
 document.querySelectorAll('.form-control').forEach(input => {
-  input.addEventListener('click', () => {
+  input.addEventListener('change', () => {
     if (resetTriggered) {
       resetTriggered = false;
       priceCalculated = false;
@@ -151,6 +151,8 @@ const interval = setInterval(() => {
     // Detener la animación cuando se alcance el precio de 0
     clearInterval(interval);
     serviceCoverageValueElement.textContent = 0;
+priceCalculated = false;
+
   } else {
     serviceCoverageValueElement.textContent = formatNumber(currentPrice);
   }

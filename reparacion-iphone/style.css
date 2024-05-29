@@ -1,3 +1,9 @@
+:root {
+  touch-action: pan-x pan-y;
+  height: 100%;
+}
+
+
 /* Estilos generales */
 body {
     font-family: 'Montserrat', sans-serif;
@@ -18,8 +24,17 @@ a {
 display: flex;
   justify-content: center; /* Alineación horizontal */
   align-items: center; 
-    
+  z-index: 99999;
+opacity: 0;
+  
+  transition: opacity 1s ease-in-out;
 }
+
+#contenedor.fade-in {
+    opacity: 1;
+}
+    
+
 /* Encabezado */
 header {
     position: fixed;
@@ -68,7 +83,7 @@ header {
 .logo {
     position: fixed;
     left: 12px;
-    top: 12.5px;
+    top: 12px;
     flex: 1;
 }
 
@@ -128,7 +143,7 @@ header {
 
 .nav-toggle {
     position: fixed;
-    top: 1px;
+    top: 0px;
     right: 10px;
     display: block;
     cursor: pointer;
@@ -625,15 +640,48 @@ section.pricing-widget {
 .send-notification {
     //position: absolute;
     margin-top: -20px;
-    font-width: bold;
+    font-weight: semi-bold;
     display: flex;
     justify-content: center;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
 
 .send-notification.show {
     opacity: 1;
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>> */
+/* >>>>>>>>>>>>>>>>>>>>>>>>>> */
+/* >>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+}
+
+#loading-overlay.fade-out {
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
