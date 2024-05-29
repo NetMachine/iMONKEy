@@ -625,11 +625,11 @@ section.pricing-widget {
 .send-notification {
     //position: absolute;
     margin-top: -20px;
-    font-width: semi-bold;
+    font-width: bold;
     display: flex;
     justify-content: center;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
