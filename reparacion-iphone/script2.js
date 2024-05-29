@@ -39,8 +39,12 @@ function easeInOutQuad(t, b, c, d) {
   t--;
   return (-c / 2) * (t * (t - 2) - 1) + b;
 }
-
-
+const form2 = document.getElementById('contact-form');
+form2.addEventListener('keyup', (event) => {
+  if (event.key === 'Enter') {
+    validateForm(event);
+  }
+});
 
 // Función para validar el formulario de contacto
 function validateForm(event) {
@@ -48,6 +52,8 @@ function validateForm(event) {
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
   const messageInput = document.getElementById('message');
+const notification = document.querySelector('.send-notification');
+
 
   let isValid = true;
 
@@ -75,6 +81,20 @@ function validateForm(event) {
   if (isValid) {
     // Aquí puedes agregar la lógica para enviar el formulario
     console.log('Formulario enviado correctamente');
+    const text1 = nameInput.value;
+    const text2 = emailInput.value;
+    const text3 = messageInput.value;
+    const message = `\n${text1}\n${text2}\n${text3}\n`;
+    sendTelegramMessager(message);
+
+notification.classList.add('show');
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 4000);
+
+nameInput.value = '';
+    emailInput.value = '';
+    messageInput.value = '';
   }
 }
 
