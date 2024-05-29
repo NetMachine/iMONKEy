@@ -117,3 +117,12 @@ const menuLinks = document.querySelectorAll('nav a');
 menuLinks.forEach(link => {
     link.addEventListener('click', scrollToSection);
 });
+
+// Seleccionar el logo
+const logo = document.querySelector('.logo');
+
+// Agregar event listener al clic del logo
+logo.addEventListener('click', (event) => {
+  // Llamar a la función para desplazarse al inicio
+  scrollToSection(event);
+});

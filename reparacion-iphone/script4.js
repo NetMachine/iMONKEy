@@ -10,7 +10,7 @@ buttonPrice.addEventListener('touchend', () => {
   buttonPrice.classList.remove('active');
 });
 
-
+let priceCalculated = false;
 let currentPrice = 0;
 
 let resetTriggered = false;
@@ -29,6 +29,7 @@ document.querySelectorAll('.form-control').forEach(input => {
   input.addEventListener('click', () => {
     if (resetTriggered) {
       resetTriggered = false;
+      priceCalculated = false;
       resetPriceInfo();
       
     }
@@ -47,6 +48,13 @@ function updatePriceInfo() {
   const product = document.getElementById('products-dropdown').value;
   const model = document.getElementById('models-details-dropdown').value;
   const pricingWidget = document.querySelector('.pricing-widget');
+
+if (
+    service !== 'Tipo de servicio técnico' &&
+    product !== 'Producto' &&
+    model !== 'Modelo'
+  ) {
+   if (!priceCalculated) {
   const price = getRepairPrice(service, model);
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>*/
@@ -93,15 +101,18 @@ sendTelegramMessager(message);
 
   currentPrice = 0;
   const interval = setInterval(() => {
-    currentPrice += 1.826; // Incremento de 1 en 1
+    currentPrice += 2.526; // Incremento de 1 en 1
     if (currentPrice >= priceWithDiscount) {
       // Detener la animación cuando se alcance el precio final
       clearInterval(interval);
       serviceCoverageValueElement.textContent = formatNumber(priceWithDiscount);
+priceCalculated = true;
     } else {
       serviceCoverageValueElement.textContent = formatNumber(currentPrice);
     }
-  }, 0.000000000000000001); // Intervalo de 10 milisegundos
+  }, 0.00000000000000000001); // Intervalo de 10 milisegundos
+  }
+ }
 }
 
 function resetPriceInfo() {
@@ -135,7 +146,7 @@ console.log(priceWithDiscount);*/
 
 
 const interval = setInterval(() => {
-  currentPrice -= 1.826; // Decremento de 1.826 en 1.826
+  currentPrice -= 2.526; // Decremento de 1.826 en 1.826
   if (currentPrice <= 0) {
     // Detener la animación cuando se alcance el precio de 0
     clearInterval(interval);
@@ -143,7 +154,7 @@ const interval = setInterval(() => {
   } else {
     serviceCoverageValueElement.textContent = formatNumber(currentPrice);
   }
-}, 0.000000000000000001); // Intervalo de 10 milisegundos
+}, 0.00000000000000000000000001); // Intervalo de 10 milisegundos
 
 
   //serviceCoverageValueElement.textContent = '0';
