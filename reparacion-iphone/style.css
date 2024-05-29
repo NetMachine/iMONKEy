@@ -68,7 +68,7 @@ header {
 .logo {
     position: fixed;
     left: 12px;
-    top: 12px;
+    top: 12.5px;
     flex: 1;
 }
 
@@ -128,7 +128,7 @@ header {
 
 .nav-toggle {
     position: fixed;
-    top: 0px;
+    top: 1px;
     right: 10px;
     display: block;
     cursor: pointer;
