@@ -7,7 +7,7 @@ buttonPrice.addEventListener('touchstart', () => {
 
 // Evento de fin de toque
 buttonPrice.addEventListener('touchend', () => {
-  buttonPrice.classList.remove('active');
+buttonPrice.classList.remove('active'); 
 });
 
 let priceCalculated = false;

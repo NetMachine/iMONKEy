@@ -1,5 +1,4 @@
-// Función para desplazarse suavemente a una sección
-function scrollToSection(event) {
+function scrollToSection(event, verticalPosition = 0) {
   event.preventDefault();
   const targetId = event.currentTarget.getAttribute('href');
   const targetElement = document.querySelector(targetId);
@@ -8,12 +7,12 @@ function scrollToSection(event) {
   if ('scrollBehavior' in document.documentElement.style) {
     targetElement.scrollIntoView({
       behavior: 'smooth',
-      block: 'start'
+      block: getVerticalPosition(verticalPosition, targetElement)
     });
   } else {
     // Desplazamiento suave manual para navegadores antiguos
     const currentPosition = window.pageYOffset;
-    const targetPosition = targetElement.offsetTop;
+    const targetPosition = getTargetPosition(targetElement, verticalPosition);
     const distance = targetPosition - currentPosition;
     const duration = 500; // Duración de la animación en milisegundos
 
@@ -32,6 +31,25 @@ function scrollToSection(event) {
   }
 }
 
+// Función auxiliar para obtener la posición vertical de la sección
+function getTargetPosition(element, verticalPosition) {
+  const elementHeight = element.offsetHeight;
+  const windowHeight = window.innerHeight;
+  return element.offsetTop + (elementHeight - windowHeight) * (verticalPosition / elementHeight);
+}
+
+// Función auxiliar para obtener el valor de 'block' para scrollIntoView()
+function getVerticalPosition(verticalPosition, element) {
+  const percentage = verticalPosition / element.offsetHeight;
+  if (percentage <= 0) {
+    return 'start';
+  } else if (percentage >= 1) {
+    return 'end';
+  } else {
+    return percentage;
+  }
+}
+
 // Función de easing para la animación de desplazamiento suave
 function easeInOutQuad(t, b, c, d) {
   t /= d / 2;
@@ -39,6 +57,9 @@ function easeInOutQuad(t, b, c, d) {
   t--;
   return (-c / 2) * (t * (t - 2) - 1) + b;
 }
+
+
+
 const form2 = document.getElementById('contact-form');
 form2.addEventListener('keyup', (event) => {
   if (event.key === 'Enter') {
@@ -48,6 +69,8 @@ form2.addEventListener('keyup', (event) => {
 
 // Función para validar el formulario de contacto
 function validateForm(event) {
+
+
   event.preventDefault();
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
@@ -126,3 +149,30 @@ logo.addEventListener('click', (event) => {
   // Llamar a la función para desplazarse al inicio
   scrollToSection(event);
 });
+
+const buttonPrice2 = document.getElementById('price-btn');
+// Evento de inicio de toque
+buttonPrice2.addEventListener('touchstart', (event) => {
+  
+buttonPrice2.classList.add('active');
+});
+
+// Evento de fin de toque
+buttonPrice2.addEventListener('touchend', () => {
+  scrollToSection(event, 250);
+buttonPrice2.classList.remove('active');
+});
+
+const contactButton = document.getElementById('contact-btn');
+// Evento de inicio de toque
+contactButton.addEventListener('touchstart', (event) => {
+  
+contactButton.classList.add('active');
+});
+
+// Evento de fin de toque
+contactButton.addEventListener('touchend', () => {
+ 
+contactButton.classList.remove('active');
+});
+

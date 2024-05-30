@@ -12,6 +12,10 @@ const iPhoneModels = {
 };
 
 function updateIPhoneTypes() {
+  if (priceCalculated) { 
+	 resetPriceInfo();
+	 priceCalculated = false;
+}
   const iPhoneProductSelect = document.getElementById('products-dropdown');
   const iPhoneModelSelect = document.getElementById('models-details-dropdown');
 

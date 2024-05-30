@@ -16,6 +16,17 @@ body {
 a {
     color: #fff;
     text-decoration: none;
+
+}
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard 
+syntax */
+        
+     -moz-user-select: -moz-none;
+     
+          user-select: none;
 }
 
 #contenedor {
@@ -27,7 +38,7 @@ display: flex;
   z-index: 99999;
 opacity: 0;
   
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.6s ease-in-out;
 }
 
 #contenedor.fade-in {
@@ -250,7 +261,7 @@ section.services {
 .hero-text h1 {
     font-size: 18px;
     align-items: center;
-    font-width: semi-bold;
+    font-weight: semi-bold;
     //margin: 0 auto 10px;
 }
 
@@ -374,19 +385,26 @@ section.services {
 
 .contact-content button {
     margin-top:10px;
-    background-color: #555;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    user-select: none;
+  color:white;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #555;
+  //border-color: #007bff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
 
 .contact-content button:active {
-    margin-top:20px;
-    background-color: #777;
+color:#777;
+  background-color: #444;
+  //border-color: #3d3d3du;
+  transform: translateY(1px);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); 
 }
 
     .contact-content .hint {
@@ -446,7 +464,7 @@ footer {
   margin-bottom: 20px;
   font-weight: bold;
   font-size: 25px;
-  margin-top: 120px;
+  margin-top: 100px;
 }
 
 .pricing-widget .hint {
@@ -525,6 +543,7 @@ footer {
 
 
 .pricing-widget .estimate-button {
+  user-select: none;
   justify-content: center;
   margin-bottom: 20px;
   background-color: #007bff;
@@ -620,7 +639,7 @@ section.pricing-widget {
   align-items: center;
   position: relative;
   overflow: hidden;
-  transition: height 0.5s ease;
+  //transition: height 0.5s ease;
 }
 
 .price-display {
@@ -670,7 +689,7 @@ section.pricing-widget {
     align-items: center;
     z-index: 9999;
     opacity: 1;
-    transition: opacity 2s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
 #loading-overlay.fade-out {
@@ -685,3 +704,80 @@ section.pricing-widget {
         opacity: 1;
     }
 }
+
+
+.price-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.price-btn {
+  user-select: none;
+  color:white;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #555;
+  //border-color: #007bff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+}
+
+.price-btn:active {
+  color:#777;
+  background-color: #444;
+  //border-color: #3d3d3du;
+  transform: translateY(1px);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); 
+}
+
+.loading-text-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #666;
+  //background-color: red;
+  z-index: 9999;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0;
+
+ 
+}
+
+.loading-text {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.0;
+  }
+  25% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.0;
+  }
+  75% {
+    opacity: 1.0;
+  }
+  100% {
+    opacity: 0.0;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 8s infinite;
+}
+

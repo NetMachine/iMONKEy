@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>iMONKEy</title>
     <link rel="stylesheet" href="https://use.typekit.net/abc1234.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,14 +14,19 @@
     <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
 
 </head>
-<body>
- <div id="loading-overlay"></div>
+<body class="prevent-select">
+ <div id="loading-overlay" class="loading-overlay">
+   <div class="loading-text-container">
+	<p class="loading-text">Toca en cualquier lugar</p></div>
+</div>
 <header class="blurred">
     <nav id="main-nav">
-        <div class="logo" href="#hero">
-            <img src="http://imonkey.store/site/iMONKEy-Logo.svg" alt="Logo">
+       
+		<div class="logo" href="#hero">
+  <img src="http://imonkey.store/site/iMONKEy-Logo.svg" alt="Logo">
+</div>
 
-        </div>
+
         <div class="nav-content">
             <ul class="nav-links">
                 <li><a href="#hero"><i class="material-icons">home</i> Inicio</a></li>
@@ -50,7 +55,11 @@
                 <div class="hero-text">
                     <h1>Brindamos servicio de reparación especializado para tu iPhone</h1>
                     
-                  
+                  <div class="price-btn-container">
+  <button id="price-btn" href="#pricing-widget" class=" price-btn prevent-select">Obtén tu presupuesto</button>
+</div>
+
+
                 </div>
             </div>
         </section>
@@ -103,7 +112,7 @@
 
   <div class="pricing-options">
 
-      <button id="estimate-button" class="btn btn-primary btn-block estimate-button">Obtén tu presupuesto</button>
+      <button id="estimate-button" class="btn btn-primary btn-block estimate-button prevent-select">Obtén tu presupuesto</button>
 		<div class="text-center">
         <a href="https://support.apple.com/es-es/108044" target="_blank" class="help-link">¿Necesitas ayuda para identificar tu modelo?</a>
       </div>
@@ -176,6 +185,8 @@
                 </div>
             </div>
         </section>
+
+
         <section id="contact" class="contact">
             <div class="contact-content">
                 <h2>Contáctanos</h2>
@@ -189,7 +200,7 @@
                     <textarea id="message" placeholder="Mensaje"name="message" required></textarea>
 
 <div class="send-notification">Mensaje enviado</div>
-                    <button type="submit">Enviar</button>
+                    <button id="contact-btn"type="submit">Enviar</button>
  
         
                 </form>
@@ -226,7 +237,7 @@ const playAnimation = () => {
 
   animation.addEventListener('complete', () => {
 
-    currentPlaySpeed = getRandomPlaySpeed(6, 6.5);
+    currentPlaySpeed = getRandomPlaySpeed(6.5, 7);
     animation.setSpeed(currentPlaySpeed);
     setTimeout(() => animation.goToAndPlay(0, true), getRandomPause(50, 6000));
   });
@@ -236,13 +247,60 @@ const getRandomPlaySpeed = (min, max) => Math.random() * (max - min) + min;
 const getRandomPause = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 
-setTimeout(playAnimation, 4500);
+setTimeout(playAnimation, 1,200);
 
 </script> 
 
 <script src="script3.js"></script>
 <script src="script4.js"></script>
+<script src="script5.js"></script>
+<script>
+/* DESVANECIMIENTO CAPA NEGRA */
+const loadingOverlay = document.getElementById("loading-overlay");
+const contenedor = document.getElementById("contenedor");
+const root = document.documentElement;
+const body = document.body;
+
+let overlayRemoved = false;
+const loadingTextContainer = document.querySelector('.loading-text-container');
+
+window.addEventListener("load", function() {
+    setTimeout(function() {
+          
+
+loadingTextContainer.classList.add('pulse-animation');
 
 
+
+  
+    }, 8000);
+
+    body.style.overflow = 'hidden';
+
+    setTimeout(function() {
+        contenedor.classList.add("fade-in");
+    }, 300);
+});
+
+document.addEventListener("click", function() {
+    if (loadingOverlay && !overlayRemoved) {
+        loadingOverlay.classList.add("fade-out");
+
+        // Esperar 400ms y luego eliminar el overlay
+        setTimeout(function() {
+            if (loadingOverlay) {
+                document.body.removeChild(loadingOverlay);
+                contenedor.style.zIndex = 'auto';
+                root.style.touchAction = 'auto';
+                root.style.height = 'auto';
+                body.style.overflow = 'auto';
+                overlayRemoved = true;
+            }
+        }, 400);
+    }
+});
+
+
+</script>
 </body>
 </html>
