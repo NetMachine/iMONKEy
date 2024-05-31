@@ -1,25 +1,361 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>iMONKEy</title>
-		
+    <link rel="stylesheet" href="https://use.typekit.net/abc1234.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" sizes="64x64" href="apple-touch-icon-180x180.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
 
 </head>
-<body>
-	
-    <div id="contenedor">
-        <div id="animation-container"></div>
+<body class="prevent-select">
+ <div id="loading-overlay" class="loading-overlay">
+   <div class="loading-text-container">
+	<p class="loading-text">Toca en cualquier lugar</p></div>
+</div>
+<header class="blurred">
+    <nav id="main-nav">
+       
+		<div class="logo" href="#hero">
+  <img src="http://imonkey.store/site/iMONKEy-Logo.svg" alt="Logo">
+</div>
+
+
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="#hero"><i class="material-icons">home</i> Inicio</a></li>
+					<li><a href="#pricing-widget"><i class="material-icons">assessment</i> Presupuesto</a></li>
+                <li><a href="#faq"><i class="material-icons">precision_manufacturing</i> Preguntas</a></li>
+                <li><a href="#contact"><i class="material-icons">mail</i> Contacto</a></li>
+            </ul>
+        </div>
+        <div class="nav-toggle">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+
+        </div>
+    </nav>
+</header>
+
+
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <div id="contenedor">
+                    <div id="animation-container"></div>
+                </div>
+                <div class="hero-text">
+                    <h1 class="shimmer">Brindamos servicio de reparación especializado para tu iPhone</h1>
+
+              <div class="arrow-container" >
+  <span class="arrow-text" id="arrow-container" href="#pricing-widget">Obtén tú presupuesto</span>
+  <div class="arrow"></div>
+</div>
+
+                    
+              <!--    <div class="price-btn-container">
+  <button id="price-btn" href="#pricing-widget" class=" price-btn prevent-select">Obtén tu presupuesto</button>-->
+
+</div>
+
+
+                </div>
+            </div>
+        </section>
+ <section id="pricing-widget" class="pricing-widget">
+    <div class="container">
+     
+      <h3>Obtén tu presupuesto</h3>
+      <p class="hint">Elige el servicio y iPhone que quieres consultar.</p>
+
+
+
+      <div class="form-group">
+        
+        <select class="form-control form-control-dark" id="services-dropdown" required>
+          <option value="Tipo de servicio técnico" disabled selected >Tipo de servicio técnico</option>
+          <option value="Pantalla agrietada (solo el frente)">Pantalla agrietada (solo el frente)</option>
+          <option value="Daño de vidrio posterior">Daño de vidrio posterior</option>
+<option value="Pantalla agrietada/daño de vidrio posterior">Pantalla agrietada/daño de vidrio posterior</option>
+<option value="Bateria">Bateria</option>
+        
+<option value="Cámara trasera">Cámara trasera</option>
+        <option value="Cambio de chasis">Cambio de chasis</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+  <select class="form-control form-control-dark" id="products-dropdown" onchange="updateIPhoneTypes()" required>
+    <option value="Producto" disabled selected>Producto</option>
+<option value="iPhone15">iPhone 15</option>
+<option value="iPhone14">iPhone 14</option>
+<option value="iPhone13">iPhone 13</option>
+<option value="iPhone12">iPhone 12</option>
+<option value="iPhone11">iPhone 11</option>
+<option value="iPhoneX">iPhone X</option>
+<option value="iPhone8">iPhone 8</option>
+<option value="iPhone7">iPhone 7</option>
+<option value="iPhone6s">iPhone 6s</option>
+<option value="iPhoneSE">iPhone SE</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <select class="form-control form-control-dark" id="models-details-dropdown" required>
+    <option value="Modelo" disabled selected>Modelo</option>
+  </select>
+</div>
+<div class="price-display">
+<p>$<span id="service-coverage-value"></span></p>
+</div>
+
+  <div class="pricing-options">
+
+      <button id="estimate-button" class="btn btn-primary btn-block estimate-button prevent-select">Calcular</button>
+		<div class="text-center">
+        <a href="https://support.apple.com/es-es/108044" target="_blank" class="help-link">¿Necesitas ayuda para identificar tu modelo?</a>
+      </div>
     </div>
 
-    
-    <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
-    <script src="script.js"></script>
+<!-- 
+<div class="price-info">
+      <p>Servicio: <span id="selected-service-type"></span></p>
+      <p>Producto: <span id="selected-product"></span></p>
+      <p>Modelo: <span id="selected-model"></span></p>
+      <p>Precio del servicio: <span id="service-coverage-value"></span></p>
+    </div>-->
 
+
+  </div>
+</section>
+
+
+
+<section id="faq" class="faq">
+  <div class="faq-content">
+    <h2>Preguntas Frecuentes</h2>
+    <div class="faq-items">
+      <div class="faq-item">
+        <h3 class="faq-question">¿Cuánto cuesta la reparación de pantalla de un iPhone?</h3>
+        <div class="faq-answer">
+          <p>El costo de la reparación de pantalla de un iPhone varía según el modelo y el estado del dispositivo. Por lo general, los precios oscilan entre $80 y $150 para la mayoría de los modelos. Contáctanos para una cotización personalizada.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Cuánto tiempo tarda la reparación de un iPhone?</h3>
+        <div class="faq-answer">
+          <p>El tiempo de reparación varía según el servicio y la disponibilidad de piezas. En la mayoría de los casos, las reparaciones se pueden realizar en 1-2 horas. Sin embargo, en algunos casos más complejos, el proceso podría tomar hasta 1 día.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Ofrecen garantía en las reparaciones?</h3>
+        <div class="faq-answer">
+          <p>Sí, ofrecemos una garantía de 6 meses en las reparaciones realizadas en nuestro taller. Si tienes algún problema con la reparación durante ese período, te lo solucionaremos sin costo adicional.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Hacen reparaciones en el mismo día?</h3>
+        <div class="faq-answer">
+          <p>Sí, en la mayoría de los casos, ofrecemos el servicio de reparación en el mismo día. Dependiendo de la complejidad de la reparación y la disponibilidad de piezas, podremos tener tu dispositivo listo en unas pocas horas.</p>
+        </div>
+      </div>
+
+
+
+ <div id="faq-expand-container" class="collapsible">
+    <div id="faq-expand-contract" class="expanded">
+      <div class="faq-item">
+        <h3 class="faq-question">¿Ofrecen recogida y entrega a domicilio?</h3>
+        <div class="faq-answer">
+          <p>Sí, contamos con un servicio de recogida y entrega a domicilio sin cargo adicional. Puedes programar una cita y nuestro equipo recogerá tu dispositivo, lo reparará y te lo devolverá en la comodidad de tu hogar u oficina.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Qué métodos de pago aceptan?</h3>
+        <div class="faq-answer">
+          <p>Aceptamos una variedad de métodos de pago, incluyendo efectivo, tarjetas de crédito y débito, y también aceptamos pagos a través de plataformas digitales como PayPal y Transferencia Bancaria.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Ofrecen descuentos o promociones?</h3>
+        <div class="faq-answer">
+          <p>Sí, ofrecemos descuentos y promociones especiales de forma recurrente. Puedes consultar nuestra página web o seguirnos en redes sociales para estar al tanto de las últimas ofertas y descuentos disponibles.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Qué tipos de dispositivos reparan?</h3>
+        <div class="faq-answer">
+          <p>Brindamos servicio de reparación para una amplia gama de dispositivos, incluyendo iPhones, iPads, Samsung Galaxy, Google Pixel y otros smartphones y tablets populares. También ofrecemos reparación de laptops y computadoras de escritorio.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Cuentan con técnicos certificados?</h3>
+        <div class="faq-answer">
+          <p>Sí, todos nuestros técnicos están altamente capacitados y cuentan con certificaciones de los fabricantes de los dispositivos que reparamos. Puedes estar seguro de que tu dispositivo estará en manos de profesionales expertos.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Qué pasa si mi dispositivo tiene problemas después de la reparación?</h3>
+        <div class="faq-answer">
+          <p>En caso de que tu dispositivo presente algún problema después de la reparación, no te preocupes. Nuestra garantía de 6 meses cubre cualquier falla relacionada con el servicio que brindamos. Solo tienes que contactarnos y haremos lo necesario para solucionar el problema sin costo adicional.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Ofrecen servicio de reparación a domicilio?</h3>
+        <div class="faq-answer">
+          <p>Sí, contamos con un servicio de reparación a domicilio para aquellos clientes que lo prefieran. Nuestros técnicos se desplazarán a tu ubicación, evaluarán el problema y realizarán la reparación en el momento. Este servicio tiene un costo adicional que puedes consultar con nuestro equipo.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Cuentan con un servicio de respaldo de datos?</h3>
+        <div class="faq-answer">
+          <p>Sí, ofrecemos un servicio de respaldo de datos para asegurarnos de que no pierdas tus archivos importantes durante el proceso de reparación. Nuestro equipo realizará una copia de seguridad de tu información y la restaurará una vez que tu dispositivo esté reparado.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">¿Tienen sucursales en otras ciudades?</h3>
+        <div class="faq-answer">
+          <p>Actualmente contamos con una sola sucursal ubicada en la ciudad de [Ciudad], pero estamos en proceso de expandir nuestros servicios a otras ciudades en un futuro cercano. Puedes estar pendiente de nuestras redes sociales y página web para estar al tanto de nuestras próximas aperturas.</p>
+        </div>
+      </div>
+
+
+</div>
+      </div>
+    
+
+</div>
+    <div class="faq-buttons">
+      <button href="#faq" class="btn-expand-faq">Más preguntas</button>
+    </div>
+  </div>
+</section>
+
+
+
+
+        <section id="contact" class="contact">
+            <div class="contact-content">
+                <h2>Contáctanos</h2>
+<p class="hint contact-description" >¿Tienes preguntas o necesitas más información sobre nuestros servicios? ¡No dudes en comunicarte con nosotros!</p>
+                <form id="contact-form">
+                    
+                    <input type="text" id="name" name="name" placeholder="Nombre" required>
+                  
+                    <input type="email" id="email" name="email" placeholder="Correo" required>
+                    
+                    <textarea id="message" placeholder="Mensaje"name="message" required></textarea>
+
+<div class="send-notification">Mensaje enviado</div>
+                    <button id="contact-btn"type="submit">Enviar</button>
+ 
+        
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; iMONKEy 2024 - Todos los derechos reservados.</p>
+        <p>Chile Coquimbo - La Serena</p>
+    </footer>
+
+<script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
+<script src="script.js"></script>
+
+<script src="script2.js"></script>
+<script src="price-list.js"></script>
+<script>
+
+const animationContainer = document.getElementById('animation-container');
+
+const animation = lottie.loadAnimation({
+  container: animationContainer,
+  renderer: 'svg',
+  loop: false,
+  autoplay: false,
+  path: 'https://imonkey.store/site/iMONKEy.json'
+});
+
+let currentPlaySpeed = 6;
+
+const playAnimation = () => {
+  animation.play();
+  animation.setSpeed(currentPlaySpeed);
+
+  animation.addEventListener('complete', () => {
+
+    currentPlaySpeed = getRandomPlaySpeed(6.5, 7);
+    animation.setSpeed(currentPlaySpeed);
+    setTimeout(() => animation.goToAndPlay(0, true), getRandomPause(50, 6000));
+  });
+};
+
+const getRandomPlaySpeed = (min, max) => Math.random() * (max - min) + min;
+const getRandomPause = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+
+setTimeout(playAnimation, 1,200);
+
+</script> 
+
+<script src="script3.js"></script>
+<script src="script4.js"></script>
+<script src="script5.js"></script>
+<script>
+/* DESVANECIMIENTO CAPA NEGRA */
+const loadingOverlay = document.getElementById("loading-overlay");
+const contenedor = document.getElementById("contenedor");
+const root = document.documentElement;
+const body = document.body;
+
+let overlayRemoved = false;
+const loadingTextContainer = document.querySelector('.loading-text-container');
+
+window.addEventListener("load", function() {
+    setTimeout(function() {
+          
+
+loadingTextContainer.classList.add('pulse-animation');
+
+
+
+  
+    }, 8000);
+
+    body.style.overflow = 'hidden';
+
+    setTimeout(function() {
+        contenedor.classList.add("fade-in");
+    }, 300);
+});
+
+document.addEventListener("click", function() {
+    if (loadingOverlay && !overlayRemoved) {
+        loadingOverlay.classList.add("fade-out");
+
+        // Esperar 400ms y luego eliminar el overlay
+        setTimeout(function() {
+            if (loadingOverlay) {
+                document.body.removeChild(loadingOverlay);
+                contenedor.style.zIndex = 'auto';
+                root.style.touchAction = 'auto';
+                root.style.height = 'auto';
+                body.style.overflow = 'auto';
+                overlayRemoved = true;
+            }
+        }, 400);
+    }
+});
+
+
+</script>
 </body>
 </html>
