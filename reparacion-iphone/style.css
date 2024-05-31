@@ -261,7 +261,9 @@ section.services {
 .hero-text h1 {
     font-size: 18px;
     align-items: center;
-    font-weight: semi-bold;
+    font-weight: 500;
+    color: #fff;
+
     //margin: 0 auto 10px;
 }
 
@@ -281,7 +283,7 @@ section.services {
     transition: background-color 0.3s ease;
 }
 
-.btn:hover {
+.btn:active {
     background-color: #777;
 }
 
@@ -320,8 +322,8 @@ section.services {
 
 /* Sección de Contacto */
 .pricing-widget::before {
-  background: #1a1a1a;
-  background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: #0A0A0A;
+  background: linear-gradient(to bottom, #0A0A0A, #2b2b2b);
   background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
   background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
   background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
@@ -329,7 +331,7 @@ section.services {
 /* Sección de Bienvenida */
 .hero::before {
   background: #1a1a1a;
-  background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+  background: linear-gradient(to bottom, #1a1a1a, #3b3b3b);
   background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
   background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
   background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
@@ -371,17 +373,20 @@ section.services {
 .contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
     width: 98%;
     max-width: 500px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .contact-content input, .contact-content textarea {
     padding: 15px;
-    border: none;
+    //border: none;
     border-radius: 10px;
     background-color: #333;
-    color: #fff;
+    color: #777;
     font-size: 16px;
+    border: 2px solid #555;
+ 
 }
+
 
 .contact-content button {
     margin-top:10px;
@@ -409,13 +414,20 @@ color:#777;
 
     .contact-content .hint {
       text-align: center;
-      margin-bottom: 30px;
-      color: #666;
+      //margin-bottom: 15px;
+      color: #777;
     }
+
+.contact-description {
+	font-size: 14.5px;
+	margin-bottom:40px;
+	margin-top: -5px;
+
+}
 
 /* Pie de página */
 footer {
-    background-color: #333;
+    background-color: #1A1A1A;
     padding: 20px;
     text-align: center;
     color: #ccc;
@@ -429,7 +441,7 @@ footer {
 
 .contact h2 {
 
-	margin-bottom:30px;
+	//margin-bottom:-5px;
 }
 
 
@@ -502,7 +514,7 @@ footer {
 .pricing-widget .form-control-dark {
   margin-top: 1px;
   border-radius: 12px;
-  border-width: 2.5px;
+  border-width: 2px;
   background-color: #1a1a1a;
   border-color: #2b2b2b;
   color: #6e6e6e;
@@ -544,6 +556,7 @@ footer {
 
 .pricing-widget .estimate-button {
   user-select: none;
+  width: 60%;
   justify-content: center;
   margin-bottom: 20px;
   background-color: #007bff;
@@ -553,7 +566,7 @@ footer {
   padding: 12px 24px;
   border-radius: 6px;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega sombra */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Agrega sombra */
 }
 
 /*
@@ -565,10 +578,11 @@ footer {
 */
 
 .pricing-widget .estimate-button:active {
+  color:#777;
   background-color: #004d99;
   border-color: #003b75;
   transform: translateY(1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Reduce la sombra en active */
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Reduce la sombra en active */
 }
 
 
@@ -711,10 +725,13 @@ section.pricing-widget {
   justify-content: center;
   margin-top: 5px;
   overflow: hidden;
+  align-items: center;
 }
 
 .price-btn {
   user-select: none;
+  width: 100%;
+  height: 100%;
   color:white;
   justify-content: center;
   margin-bottom: 20px;
@@ -733,7 +750,7 @@ section.pricing-widget {
   background-color: #444;
   //border-color: #3d3d3du;
   transform: translateY(1px);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.0); 
 }
 
 .loading-text-container {
@@ -780,4 +797,108 @@ section.pricing-widget {
 .pulse-animation {
   animation: pulse 8s infinite;
 }
+
+
+
+
+.arrow-container {
+  margin-bottom:-50;
+  display: flex;
+  //background-color:yellow;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80px; /* Ajusta la altura según tus necesidades */
+  //width:150px;
+}
+
+.arrow-text {
+  //background-color:red;
+  width:205px;
+  height: 50px;
+  font-size: 14px;
+  //margin-top: -5px;
+  //margin-bottom: 5px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.5s;
+}
+
+.arrow {
+  width: 15px;
+  height: 15px;
+  margin-top:-30px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+  opacity: 0;
+  animation-delay: 0.5s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(2px) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*
+.shimmer {
+  color: #fff;
+  background-image: linear-gradient(to right, transparent, #fff, transparent);
+  background-size: 400% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 5s linear infinite;
+  //background-position: -100% 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+*/
+
+
+@keyframes preloadAnimation {
+    from {background-position: 100% 0}
+    to {background-position: -100% 0}
+}
+
+.shimmer{
+     //color: #fff;
+//background: linear-gradient(to right, #dedede 8%, #f3f3f3 18%, #dedede 33%);
+     //background-position: 50% 0;
+     background: repeating-linear-gradient(to right, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.6) 25%, #fff 50%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.45) 100%);
+     background-clip: text;
+     background-size: 200% auto;
+     animation: preloadAnimation 30s infinite;
+       -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     //border-collapse:collapse;
+     //width:100%
+   }
 

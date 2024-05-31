@@ -53,10 +53,17 @@
                     <div id="animation-container"></div>
                 </div>
                 <div class="hero-text">
-                    <h1>Brindamos servicio de reparación especializado para tu iPhone</h1>
+                    <h1 class="shimmer">Brindamos servicio de reparación especializado para tu iPhone</h1>
+
+              <div class="arrow-container" >
+  <span class="arrow-text" id="arrow-container" href="#pricing-widget">Obtén tú presupuesto</span>
+  <div class="arrow"></div>
+</div>
+
                     
-                  <div class="price-btn-container">
-  <button id="price-btn" href="#pricing-widget" class=" price-btn prevent-select">Obtén tu presupuesto</button>
+              <!--    <div class="price-btn-container">
+  <button id="price-btn" href="#pricing-widget" class=" price-btn prevent-select">Obtén tu presupuesto</button>-->
+
 </div>
 
 
@@ -73,7 +80,7 @@
 
       <div class="form-group">
         
-        <select class="form-control form-control-dark" id="services-dropdown">
+        <select class="form-control form-control-dark" id="services-dropdown" required>
           <option value="Tipo de servicio técnico" disabled selected >Tipo de servicio técnico</option>
           <option value="Pantalla agrietada (solo el frente)">Pantalla agrietada (solo el frente)</option>
           <option value="Daño de vidrio posterior">Daño de vidrio posterior</option>
@@ -86,7 +93,7 @@
       </div>
 
       <div class="form-group">
-  <select class="form-control form-control-dark" id="products-dropdown" onchange="updateIPhoneTypes()">
+  <select class="form-control form-control-dark" id="products-dropdown" onchange="updateIPhoneTypes()" required>
     <option value="Producto" disabled selected>Producto</option>
 <option value="iPhone15">iPhone 15</option>
 <option value="iPhone14">iPhone 14</option>
@@ -102,7 +109,7 @@
 </div>
 
 <div class="form-group">
-  <select class="form-control form-control-dark" id="models-details-dropdown">
+  <select class="form-control form-control-dark" id="models-details-dropdown" required>
     <option value="Modelo" disabled selected>Modelo</option>
   </select>
 </div>
@@ -112,7 +119,7 @@
 
   <div class="pricing-options">
 
-      <button id="estimate-button" class="btn btn-primary btn-block estimate-button prevent-select">Obtén tu presupuesto</button>
+      <button id="estimate-button" class="btn btn-primary btn-block estimate-button prevent-select">Calcular</button>
 		<div class="text-center">
         <a href="https://support.apple.com/es-es/108044" target="_blank" class="help-link">¿Necesitas ayuda para identificar tu modelo?</a>
       </div>
@@ -190,7 +197,7 @@
         <section id="contact" class="contact">
             <div class="contact-content">
                 <h2>Contáctanos</h2>
-<p class="hint">Elige las opciones correspondientes a continuación.</p>
+<p class="hint contact-description" >¿Tienes preguntas o necesitas más información sobre nuestros servicios? ¡No dudes en comunicarte con nosotros!</p>
                 <form id="contact-form">
                     
                     <input type="text" id="name" name="name" placeholder="Nombre" required>

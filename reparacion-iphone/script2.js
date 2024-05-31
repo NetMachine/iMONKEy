@@ -150,6 +150,14 @@ logo.addEventListener('click', (event) => {
   scrollToSection(event);
 });
 
+const arrowcontainer = document.getElementById('arrow-container');
+
+// Agregar event listener al clic del logo
+arrowcontainer.addEventListener('click', (event) => {
+  // Llamar a la función para desplazarse al inicio
+  scrollToSection(event, 250);
+});
+/*
 const buttonPrice2 = document.getElementById('price-btn');
 // Evento de inicio de toque
 buttonPrice2.addEventListener('touchstart', (event) => {
@@ -161,7 +169,7 @@ buttonPrice2.classList.add('active');
 buttonPrice2.addEventListener('touchend', () => {
   scrollToSection(event, 250);
 buttonPrice2.classList.remove('active');
-});
+});*/
 
 const contactButton = document.getElementById('contact-btn');
 // Evento de inicio de toque
