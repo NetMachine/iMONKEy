@@ -184,3 +184,32 @@ contactButton.addEventListener('touchend', () => {
 contactButton.classList.remove('active');
 });
 
+const faqSection = document.querySelector('.faq');
+
+const btnExpandFAQ = document.querySelector('.btn-expand-faq');
+
+//let isExpanded = true;
+// Evento de inicio de toque
+btnExpandFAQ.addEventListener('touchstart', () => {
+  event.preventDefault();
+  btnExpandFAQ.classList.add('active');
+});
+
+// Evento de fin de toque
+btnExpandFAQ.addEventListener('touchend', (event) => {
+
+      
+event.preventDefault();
+btnExpandFAQ.classList.add('hidden');
+         faqItems.forEach((item, index) => {
+    if (index > 4) {
+      item.classList.toggle('show');
+      faqSection.classList.toggle('expanded');
+    }
+  });
+ 
+btnExpandFAQ.classList.remove('active');
+});
+
+
+
