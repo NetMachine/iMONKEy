@@ -187,11 +187,12 @@ contactButton.classList.remove('active');
 const faqSection = document.querySelector('.faq');
 
 const btnExpandFAQ = document.querySelector('.btn-expand-faq');
+const el = document.getElementById("faq-expand-contract");
 
-//let isExpanded = true;
+let isExpanded = false;
 // Evento de inicio de toque
 btnExpandFAQ.addEventListener('touchstart', () => {
-  event.preventDefault();
+  //event.preventDefault();
   btnExpandFAQ.classList.add('active');
 });
 
@@ -199,16 +200,33 @@ btnExpandFAQ.addEventListener('touchstart', () => {
 btnExpandFAQ.addEventListener('touchend', (event) => {
 
       
-event.preventDefault();
-btnExpandFAQ.classList.add('hidden');
-         faqItems.forEach((item, index) => {
-    if (index > 4) {
-      item.classList.toggle('show');
-      faqSection.classList.toggle('expanded');
-    }
-  });
+//event.preventDefault();
+//btnExpandFAQ.classList.add('hidden');
+         //faqItems.forEach((item, index) => {
+    //if (index > 4) {
+      //item.classList.toggle('show');
+      //faqSection.classList.toggle('expanded');
+    //}
+  //});
+ //el.classList.toggle('collapsed');
+ //el.classList.toggle('expanded');
+  document.querySelector('.collapsible').classList.toggle('collapsed');
+   
+
  
+
+
+if (isExpanded) {
+btnExpandFAQ.textContent = 'Más preguntas';
+scrollToSection(event);
+} else {
+
+btnExpandFAQ.textContent = 'Menos preguntas';
+}
 btnExpandFAQ.classList.remove('active');
+
+isExpanded = !isExpanded;
+
 });
 
 

@@ -937,7 +937,7 @@ section.pricing-widget {
 .faq-item {
   background-color: #2d2d2d;
   border-radius: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   overflow: hidden;
   border: 2px solid #424242;
 }
@@ -968,13 +968,13 @@ section.pricing-widget {
 
 .faq-content h2 {
 margin-top:40px;
-margin-bottom:10px;
+margin-bottom:35px;
 	
 }
 
 .faq-buttons {
   text-align: center;
-  margin-top: 20px;
+  //margin-top: 20px;
 }
 
 .btn-expand-faq {
@@ -1019,23 +1019,54 @@ margin-bottom:10px;
   width: 60%;
   color: #fff;
   justify-content: center;
-  margin-top:20px;
+  margin-top:10px;
   margin-bottom: 20px;
   background-color: #454545;
-  border-color: #007bff;
+  //border-color: #007bff;
   font-size: 16px;
   font-weight: 500;
   padding: 12px 24px;
   border-radius: 6px;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Agrega sombra */
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 
 .btn-expand-faq:active {
   color:#777;
   background-color: #252525;
-  border-color: #003b75;
+  //border-color: #003b75;
   transform: translateY(1px);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.btn-expand-faq:hover {
+  color: #fff;
+  justify-content: center;
+  //margin-top:20px;
+  //margin-bottom: 20px;
+  background-color: #454545;
+}
+
+#faq-expand-container {
+  overflow: hidden;
+}
+/*
+#faq-expand-contract {
+  //border-bottom: 1px solid red;
+  margin-top: 0%;
+  transition: margin-top 1s ease-out;
+}
+
+#faq-expand-contract.expanded {
+   //background-color: green;
+   margin-top: -1000%;
+}*/
+
+.collapsible {
+  transition: max-height 1s ease-in-out;
+  overflow: hidden;
+  max-height: 0px;
+}
+.collapsed {
+  max-height: 7000px;
 }
