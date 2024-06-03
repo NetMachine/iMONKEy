@@ -42,7 +42,7 @@ function updatePriceInfo() {
   const selectedModelElement = document.getElementById('selected-model');
   const serviceCoverageValueElement = document.getElementById('service-coverage-value');
   const priceInfoElement = document.querySelector('.price-info');
-  const container = document.querySelector('.pricing-widget .container');
+  const container = document.querySelector('.pricing-widget .pricing-container');
 
   const service = document.getElementById('services-dropdown').value;
   const product = document.getElementById('products-dropdown').value;
