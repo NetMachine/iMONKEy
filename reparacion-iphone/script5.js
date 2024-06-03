@@ -1,10 +1,13 @@
-history.scrollRestoration = "manual";
+// Deshabilitar la restauración automática del scroll por parte del navegador
+        history.scrollRestoration = "manual";
 
-window.addEventListener('beforeunload', function() {
-  window.scrollTo(0, 0);
-});
-
-
+        // Evento que se ejecuta justo antes de que la página se descargue o se recargue
+        window.addEventListener('beforeunload', function(e) {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 100); // Retraso de 100 milisegundos
+        });
+        
 // Seleccionar todos los elementos de preguntas frecuentes
 const faqItems = document.querySelectorAll(".faq-item");
 
@@ -44,3 +47,5 @@ btnExpandFAQ.addEventListener('click', () => {
 
 
 });*/
+
+
