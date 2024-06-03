@@ -958,13 +958,15 @@ footer {
     }           
 }
 
-.is-iphone body {
-    .hero-content,
+
+@supports (-webkit-touch-callout:none) {
+
+        .hero-content,
     .faq-content,
     .contact-content,
     .pricing-container {
 
          margin-top:-100px;
 
-    }              
+    }         
 }
