@@ -18,7 +18,7 @@
 
 <div id="loading-overlay" class="loading-overlay">
     <div class="loading-text-container">
-        <p class="loading-text">Toca en cualquier lugar</p>
+        <p class="loading-text">Toca cualquier en lugar</p>
     </div>
 </div>
 
@@ -55,10 +55,10 @@
         <div class="hero-text">
             <h1 class="shimmer">Brindamos servicio de reparación especializado para tu iPhone</h1>
         </div>
-        <a class="arrow-container" id="arrow-container" href="#pricing-widget">
+        <a class="arrow-container prevent-select" id="arrow-container" href="#pricing-widget">
             <p class="arrow-text" >Obtén tu presupuesto</p>
             <div class="ico animated">
-                <div class="circle circle-main"></div>
+                <div class="circle"></div>
                 <svg class="svg st-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;">
                     <defs>
                         <clipPath id="cut-off-arrow">
@@ -356,5 +356,16 @@ document.addEventListener("click", function() {
 
 
 </script>
+  <script>
+    // Deshabilitar clic derecho en toda la página
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    // Deshabilitar target en los enlaces
+    document.querySelectorAll('a').forEach(function(link) {
+      link.removeAttribute('target');
+    });
+  </script>
 </body>
 </html>
