@@ -947,4 +947,24 @@ footer {
         font-size: 10px;
 
     }
+
+    .hero-content,
+    .faq-content,
+    .contact-content,
+    .pricing-container {
+
+         //margin-top:-100px;
+
+    }           
+}
+
+.is-iphone body {
+    .hero-content,
+    .faq-content,
+    .contact-content,
+    .pricing-container {
+
+         margin-top:-100px;
+
+    }              
 }
