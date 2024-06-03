@@ -62,7 +62,10 @@ header {
 
 
 
-/* Estilos para el menú */
+/* >>>>> Estilos para el menú <<<<< */
+
+
+
 #main-nav {
     display: flex;
     justify-content: flex-start;
@@ -172,7 +175,11 @@ header {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Secciones principales */
+
+
+/* >>>>> Secciones principales <<<<< */
+
+
 
 section {
     height: 100vh;
@@ -215,50 +222,35 @@ section {
 
 }
 
-/* Sección de widget */
+
+/* >>>>> Color de fondo Secciones <<<<< */
+
+
+/* Sección de Inicio */
+.hero::before {
+}
+/* Sección de Presupuesto */
 .pricing-widget::before {
 background-color: #151515;
-
 }
-
-/* Sección de Bienvenida */
-.hero::before {
-  /*background: #1a1a1a;
-  background: linear-gradient(to bottom, #1a1a1a, #3b3b3b);
-  background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
-  background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
-  background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);*/
-}
-
 /* Sección de faq */
 .faq::before {
     background-color: #202020;
-    /*
-               background: 
-                linear-gradient(135deg, rgba(100, 100, 100, 0.5) 25%, transparent 25%) -5px 0/ 5px 5px, 
-                linear-gradient(225deg, rgba(100, 100, 100, 0.5) 25%, transparent 25%) -5px 0/ 5px 5px, 
-                linear-gradient(45deg, rgba(120, 120, 120, 0.5) 25%, transparent 25%) 0px 2.5px/ 5px 5px, 
-                linear-gradient(315deg, rgba(120, 120, 120, 0.5) 25%, #444 25%) 0px 2.5px/ 5px 5px;
-            background-color: #444;*/
-
 }
-
 /* Sección de Contacto */
 .contact::before {
-    /*
-    background: #1a1a1a;
-    background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
-    background: -webkit-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
-    background: -moz-linear-gradient(to bottom, #1a1a1a, #2b2b2b);
-    background: -o-linear-gradient(to bottom, #1a1a1a, #2b2b2b);*/
 }
+
+
+
+/* >>>>> Sección de Inicio <<<<< */
 
 
 
 #contenedor {
-    width: 140%; /* O cualquier otro porcentaje según lo que necesites */
+    width: 90%; /* O cualquier otro porcentaje según lo que necesites */
     //height: 10%; /* Ajusta esto según tus necesidades */
-   max-width: 500px;
+   max-width: 600px;
     //display: flex;
     justify-content: center;
     align-items: center;
@@ -301,20 +293,20 @@ background-color: #151515;
 }
 
 .hero-text {
-    width: 100%;
+    max-width: 600px;
     text-align: center;
     justify-content:center;
     //display: flex;
-
+//background-color: red;
      //margin-bottom: 16%;
      margin-top: 20px;
 }
 
 .hero-text h1 {
-    margin: 20px;
+    //margin: 20px;
     font-size: 16px;
     align-items: center;
-    font-weight: 600;
+    font-weight: 700;
     color: #fff;
     text-transform: uppercase;
 
@@ -324,6 +316,47 @@ background-color: #151515;
     font-size: 18px;
     margin-bottom: 20px;
 }
+
+.arrow-container {
+   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 50px; /* Ajusta la altura según tus necesidades */
+}
+
+.arrow-text {
+  width: 205px;
+  height: 50px;
+  font-size: 12px;
+  text-transform: uppercase; /* Texto en mayúsculas para un aspecto más formal */
+  font-weight: 500; /* Texto en negrita para mayor presencia */
+  color: #fff; /* Cambia el color del texto si es necesario */
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@keyframes preloadAnimation {
+    from {background-position: 100% 0}
+    to {background-position: -100% 0}
+}
+
+.shimmer{
+
+     background: repeating-linear-gradient(to right, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.6) 25%, #fff 50%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.45) 100%);
+     background-clip: text;
+     background-size: 200% auto;
+     animation: preloadAnimation 30s infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+   }
 
 .btn {
 
@@ -337,95 +370,9 @@ background-color: #151515;
     display: block;
 }
 
-.contact-content {
-    //background-color: red;
-
-}
 
 
-.contact-content form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-//color: #8F8F8F;
-    max-width: 500px;
-}
-
-.contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
-    width: 100%;
-    //max-width: 550px;
-  //color: #8F8F8F;
-    margin-bottom: 15px;
-    //padding: 12px 16px;
-}
-.contact{
-
-}
-.contact-content input, .contact-content textarea {
-    padding: 15px;
-    //border: none;
-    border-radius: 10px;
-    background-color: #333;
-    //color: #8F8F8F;
-    font-size: 16px;
-    border: 2px solid #555;
-  color: white;
-}
-
-
-.contact-content button {
-  margin-top:10px;
-  user-select: none;
-  color:white;
-  justify-content: center;
-  margin-bottom: 20px;
-  background-color: #555;
-  border-color: transparent;
-  font-size: 16px;
-  font-weight: 500;
-  //padding: 12px 24px;
-  border-radius: 8px;
-  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); 
-}
-.contact-content button:hover {
-
-}
-.contact-content button:active {
-  color:#777;
-  background-color: #444;
-
-  transform: translateY(1px);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); 
-}
-
-.contact-content .hint {
-  text-align: center;
-  color: #777;
-}
-
-.contact-description {
-	font-size: 14.5px;
-	margin-bottom:40px;
-	margin-top: -5px;
-
-}
-
-/* Pie de página */
-footer {
-    background-color: #101010;
-    padding: 20px;
-    text-align: center;
-    color: #ccc;
-    font-size: 12px;
-}
-
-
-.contact h2 {
-
-	//margin-bottom:-5px;
-}
+/* >>>>> Sección de Presupuesto <<<<< */
 
 
 
@@ -606,124 +553,12 @@ footer {
     margin: 0; /* Asegúrate de eliminar cualquier margen que pueda estar empujando el texto fuera del contenedor */
 }
 
-#loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-}
-
-#loading-overlay.fade-out {
-    opacity: 0;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-.loading-text-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  color: #666;
-  //background-color: red;
-  z-index: 9999;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  opacity: 0;
-
- 
-}
-
-.loading-text {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0.0;
-  }
-  25% {
-    opacity: 1.0;
-  }
-  50% {
-    opacity: 0.0;
-  }
-  75% {
-    opacity: 1.0;
-  }
-  100% {
-    opacity: 0.0;
-  }
-}
-
-.pulse-animation {
-  animation: pulse 8s infinite;
-}
 
 
-.arrow-container {
-   
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  height: 50px; /* Ajusta la altura según tus necesidades */
-}
-
-.arrow-text {
-  width: 205px;
-  height: 50px;
-  font-size: 10px;
-  text-transform: uppercase; /* Texto en mayúsculas para un aspecto más formal */
-  font-weight: 400; /* Texto en negrita para mayor presencia */
-  color: #fff; /* Cambia el color del texto si es necesario */
-  animation: fadeIn 1s forwards;
-  animation-delay: 0.5s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-@keyframes preloadAnimation {
-    from {background-position: 100% 0}
-    to {background-position: -100% 0}
-}
-
-.shimmer{
-
-     background: repeating-linear-gradient(to right, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.6) 25%, #fff 50%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.45) 100%);
-     background-clip: text;
-     background-size: 200% auto;
-     animation: preloadAnimation 30s infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-   }
+/* >>>>> Sección de Preguntas Frecuntes <<<<< */
 
 
 
-/* Sección de Preguntas Frecuentes */
 .faq {
     height: auto;
   
@@ -784,7 +619,7 @@ footer {
 .faq-content h2 {
    margin-top:40px;
    margin-bottom:35px;
-	
+    
 }
 
 .faq-buttons {
@@ -861,6 +696,170 @@ footer {
 }
 
 
+/* >>>>> Sección de Contacto <<<<< */
+
+
+.contact-content {
+    //background-color: red;
+
+}
+
+
+.contact-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+//color: #8F8F8F;
+    max-width: 500px;
+}
+
+.contact-content label, .contact-content input, .contact-content textarea, .contact-content button {
+    width: 100%;
+    //max-width: 550px;
+  //color: #8F8F8F;
+    margin-bottom: 15px;
+    //padding: 12px 16px;
+}
+.contact{
+
+}
+.contact-content input, .contact-content textarea {
+    padding: 15px;
+    //border: none;
+    border-radius: 10px;
+    background-color: #333;
+    //color: #8F8F8F;
+    font-size: 16px;
+    border: 2px solid #555;
+  color: white;
+}
+
+
+.contact-content button {
+  margin-top:10px;
+  user-select: none;
+  color:white;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #555;
+  border-color: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  //padding: 12px 24px;
+  border-radius: 8px;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); 
+}
+.contact-content button:hover {
+
+}
+.contact-content button:active {
+  color:#777;
+  background-color: #444;
+
+  transform: translateY(1px);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); 
+}
+
+.contact-content .hint {
+  text-align: center;
+  color: #777;
+}
+
+.contact-description {
+    font-size: 14.5px;
+    margin-bottom:40px;
+    margin-top: -5px;
+
+}
+
+/* Pie de página */
+footer {
+    background-color: #101010;
+    padding: 20px;
+    text-align: center;
+    color: #ccc;
+    font-size: 12px;
+}
+
+
+.contact h2 {
+
+    //margin-bottom:-5px;
+}
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#loading-overlay.fade-out {
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.loading-text-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #666;
+  //background-color: red;
+  z-index: 9999;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0;
+
+ 
+}
+
+.loading-text {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.0;
+  }
+  25% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.0;
+  }
+  75% {
+    opacity: 1.0;
+  }
+  100% {
+    opacity: 0.0;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 8s infinite;
+}
 
 
 /* Circle Styles */
@@ -928,4 +927,24 @@ footer {
   100% {
     transform: translate3d(0,50%,0) rotateX(-90deg) scale(0.5) skewX(-3deg);
   }
+}
+
+@media (max-width: 550px) {
+
+    .hero-text h1 {
+        font-size: 14px;
+        margin-top: 20px;
+
+    }
+
+    .arrow-container {
+
+        margin-top: -10px;
+    }
+
+    .arrow-text {
+
+        font-size: 10px;
+
+    }
 }
