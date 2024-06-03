@@ -81,7 +81,7 @@ header {
 }
 
 #main-nav.open {
-    height: 110vh;/*210px;*/ /* Altura cuando se expande la barra de navegación */
+    height: 100%;/*210px;*/ /* Altura cuando se expande la barra de navegación */
    
 }
 
