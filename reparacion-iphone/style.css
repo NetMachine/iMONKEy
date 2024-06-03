@@ -7,13 +7,15 @@
 /* Estilos generales */
 body {
 
-  --circle-w: 20px;
-  --circle-bg: #fff;
-  --arrow-bg: #55544F;
+  --circle-w: 25px;
+  --circle-bg: rgba(255, 255, 255, 0.3);
+  --circle-bg-alpha: rgba(255, 255, 255, 1);
+  --arrow-bg: rgba(200, 200, 200, 1);/*#55544F;*/
+  --arrow-bg-hover: rgba(20, 20, 20, 1);
   --body-bg: #9DDCDC;
   --bezier: cubic-bezier(0.770, 0.000, 0.175, 1.000);
   --bezier-bounce: cubic-bezier(0.87, -0.41, 0.19, 1.44);
-  --anim-timing: 2s;
+  --anim-timing: 1.8s;
 
     overflow: hidden;
     font-family: 'Montserrat', sans-serif;
@@ -250,7 +252,7 @@ background-color: #151515;
 #contenedor {
     width: 90%; /* O cualquier otro porcentaje según lo que necesites */
     //height: 10%; /* Ajusta esto según tus necesidades */
-   max-width: 600px;
+   max-width: 400px;
     //display: flex;
     justify-content: center;
     align-items: center;
@@ -318,27 +320,31 @@ background-color: #151515;
 }
 
 .arrow-container {
-   
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  height: 50px; /* Ajusta la altura según tus necesidades */
+  height: 60px;
+  width: 50%;
+
 }
 
 .arrow-text {
+  margin-top: -10px;
   width: 205px;
   height: 50px;
   font-size: 12px;
-  text-transform: uppercase; /* Texto en mayúsculas para un aspecto más formal */
+  //text-transform: uppercase; /* Texto en mayúsculas para un aspecto más formal */
   font-weight: 500; /* Texto en negrita para mayor presencia */
-  color: #fff; /* Cambia el color del texto si es necesario */
+  color: #888; /* Cambia el color del texto si es necesario */
   animation: fadeIn 1s forwards;
   animation-delay: 0.5s;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: font-weight 0.3s ease; 
 }
 
 
@@ -352,7 +358,7 @@ background-color: #151515;
      background: repeating-linear-gradient(to right, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.6) 25%, #fff 50%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.45) 100%);
      background-clip: text;
      background-size: 200% auto;
-     animation: preloadAnimation 30s infinite;
+     animation: preloadAnimation 10s infinite;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
@@ -870,12 +876,17 @@ footer {
   width: var(--circle-w);
   height: var(--circle-w);
   position: relative;
-  top: 5px;
+  top: 0px;
   transform: translateY(-50%);
+
+
 }
 
 .circle {
-  background: var(--circle-bg);
+  height: calc(var(--circle-w) *1.4);
+  width: calc(var(--circle-w) * 1.4);
+  z-index: 1;
+  background-color: var(--circle-bg);
   border-radius: 50%;
   display: inline-block;
   position: absolute;
@@ -883,14 +894,18 @@ footer {
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   transform-origin: 0%;
+  transition: transform 0.3s ease, background-color 0.3s ease; 
+
 }
 
+.arrow-container:hover .circle {
+  
+  background-color: var(--circle-bg-alpha); /* Cambia el color de fondo */
+}
 
-.circle-main {
-  height: calc(var(--circle-w) *1.2);
-  width: calc(var(--circle-w) * 1.2);
-  z-index: 1;
-
+.arrow-container:hover .arrow-text {
+    font-weight: 700;
+    color:white;
 }
 
 
@@ -902,6 +917,15 @@ footer {
   perspective: 9000px;
   transform: translateZ(0);
   transform-origin: bottom;
+  overflow: hidden;
+  pointer-events: none;
+  transition: transform 0.3s ease, background-color 0.3s ease; 
+
+}
+.arrow-container:hover .st-arrow {
+   fill: var(--arrow-bg-hover);
+
+
 }
 
 /* SVG Styles */
@@ -939,7 +963,7 @@ footer {
 
     .arrow-container {
 
-        //margin-top: 10px;
+        //margin-top: 50px;
     }
 
     .arrow-text {
@@ -947,18 +971,40 @@ footer {
         font-size: 10px;
 
     }
+
+    .hero-content,
+    .faq-content,
+    .contact-content,
+    .pricing-container {
+
+         //margin-top:-100px;
+
+    }   
     
+}
+
+@media (max-width: 550px) {
+
+    .arrow-container {
+
+        //margin-top: 50px;
+    }
 }
 
 
 @supports (-webkit-touch-callout:none) {
 
-        .hero-content,
+    .hero-content,
     .faq-content,
     .contact-content,
     .pricing-container {
 
          margin-top:-100px;
 
+    }
+
+    .arrow-container {
+
+        margin-top: 50px;
     }         
 }
