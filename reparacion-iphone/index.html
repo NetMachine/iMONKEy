@@ -17,20 +17,20 @@
 <body class="prevent-select">
  <div id="loading-overlay" class="loading-overlay">
    <div class="loading-text-container">
-	<p class="loading-text">Toca en cualquier lugar</p></div>
+  <p class="loading-text">Toca en cualquier lugar</p></div>
 </div>
 <header class="blurred">
     <nav id="main-nav">
        
-		<div class="logo" href="#hero">
-  <img src="http://imonkey.store/site/iMONKEy-Logo.svg" alt="Logo">
+    <div class="logo" href="#hero">
+  <img src="http://imonkey.store/site/iMONKEy-Logo.svg" alt="iMONKEy">
 </div>
 
 
         <div class="nav-content">
             <ul class="nav-links">
                 <li><a href="#hero"><i class="material-icons">home</i> Inicio</a></li>
-					<li><a href="#pricing-widget"><i class="material-icons">assessment</i> Presupuesto</a></li>
+          <li><a href="#pricing-widget"><i class="material-icons">assessment</i> Presupuesto</a></li>
                 <li><a href="#faq"><i class="material-icons">precision_manufacturing</i> Preguntas</a></li>
                 <li><a href="#contact"><i class="material-icons">mail</i> Contacto</a></li>
             </ul>
@@ -46,96 +46,101 @@
 
 
 
-    <main>
-        <section id="hero" class="hero">
-            <div class="hero-content">
-                <div id="contenedor">
-                    <div id="animation-container"></div>
-                </div>
-                <div class="hero-text">
-                    <h1 class="shimmer">Brindamos servicio de reparación especializado para tu iPhone</h1>
+<main>
 
-              <div class="arrow-container" >
-  <span class="arrow-text" id="arrow-container" href="#pricing-widget">Obtén tú presupuesto</span>
-  <div class="arrow"></div>
-</div>
-
-                    
-              <!--    <div class="price-btn-container">
-  <button id="price-btn" href="#pricing-widget" class=" price-btn prevent-select">Obtén tu presupuesto</button>-->
-
-</div>
-
-
-                </div>
+<section id="hero" class="hero">
+    <div class="hero-content">
+        <div id="contenedor">
+            <div id="animation-container"></div>
+        </div>
+        <div class="hero-text">
+            <h1 class="shimmer">Brindamos servicio de reparación especializado para tu iPhone</h1>
+        </div>
+        <a class="arrow-container" id="arrow-container" href="#pricing-widget">
+            <p class="arrow-text" >Obtén tu presupuesto</p>
+            <div class="ico animated">
+                <div class="circle circle-main"></div>
+                <svg class="svg st-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;">
+                    <defs>
+                        <clipPath id="cut-off-arrow">
+                            <circle cx="306" cy="306" r="287"/>
+                        </clipPath>
+                        <filter id="goo">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+                            <feBlend in="SourceGraphic" in2="goo" />
+                        </filter>
+                    </defs>
+                    <path class="st-arrow" d="M317.5,487.6c0.3-0.3,0.4-0.7,0.7-1.1l112.6-112.6c6.3-6.3,6.3-16.5,0-22.7c-6.3-6.3-16.5-6.3-22.7,0
+                                l-86,86V136.1c0-8.9-7.3-16.2-16.2-16.2c-8.9,0-16.2,7.3-16.2,16.2v301.1l-86-86c-6.3-6.3-16.5-6.3-22.7,0
+                                c-6.3,6.3-6.3,16.5,0,22.7l112.7,112.7c0.3,0.3,0.4,0.7,0.7,1c0.5,0.5,1.2,0.5,1.7,0.9c1.7,1.4,3.6,2.3,5.6,2.9
+                                c0.8,0.2,1.5,0.4,2.3,0.4C308.8,492.6,313.8,491.3,317.5,487.6z"/>
+                </svg>
             </div>
-        </section>
- <section id="pricing-widget" class="pricing-widget">
-    <div class="container">
-     
-      <h3>Obtén tu presupuesto</h3>
-      <p class="hint">Elige el servicio y iPhone que quieres consultar.</p>
-
-
-
-      <div class="form-group">
-        
-        <select class="form-control form-control-dark" id="services-dropdown" required>
-          <option value="Tipo de servicio técnico" disabled selected >Tipo de servicio técnico</option>
-          <option value="Pantalla agrietada (solo el frente)">Pantalla agrietada (solo el frente)</option>
-          <option value="Daño de vidrio posterior">Daño de vidrio posterior</option>
-<option value="Pantalla agrietada/daño de vidrio posterior">Pantalla agrietada/daño de vidrio posterior</option>
-<option value="Bateria">Bateria</option>
-        
-<option value="Cámara trasera">Cámara trasera</option>
-        <option value="Cambio de chasis">Cambio de chasis</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-  <select class="form-control form-control-dark" id="products-dropdown" onchange="updateIPhoneTypes()" required>
-    <option value="Producto" disabled selected>Producto</option>
-<option value="iPhone15">iPhone 15</option>
-<option value="iPhone14">iPhone 14</option>
-<option value="iPhone13">iPhone 13</option>
-<option value="iPhone12">iPhone 12</option>
-<option value="iPhone11">iPhone 11</option>
-<option value="iPhoneX">iPhone X</option>
-<option value="iPhone8">iPhone 8</option>
-<option value="iPhone7">iPhone 7</option>
-<option value="iPhone6s">iPhone 6s</option>
-<option value="iPhoneSE">iPhone SE</option>
-  </select>
-</div>
-
-<div class="form-group">
-  <select class="form-control form-control-dark" id="models-details-dropdown" required>
-    <option value="Modelo" disabled selected>Modelo</option>
-  </select>
-</div>
-<div class="price-display">
-<p>$<span id="service-coverage-value"></span></p>
-</div>
-
-  <div class="pricing-options">
-
-      <button id="estimate-button" class="btn btn-primary btn-block estimate-button prevent-select">Calcular</button>
-		<div class="text-center">
-        <a href="https://support.apple.com/es-es/108044" target="_blank" class="help-link">¿Necesitas ayuda para identificar tu modelo?</a>
-      </div>
+        </a>
     </div>
-
-<!-- 
-<div class="price-info">
-      <p>Servicio: <span id="selected-service-type"></span></p>
-      <p>Producto: <span id="selected-product"></span></p>
-      <p>Modelo: <span id="selected-model"></span></p>
-      <p>Precio del servicio: <span id="service-coverage-value"></span></p>
-    </div>-->
-
-
-  </div>
 </section>
+
+
+<section id="pricing-widget" class="pricing-widget">
+    <div class="pricing-container">
+        <!-- Título del formulario -->
+        <h3>Obtén tu presupuesto</h3>
+        <p class="hint">Elige el servicio y iPhone que quieres consultar.</p>
+<div class="form-group-container">
+        <!-- Selección de tipo de servicio técnico -->
+        <div class="form-group">
+            <select class="form-control form-control-dark" id="services-dropdown" required>
+                <option value="Tipo de servicio técnico" disabled selected>Tipo de servicio técnico</option>
+                <option value="Pantalla agrietada (solo el frente)">Pantalla agrietada (solo el frente)</option>
+                <option value="Daño de vidrio posterior">Daño de vidrio posterior</option>
+                <option value="Pantalla agrietada/daño de vidrio posterior">Pantalla agrietada/daño de vidrio posterior</option>
+                <option value="Bateria">Bateria</option>
+                <option value="Cámara trasera">Cámara trasera</option>
+                <option value="Cambio de chasis">Cambio de chasis</option>
+            </select>
+        </div>
+
+        <!-- Selección de producto -->
+        <div class="form-group">
+            <select class="form-control form-control-dark" id="products-dropdown" onchange="updateIPhoneTypes()" required>
+                <option value="Producto" disabled selected>Producto</option>
+                <option value="iPhone15">iPhone 15</option>
+                <option value="iPhone14">iPhone 14</option>
+                <option value="iPhone13">iPhone 13</option>
+                <option value="iPhone12">iPhone 12</option>
+                <option value="iPhone11">iPhone 11</option>
+                <option value="iPhoneX">iPhone X</option>
+                <option value="iPhone8">iPhone 8</option>
+                <option value="iPhone7">iPhone 7</option>
+                <option value="iPhone6s">iPhone 6s</option>
+                <option value="iPhoneSE">iPhone SE</option>
+            </select>
+        </div>
+
+        <!-- Selección de modelo -->
+        <div class="form-group">
+            <select class="form-control form-control-dark" id="models-details-dropdown" required>
+                <option value="Modelo" disabled selected>Modelo</option>
+            </select>
+        </div>
+
+        <!-- Display del precio -->
+        <div class="price-display">
+            <p>$<span id="service-coverage-value"></span></p>
+        </div>
+
+        <!-- Botón de calcular y enlace de ayuda -->
+        <div class="pricing-options">
+            <button id="estimate-button" class="btn btn-primary btn-block estimate-button prevent-select">Calcular</button>
+            <div class="text-center">
+                <a href="https://support.apple.com/es-es/108044" target="_blank" class="help-link">¿Necesitas ayuda para identificar tu modelo?</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
 
 
 
@@ -146,19 +151,19 @@
       <div class="faq-item">
         <h3 class="faq-question">¿Cuánto cuesta la reparación de pantalla de un iPhone?</h3>
         <div class="faq-answer">
-          <p>El costo de la reparación de pantalla de un iPhone varía según el modelo y el estado del dispositivo. Por lo general, los precios oscilan entre $80 y $150 para la mayoría de los modelos. Contáctanos para una cotización personalizada.</p>
+          <p>El costo de la reparación de pantalla de un iPhone varía según el modelo y el estado del dispositivo. Por lo general, los precios oscilan entre $80.000 y $200.000 para la mayoría de los modelos. Contáctanos para una cotización personalizada.</p>
         </div>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">¿Cuánto tiempo tarda la reparación de un iPhone?</h3>
         <div class="faq-answer">
-          <p>El tiempo de reparación varía según el servicio y la disponibilidad de piezas. En la mayoría de los casos, las reparaciones se pueden realizar en 1-2 horas. Sin embargo, en algunos casos más complejos, el proceso podría tomar hasta 1 día.</p>
+          <p>El tiempo de reparación varía según el servicio y la disponibilidad de piezas. En la mayoría de los casos, las reparaciones se pueden realizar en 1-3 horas. Sin embargo, en algunos casos más complejos, el proceso podría tomar varios días. Si no hay disponibilidad de piezas, encargarlas puede demorar alrededor de dos semanas.</p>
         </div>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">¿Ofrecen garantía en las reparaciones?</h3>
         <div class="faq-answer">
-          <p>Sí, ofrecemos una garantía de 6 meses en las reparaciones realizadas en nuestro taller. Si tienes algún problema con la reparación durante ese período, te lo solucionaremos sin costo adicional.</p>
+          <p>Sí, ofrecemos una garantía de 3 meses en las reparaciones realizadas en nuestro taller. Si el dispositivo nunca ha sido abierto la garantia es de 6 meses. Si tienes algún problema con la reparación durante ese período, te lo solucionaremos sin costo adicional.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -171,7 +176,7 @@
 
 
  <div id="faq-expand-container" class="collapsible">
-    <div id="faq-expand-contract" class="expanded">
+ 
       <div class="faq-item">
         <h3 class="faq-question">¿Ofrecen recogida y entrega a domicilio?</h3>
         <div class="faq-answer">
@@ -193,25 +198,25 @@
       <div class="faq-item">
         <h3 class="faq-question">¿Qué tipos de dispositivos reparan?</h3>
         <div class="faq-answer">
-          <p>Brindamos servicio de reparación para una amplia gama de dispositivos, incluyendo iPhones, iPads, Samsung Galaxy, Google Pixel y otros smartphones y tablets populares. También ofrecemos reparación de laptops y computadoras de escritorio.</p>
+          <p>Nos especializamos en la reparación de iPhones. Dado que los iPhones son uno de los dispositivos móviles más populares y sofisticados del mercado, hemos desarrollado un profundo conocimiento y experiencia en la reparación de estos dispositivos. Nos enorgullece ofrecer un servicio de alta calidad y confiabilidad para mantener tus dispositivos Apple en óptimo funcionamiento.</p>
         </div>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">¿Cuentan con técnicos certificados?</h3>
         <div class="faq-answer">
-          <p>Sí, todos nuestros técnicos están altamente capacitados y cuentan con certificaciones de los fabricantes de los dispositivos que reparamos. Puedes estar seguro de que tu dispositivo estará en manos de profesionales expertos.</p>
+          <p>Aunque no contamos con certificaciones directas, hemos desarrollado una extraordinaria especialización en la reparación de iPhones a través de años de experiencia. Esto nos permite ofrecer un servicio de reparación de alto nivel, con un profundo conocimiento de la arquitectura y el funcionamiento de los dispositivos iPhone. A diferencia de los centros de servicio autorizados, que a menudo tienen que seguir protocolos y procedimientos rígidos, nosotros podemos adaptar nuestro enfoque a las necesidades específicas de cada cliente.</p>
         </div>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">¿Qué pasa si mi dispositivo tiene problemas después de la reparación?</h3>
         <div class="faq-answer">
-          <p>En caso de que tu dispositivo presente algún problema después de la reparación, no te preocupes. Nuestra garantía de 6 meses cubre cualquier falla relacionada con el servicio que brindamos. Solo tienes que contactarnos y haremos lo necesario para solucionar el problema sin costo adicional.</p>
+          <p>En caso de que tu dispositivo presente algún problema después de la reparación, no te preocupes. Nuestra garantía de 3 meses cubre cualquier falla relacionada con el servicio que brindamos. Solo tienes que contactarnos y haremos lo necesario para solucionar el problema sin costo adicional.</p>
         </div>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">¿Ofrecen servicio de reparación a domicilio?</h3>
         <div class="faq-answer">
-          <p>Sí, contamos con un servicio de reparación a domicilio para aquellos clientes que lo prefieran. Nuestros técnicos se desplazarán a tu ubicación, evaluarán el problema y realizarán la reparación en el momento. Este servicio tiene un costo adicional que puedes consultar con nuestro equipo.</p>
+          <p>En este momento no contamos con un servicio de reparación a domicilio. Nos hemos enfocado en brindar un excelente servicio en nuestras instalaciones, donde nuestros técnicos especializados pueden atender a los clientes de manera personalizada. Sin embargo, estamos trabajando en desarrollar una opción de reparación a domicilio en un futuro cercano. Sabemos que esto sería una gran conveniencia para muchos de nuestros clientes, y es algo que estamos evaluando activamente para poder ofrecerlo pronto. Mantente atento a nuestros próximos anuncios, donde informaremos sobre el lanzamiento de este nuevo servicio</p>
         </div>
       </div>
       <div class="faq-item">
@@ -223,18 +228,17 @@
       <div class="faq-item">
         <h3 class="faq-question">¿Tienen sucursales en otras ciudades?</h3>
         <div class="faq-answer">
-          <p>Actualmente contamos con una sola sucursal ubicada en la ciudad de [Ciudad], pero estamos en proceso de expandir nuestros servicios a otras ciudades en un futuro cercano. Puedes estar pendiente de nuestras redes sociales y página web para estar al tanto de nuestras próximas aperturas.</p>
+          <p>Actualmente nuestros servicios están ubicados en la ciudad de Coquimbo y La Serena, pero estamos en proceso de expandir nuestros servicios a otras ciudades en un futuro cercano. Puedes estar pendiente de nuestras redes sociales y página web para estar al tanto de nuestras próximas aperturas.</p>
         </div>
       </div>
 
 
-</div>
       </div>
     
 
 </div>
     <div class="faq-buttons">
-      <button href="#faq" class="btn-expand-faq">Más preguntas</button>
+      <button href="#faq" id="btn-expand-faq" class="btn-expand-faq btn btn-primary btn-block prevent-select">Más preguntas</button>
     </div>
   </div>
 </section>
@@ -242,30 +246,26 @@
 
 
 
-        <section id="contact" class="contact">
-            <div class="contact-content">
-                <h2>Contáctanos</h2>
-<p class="hint contact-description" >¿Tienes preguntas o necesitas más información sobre nuestros servicios? ¡No dudes en comunicarte con nosotros!</p>
-                <form id="contact-form">
-                    
-                    <input type="text" id="name" name="name" placeholder="Nombre" required>
-                  
-                    <input type="email" id="email" name="email" placeholder="Correo" required>
-                    
-                    <textarea id="message" placeholder="Mensaje"name="message" required></textarea>
+    <section id="contact" class="contact">
+        <div class="contact-content">
+            <h2>Contáctanos</h2>
+            <p class="hint contact-description" >¿Tienes preguntas o necesitas más información sobre nuestros servicios? ¡No dudes en comunicarte con nosotros!</p>
+            <form id="contact-form" onsubmit="return false">
+                
+                <input type="text" id="name" name="name" placeholder="Nombre" required>         
+                <input type="email" id="email" name="email" placeholder="Correo" required>    
+                <textarea id="message" placeholder="Mensaje"name="message" required></textarea>
 
-<div class="send-notification">Mensaje enviado</div>
-                    <button id="contact-btn"type="submit">Enviar</button>
- 
-        
-                </form>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; iMONKEy 2024 - Todos los derechos reservados.</p>
-        <p>Chile Coquimbo - La Serena</p>
-    </footer>
+                <button class="contact-btn btn btn-primary btn-block prevent-select" id="contact-btn" type="submit">Enviar</button> 
+            </form>
+        </div>
+    </section>
+
+</main>
+<footer>
+    <p>&copy; iMONKEy 2024 - Todos los derechos reservados.</p>
+    <p>Coquimbo - La Serena</p>
+</footer>
 
 <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
 <script src="script.js"></script>
