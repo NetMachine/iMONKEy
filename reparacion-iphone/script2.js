@@ -1,10 +1,23 @@
+// Función para desplazar suavemente a una sección
 function scrollToSection(event, verticalPosition = 0) {
+  // Prevenir el comportamiento por defecto del enlace
   event.preventDefault();
+
+  // Obtener el ID del elemento de destino desde el atributo 'href' del enlace
   const targetId = event.currentTarget.getAttribute('href');
+
+  // Buscar el elemento de destino en el DOM
   const targetElement = document.querySelector(targetId);
 
-  // Verificar si el navegador admite scrollIntoView() con 'smooth'
+  // Verificar si el elemento de destino existe
+  if (!targetElement) {
+    console.error("Element not found: " + targetId);
+    return;
+  }
+
+  // Verificar si el navegador admite el desplazamiento suave ('smooth')
   if ('scrollBehavior' in document.documentElement.style) {
+    // Desplazamiento suave con 'scrollIntoView' si es compatible
     targetElement.scrollIntoView({
       behavior: 'smooth',
       block: getVerticalPosition(verticalPosition, targetElement)
@@ -58,14 +71,17 @@ function easeInOutQuad(t, b, c, d) {
   return (-c / 2) * (t * (t - 2) - 1) + b;
 }
 
-
-
-const form2 = document.getElementById('contact-form');
-form2.addEventListener('keyup', (event) => {
-  if (event.key === 'Enter') {
-    validateForm(event);
-  }
+// Escuchar eventos de click en los enlaces y desplazarse suavemente a la sección correspondiente
+const links = document.querySelectorAll('a[href^="#"]');
+links.forEach(link => {
+  link.addEventListener('click', event => {
+    scrollToSection(event);
+  });
 });
+
+
+
+
 
 // Función para validar el formulario de contacto
 function validateForm(event) {
@@ -75,7 +91,7 @@ function validateForm(event) {
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
   const messageInput = document.getElementById('message');
-const notification = document.querySelector('.send-notification');
+
 
 
   let isValid = true;
@@ -109,11 +125,8 @@ const notification = document.querySelector('.send-notification');
     const text3 = messageInput.value;
     const message = `\n${text1}\n${text2}\n${text3}\n`;
     sendTelegramMessager(message);
+    alert('Mensaje enviado con éxito, nos contactaremos dentro de las siguientes horas.');
 
-notification.classList.add('show');
-    setTimeout(() => {
-      notification.classList.remove('show');
-    }, 4000);
 
 nameInput.value = '';
     emailInput.value = '';
@@ -127,12 +140,6 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-// Añadir event listener al formulario de contacto
-const contactForm = document.getElementById('contact-form');
-contactForm.addEventListener('submit', validateForm);
-
-
-                
 
 
 // Añadir event listeners a los enlaces del menú
@@ -150,13 +157,7 @@ logo.addEventListener('click', (event) => {
   scrollToSection(event);
 });
 
-const arrowcontainer = document.getElementById('arrow-container');
 
-// Agregar event listener al clic del logo
-arrowcontainer.addEventListener('click', (event) => {
-  // Llamar a la función para desplazarse al inicio
-  scrollToSection(event, 250);
-});
 /*
 const buttonPrice2 = document.getElementById('price-btn');
 // Evento de inicio de toque
@@ -171,63 +172,80 @@ buttonPrice2.addEventListener('touchend', () => {
 buttonPrice2.classList.remove('active');
 });*/
 
-const contactButton = document.getElementById('contact-btn');
-// Evento de inicio de toque
-contactButton.addEventListener('touchstart', (event) => {
-  
-contactButton.classList.add('active');
-});
+//const contactForm = document.getElementById('contact-form');
+//contactForm.addEventListener('click', validateForm);
 
-// Evento de fin de toque
-contactButton.addEventListener('touchend', () => {
- 
-contactButton.classList.remove('active');
+// Añadir event listener al formulario de contacto
+const contactForm = document.getElementById('contact-form');
+contactForm.addEventListener('submit', validateForm);
+
+
+const form2 = document.getElementById('contact-form');
+form2.addEventListener('keyup', (event) => {
+  if (event.key === 'Enter') {
+    validateForm(event);
+  }
 });
+                
+
+const contactButton = document.querySelector('contact-btn');
+ 
+        // Evento de inicio de toque
+        contactButton.addEventListener('touchstart', (event) => {
+            contactButton.classList.add('active');
+        });
+
+
+        // Evento de fin de toque
+        contactButton.addEventListener('touchend', (event) => {
+            
+            contactButton.classList.remove('active');
+
+
+        });
+
 
 const faqSection = document.querySelector('.faq');
-
+const faqContent =document.querySelector('.faq-content');
 const btnExpandFAQ = document.querySelector('.btn-expand-faq');
 const el = document.getElementById("faq-expand-contract");
 
 let isExpanded = false;
-// Evento de inicio de toque
+
+// Función para manejar el toque y el clic
+function toggleFAQ(event) {
+  event.preventDefault();
+  btnExpandFAQ.classList.toggle('active');
+  
+  document.querySelector('.collapsible').classList.toggle('collapsed');
+
+  if (isExpanded) {
+    btnExpandFAQ.textContent = 'Más preguntas';
+    scrollToSection(event);
+
+  } else {
+    btnExpandFAQ.textContent = 'Menos preguntas';
+    faqContent.style.height = "auto";
+  }
+
+  btnExpandFAQ.classList.remove('active');
+  isExpanded = !isExpanded;
+}
+
+// Eventos de toque
 btnExpandFAQ.addEventListener('touchstart', () => {
-  //event.preventDefault();
   btnExpandFAQ.classList.add('active');
 });
 
-// Evento de fin de toque
-btnExpandFAQ.addEventListener('touchend', (event) => {
+btnExpandFAQ.addEventListener('touchend', toggleFAQ);
 
-      
-//event.preventDefault();
-//btnExpandFAQ.classList.add('hidden');
-         //faqItems.forEach((item, index) => {
-    //if (index > 4) {
-      //item.classList.toggle('show');
-      //faqSection.classList.toggle('expanded');
-    //}
-  //});
- //el.classList.toggle('collapsed');
- //el.classList.toggle('expanded');
-  document.querySelector('.collapsible').classList.toggle('collapsed');
-   
+// Eventos de clic
+btnExpandFAQ.addEventListener('click', toggleFAQ);
 
- 
+const arrowcontainer = document.querySelector('arrow-container');
 
 
-if (isExpanded) {
-btnExpandFAQ.textContent = 'Más preguntas';
-scrollToSection(event);
-} else {
-
-btnExpandFAQ.textContent = 'Menos preguntas';
-}
-btnExpandFAQ.classList.remove('active');
-
-isExpanded = !isExpanded;
-
+arrowcontainer.addEventListener('click', (event) => {
+  // Llamar a la función para desplazarse al inicio
+  scrollToSection(event);
 });
-
-
-
