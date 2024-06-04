@@ -394,7 +394,27 @@ background-color: #151515;
     color:white;
 }
 
+.arrow-container:hover .st-arrow {
+   fill: var(--arrow-bg-hover);
 
+
+}
+
+.arrow-container:active .circle {
+  
+  background-color: var(--circle-bg-alpha); /* Cambia el color de fondo */
+}
+
+.arrow-container:active .arrow-text {
+    font-weight: 700;
+    color:white;
+}
+
+.arrow-container:active .st-arrow {
+   fill: var(--arrow-bg-hover);
+
+
+}
 
 /* Arrow Styles */
 .st-arrow {
@@ -409,11 +429,7 @@ background-color: #151515;
   transition: transform 0.3s ease, background-color 0.3s ease; 
 
 }
-.arrow-container:hover .st-arrow {
-   fill: var(--arrow-bg-hover);
 
-
-}
 
 /* SVG Styles */
 .svg {
@@ -430,10 +446,10 @@ background-color: #151515;
     transform: translate3d(0, -100%,0) rotateX(90deg) scale(0) skewX(3deg);
   }
   30% {
-    transform: translate3d(0,0,0) rotateX(0deg) scale(1) skewX(0deg);
+    transform: translate3d(0,-1.5px,0) rotateX(0deg) scale(1) skewX(0deg);
   }
   70% {
-    transform: translate3d(0,0,0) rotateX(0deg) scale(1) skewX(0deg);
+    transform: translate3d(0,-1.5px,0) rotateX(0deg) scale(1) skewX(0deg);
   }
   100% {
     transform: translate3d(0,1%,0) rotateX(90deg) scale(0) skewX(3deg);
@@ -1030,6 +1046,10 @@ footer {
     .arrow-container:hover .st-arrow {
           fill: var(--arrow-bg);
 
-    }        
-
+    }      
 }
+
+
+
+
+
