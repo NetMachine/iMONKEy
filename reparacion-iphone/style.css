@@ -741,7 +741,7 @@ background-color: #151515;
   //margin-top: 20px;
 }
 
-.faq-content button {
+.faq-content .btn-expand-faq {
 
   margin-top:10px;
   user-select: none;
@@ -758,11 +758,11 @@ background-color: #151515;
 
 }
 
-.faq-content button:hover {
+.faq-content .btn-expand-faq:hover {
 
 }
 
-.faq-content button:active {
+.faq-content .btn-expand-faq:active {
   color:#777;
   background-color: #444;
 
@@ -850,7 +850,7 @@ background-color: #151515;
 }
 
 
-.contact-content button {
+.contact-content .contact-btn {
   margin-top:10px;
   user-select: none;
   color:white;
@@ -865,10 +865,10 @@ background-color: #151515;
   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); 
 }
-.contact-content button:hover {
+.contact-content .contact-btn:hover {
 
 }
-.contact-content button:active {
+.contact-content .contact-btn:active {
   color:#777;
   background-color: #444;
 
