@@ -203,7 +203,7 @@ const contactButton = document.querySelector('contact-btn');
 
 
         });
-
+/*
 
 const faqSection = document.querySelector('.faq');
 const faqContent =document.querySelector('.faq-content');
@@ -253,6 +253,7 @@ arrowcontainer.addEventListener('click', (event) => {
 
  
       */
+      const arrowcontainer = document.querySelector('arrow-container');
         arrowcontainer.addEventListener('touchstart', (event) => {
             arrowcontainer.classList.add('active');
         });
