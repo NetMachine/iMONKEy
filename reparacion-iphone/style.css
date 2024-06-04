@@ -7,7 +7,7 @@
 /* Estilos generales */
 body {
 
-  --circle-w: 25px;
+  --circle-w: 30px;
   --circle-bg: rgba(255, 255, 255, 0.3);
   --circle-bg-alpha: rgba(255, 255, 255, 1);
   --arrow-bg: rgba(200, 200, 200, 1);/*#55544F;*/
@@ -1031,10 +1031,5 @@ footer {
           fill: var(--arrow-bg);
 
     }        
-    
-    .ico {
-          width: 50px;
-          height: 50px;
 
-    }
 }
