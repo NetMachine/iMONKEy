@@ -400,17 +400,17 @@ background-color: #151515;
 
 }
 
-.arrow-container:active .circle {
+.arrow-container.circle:active {
   
   background-color: var(--circle-bg-alpha); /* Cambia el color de fondo */
 }
 
-.arrow-container:active .arrow-text {
+.arrow-container.arrow-text:active {
     font-weight: 700;
     color:white;
 }
 
-.arrow-container:active .st-arrow {
+.arrow-container.st-arrow:active {
    fill: var(--arrow-bg-hover);
 
 
