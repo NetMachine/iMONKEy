@@ -1015,5 +1015,14 @@ footer {
     .arrow-container {
 
         margin-top: 50px;
-    }         
+    } 
+
+    .arrow-container:hover .circle {
+  
+
+    }
+
+    .arrow-container:hover .arrow-text {
+
+    }        
 }
