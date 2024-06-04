@@ -1024,6 +1024,7 @@ footer {
 
     .arrow-container:hover .arrow-text {
          font-weight: 500;
+         color: #888;
     }
     
     .arrow-container:hover .st-arrow {
