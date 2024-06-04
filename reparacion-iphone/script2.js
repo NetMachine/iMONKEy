@@ -244,15 +244,15 @@ btnExpandFAQ.addEventListener('click', toggleFAQ);
 
 const arrowcontainer = document.querySelector('arrow-container');
 
-
+/*
 arrowcontainer.addEventListener('click', (event) => {
-  // Llamar a la función para desplazarse al inicio
+
   scrollToSection(event);
 });
 
 
  
-        // Evento de inicio de toque
+      */
         arrowcontainer.addEventListener('touchstart', (event) => {
             arrowcontainer.classList.add('active');
         });
@@ -263,5 +263,5 @@ arrowcontainer.addEventListener('click', (event) => {
             
             contaarrowcontainerctButton.classList.remove('active');
 
-
+           scrollToSection(event);
         });
