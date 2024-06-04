@@ -353,6 +353,9 @@ document.addEventListener("click", function() {
     document.querySelectorAll('a').forEach(function(link) {
       link.removeAttribute('target');
     });
+        document.getElementById('arrow-container').addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
   </script>
 </body>
 </html>
