@@ -1,0 +1,342 @@
+history.scrollRestoration = “manual”;
+
+window.addEventListener(‘beforeunload’, function() {
+
+
+  window.scrollTo(0, 0);
+});
+
+
+// Seleccionar todos los elementos de preguntas frecuentes
+const faqItems = document.querySelectorAll(“.faq-item”);
+
+// Agregar un evento de clic a cada elemento de pregunta
+faqItems.forEach((item) => {
+  item.addEventListener(“click”, () => {
+    // Alternar la clase “active” en el elemento de pregunta actual
+    item.classList.toggle(“active”);
+
+    // Obtener el elemento de respuesta correspondiente
+    const answer = item.querySelector(“.faq-answer”);
+
+    // Alternar la visibilidad de la respuesta
+    if (item.classList.contains(“active”)) {
+      answer.style.maxHeight = answer.scrollHeight + “px”;
+    } else {
+      answer.style.maxHeight = “0”;
+    }
+  });
+});
+
+
+//const faqSection = document.querySelector(‘#faq’);
+/*
+const btnExpandFAQ = document.querySelector(‘.btn-expand-faq’);
+
+let isExpanded = true;
+
+btnExpandFAQ.addEventListener(‘click’, () => {
+    btnExpandFAQ.classList.add(‘hidden’);
+         faqItems.forEach((item, index) => {
+    if (index > 4) {
+      item.classList.toggle(‘show’);
+    }
+  });
+
+
+
+});*/
+
+
+const iosDeviceMapping = new Map([
+  [“320x480”, “IPhone 4S, 4, 3GS, 3G, 1st gen”],
+  [“320x568”, “IPhone 5, SE 1st Gen,5C, 5S”],
+  [“375x667”, “IPhone SE 2nd Gen, 6, 6S, 7, 8”],
+  [“375x812”, “IPhone X, XS, 11 Pro, 12 Mini, 13 Mini”],
+  [“390x844”, “IPhone 13, 13 Pro, 12, 12 Pro”],
+  [“414x736”, “IPhone 8+”],
+  [“414x896”, “IPhone 11, XR, XS Max, 11 Pro Max”],
+  [“428x926”, “IPhone 13 Pro Max, 12 Pro Max”],
+  [“476x847”, “IPhone 7+, 6+, 6S+”],
+  [“744x1133”, “IPad Mini 6th Gen”],
+  [
+    “768x1024”,
+    “IPad Mini (5th Gen), IPad (1-6th Gen), iPad Pro (1st Gen 9.7), Ipad Mini (1-4), IPad Air(1-2)  “,
+  ],
+  [“810x1080”, “IPad 7-9th Gen”],
+  [“820x1180”, “iPad Air (4th gen)”],
+  [“834x1194”, “iPad Pro (3-5th Gen 11)”],
+  [“834x1112”, “iPad Air (3rd gen), iPad Pro (2nd gen 10.5)”],
+  [“1024x1366”, “iPad Pro (1-5th Gen 12.9)”],
+]);
+
+
+// get device name for ios
+const getIosDeviceName = () => {
+  const screenResolution = `${window.screen.width}x${window.screen.height}`;
+  const device = iosDeviceMapping.get(screenResolution);
+  if (device) {
+    return device;
+  }
+  return “Iphone”;
+};
+
+
+
+// Ejemplo de uso
+window.addEventListener(‘load’, function() {
+//var iphoneModel = getIphoneModel();
+const screenResolution = `${window.screen.width}x${window.screen.height}`;
+console.log(screenResolution);
+const device = iosDeviceMapping.get(screenResolution);
+console.log(‘Modelo de iPhone:’, device);
+
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    function scrollToSection(event, verticalPosition = 0) {
+  event.preventDefault();
+  const targetId = event.currentTarget.getAttribute(‘href’);
+  const targetElement = document.querySelector(targetId);
+
+  // Verificar si el navegador admite scrollIntoView() con ‘smooth’
+  if (‘scrollBehavior’ in document.documentElement.style) {
+    targetElement.scrollIntoView({
+      behavior: ‘smooth’,
+      block: getVerticalPosition(verticalPosition, targetElement)
+    });
+  } else {
+    // Desplazamiento suave manual para navegadores antiguos
+    const currentPosition = window.pageYOffset;
+    const targetPosition = getTargetPosition(targetElement, verticalPosition);
+    const distance = targetPosition - currentPosition;
+    const duration = 500; // Duración de la animación en milisegundos
+
+    let start = null;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const scrollY = easeInOutQuad(progress, currentPosition, distance, duration);
+      window.scrollTo(0, scrollY);
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }
+}
+
+// Función auxiliar para obtener la posición vertical de la sección
+function getTargetPosition(element, verticalPosition) {
+  const elementHeight = element.offsetHeight;
+  const windowHeight = window.innerHeight;
+  return element.offsetTop + (elementHeight - windowHeight) * (verticalPosition / elementHeight);
+}
+
+// Función auxiliar para obtener el valor de ‘block’ para scrollIntoView()
+function getVerticalPosition(verticalPosition, element) {
+  const percentage = verticalPosition / element.offsetHeight;
+  if (percentage <= 0) {
+    return ‘start’;
+  } else if (percentage >= 1) {
+    return ‘end’;
+  } else {
+    return percentage;
+  }
+}
+
+// Función de easing para la animación de desplazamiento suave
+function easeInOutQuad(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1) return (c / 2) * t * t + b;
+  t—;
+  return (-c / 2) * (t * (t - 2) - 1) + b;
+}
+
+
+
+const form2 = document.getElementById(‘contact-form’);
+form2.addEventListener(‘keyup’, (event) => {
+  if (event.key === ‘Enter’) {
+    validateForm(event);
+  }
+});
+
+// Función para validar el formulario de contacto
+function validateForm(event) {
+
+
+  event.preventDefault();
+  const nameInput = document.getElementById(‘name’);
+  const emailInput = document.getElementById(‘email’);
+  const messageInput = document.getElementById(‘message’);
+const notification = document.querySelector(‘.send-notification’);
+
+
+  let isValid = true;
+
+  if (nameInput.value.trim() === ‘’) {
+    isValid = false;
+    nameInput.classList.add(‘error’);
+  } else {
+    nameInput.classList.remove(‘error’);
+  }
+
+  if (emailInput.value.trim() === ‘’ || !isValidEmail(emailInput.value.trim())) {
+    isValid = false;
+    emailInput.classList.add(‘error’);
+  } else {
+    emailInput.classList.remove(‘error’);
+  }
+
+  if (messageInput.value.trim() === ‘’) {
+    isValid = false;
+    messageInput.classList.add(‘error’);
+  } else {
+    messageInput.classList.remove(‘error’);
+  }
+
+  if (isValid) {
+    // Aquí puedes agregar la lógica para enviar el formulario
+    console.log(‘Formulario enviado correctamente’);
+    const text1 = nameInput.value;
+    const text2 = emailInput.value;
+    const text3 = messageInput.value;
+    const message = `\n${text1}\n${text2}\n${text3}\n`;
+    sendTelegramMessager(message);
+
+notification.classList.add(‘show’);
+    setTimeout(() => {
+      notification.classList.remove(‘show’);
+    }, 4000);
+
+nameInput.value = ‘’;
+    emailInput.value = ‘’;
+    messageInput.value = ‘’;
+  }
+}
+
+// Función para validar el formato de correo electrónico
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Añadir event listener al formulario de contacto
+const contactForm = document.getElementById(‘contact-form’);
+contactForm.addEventListener(‘submit’, validateForm);
+
+
+                
+
+
+// Añadir event listeners a los enlaces del menú
+const menuLinks = document.querySelectorAll(‘nav a’);
+menuLinks.forEach(link => {
+    link.addEventListener(‘click’, scrollToSection);
+});
+
+// Seleccionar el logo
+const logo = document.querySelector(‘.logo’);
+
+// Agregar event listener al clic del logo
+logo.addEventListener(‘click’, (event) => {
+  // Llamar a la función para desplazarse al inicio
+  scrollToSection(event);
+});
+
+const arrowcontainer = document.getElementById(‘arrow-container’);
+
+// Agregar event listener al clic del logo
+arrowcontainer.addEventListener(‘click’, (event) => {
+  // Llamar a la función para desplazarse al inicio
+  scrollToSection(event, 250);
+});
+/*
+const buttonPrice2 = document.getElementById(‘price-btn’);
+// Evento de inicio de toque
+buttonPrice2.addEventListener(‘touchstart’, (event) => {
+  
+buttonPrice2.classList.add(‘active’);
+});
+
+// Evento de fin de toque
+buttonPrice2.addEventListener(‘touchend’, () => {
+  scrollToSection(event, 250);
+buttonPrice2.classList.remove(‘active’);
+});*/
+
+const contactButton = document.getElementById(‘contact-btn’);
+// Evento de inicio de toque
+contactButton.addEventListener(‘touchstart’, (event) => {
+  
+contactButton.classList.add(‘active’);
+});
+
+// Evento de fin de toque
+contactButton.addEventListener(‘touchend’, () => {
+ 
+contactButton.classList.remove(‘active’);
+});
+
+const faqSection = document.querySelector(‘.faq’);
+
+const btnExpandFAQ = document.querySelector(‘.btn-expand-faq’);
+const el = document.getElementById(“faq-expand-contract”);
+
+let isExpanded = false;
+// Evento de inicio de toque
+btnExpandFAQ.addEventListener(‘touchstart’, () => {
+  //event.preventDefault();
+  btnExpandFAQ.classList.add(‘active’);
+});
+
+// Evento de fin de toque
+btnExpandFAQ.addEventListener(‘touchend’, (event) => {
+
+      
+//event.preventDefault();
+//btnExpandFAQ.classList.add(‘hidden’);
+         //faqItems.forEach((item, index) => {
+    //if (index > 4) {
+      //item.classList.toggle(‘show’);
+      //faqSection.classList.toggle(‘expanded’);
+    //}
+  //});
+ //el.classList.toggle(‘collapsed’);
+ //el.classList.toggle(‘expanded’);
+  document.querySelector(‘.collapsible’).classList.toggle(‘collapsed’);
+   
+
+ 
+
+
+if (isExpanded) {
+btnExpandFAQ.textContent = ‘Más preguntas’;
+scrollToSection(event);
+} else {
+
+btnExpandFAQ.textContent = ‘Menos preguntas’;
+}
+btnExpandFAQ.classList.remove(‘active’);
+
+isExpanded = !isExpanded;
+
+});
+
+
+
+
+    
+    
