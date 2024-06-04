@@ -77,7 +77,7 @@ header {
     width: 100%;
     height: 50px; /* Altura inicial de la barra de navegación */
     overflow: hidden;
-    transition: height 0.5s ease;
+    transition: height 0.3s ease;
 }
 
 #main-nav.open {
@@ -331,11 +331,13 @@ background-color: #151515;
   width: 100%;
   margin-top: 30px;
   max-width: 150px;
+-webkit-touch-callout: none;
 
 }
 
 .arrow-text {
   margin-top: -10px;
+
   width: 205px;
   height: 50px;
   font-size: 12px;
@@ -360,10 +362,9 @@ background-color: #151515;
   width: var(--circle-w);
   height: var(--circle-w);
   position: relative;
-  top: 8px;
-  transform: translateY(-50%);
+  //top: 8px;
+  //transform: translateY(-50%);
   //filter: url(#goo);
-
 
 }
 
@@ -397,6 +398,7 @@ background-color: #151515;
 
 /* Arrow Styles */
 .st-arrow {
+
   fill: var(--arrow-bg);
   animation: scrolly var(--anim-timing) var(--bezier) forwards infinite;
   perspective: 9000px;
@@ -415,8 +417,9 @@ background-color: #151515;
 
 /* SVG Styles */
 .svg {
-  height: 80%;
-  width: 80%;
+
+  height: 100%;
+  width: 100%;
   z-index: 9;
   position: relative;
 }
@@ -424,7 +427,7 @@ background-color: #151515;
 
 @keyframes scrolly {
   0% {
-    transform: translate3d(0, -100%,0) rotateX(90deg) scale(0.2) skewX(3deg);
+    transform: translate3d(0, -100%,0) rotateX(90deg) scale(0) skewX(3deg);
   }
   30% {
     transform: translate3d(0,0,0) rotateX(0deg) scale(1) skewX(0deg);
@@ -432,11 +435,8 @@ background-color: #151515;
   70% {
     transform: translate3d(0,0,0) rotateX(0deg) scale(1) skewX(0deg);
   }
-  95% {
-    transform: translate3d(0,40%,0) rotateX(-90deg) scale(0.5) skewX(-3deg);
-  }
   100% {
-    transform: translate3d(0,30%,0) rotateX(-90deg) scale(0.2) skewX(-3deg);
+    transform: translate3d(0,1%,0) rotateX(90deg) scale(0) skewX(3deg);
   }
 }
 
@@ -450,7 +450,7 @@ background-color: #151515;
      background: repeating-linear-gradient(to right, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.6) 25%, #fff 50%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.45) 100%);
      background-clip: text;
      background-size: 200% auto;
-     animation: preloadAnimation 10s infinite;
+     animation: preloadAnimation 5s infinite;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
