@@ -262,7 +262,7 @@ arrowcontainer.addEventListener('click', (event) => {
         // Evento de fin de toque
         arrowcontainer.addEventListener('touchend', (event) => {
             
-            contaarrowcontainerctButton.classList.remove('active');
+            arrowcontainer.classList.remove('active');
 
            scrollToSection(event);
         });
