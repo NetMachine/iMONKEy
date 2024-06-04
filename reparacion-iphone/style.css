@@ -1028,8 +1028,13 @@ footer {
     }
     
     .arrow-container:hover .st-arrow {
-   fill: var(--arrow-bg);
+          fill: var(--arrow-bg);
 
+    }        
+    
+    .ico {
+          width: 30px;
+          height: 30px;
 
-}        
+    }
 }
