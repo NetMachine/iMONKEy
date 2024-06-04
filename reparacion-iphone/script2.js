@@ -249,3 +249,19 @@ arrowcontainer.addEventListener('click', (event) => {
   // Llamar a la función para desplazarse al inicio
   scrollToSection(event);
 });
+
+
+ 
+        // Evento de inicio de toque
+        arrowcontainer.addEventListener('touchstart', (event) => {
+            arrowcontainer.classList.add('active');
+        });
+
+
+        // Evento de fin de toque
+        arrowcontainer.addEventListener('touchend', (event) => {
+            
+            contaarrowcontainerctButton.classList.remove('active');
+
+
+        });
