@@ -1024,5 +1024,11 @@ footer {
 
     .arrow-container:hover .arrow-text {
          font-weight: 500;
-    }        
+    }
+    
+    .arrow-container:hover .st-arrow {
+   fill: var(--arrow-bg);
+
+
+}        
 }
