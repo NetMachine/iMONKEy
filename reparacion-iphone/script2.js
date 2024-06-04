@@ -264,5 +264,5 @@ arrowcontainer.addEventListener('click', (event) => {
             
             arrowcontainer.classList.remove('active');
 
-           scrollToSection(event);
+           //scrollToSection(event);
         });

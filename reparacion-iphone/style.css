@@ -399,10 +399,10 @@ background-color: #151515;
 
 
 }
-
+/*
 .arrow-container.circle:active {
   
-  background-color: var(--circle-bg-alpha); /* Cambia el color de fondo */
+  background-color: var(--circle-bg-alpha); 
 }
 
 .arrow-container.arrow-text:active {
@@ -414,7 +414,7 @@ background-color: #151515;
    fill: var(--arrow-bg-hover);
 
 
-}
+}*/
 
 /* Arrow Styles */
 .st-arrow {
