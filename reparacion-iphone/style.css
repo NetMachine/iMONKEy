@@ -23,7 +23,7 @@ body {
     padding: 0;
     background-color: #191919;
     color: #fff;
-
+    -webkit-touch-callout: none;
 
 }
 
