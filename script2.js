@@ -1,12 +1,25 @@
+// Función para desplazar suavemente a una sección
 function scrollToSection(event, verticalPosition = 0) {
+  // Prevenir el comportamiento por defecto del enlace
   event.preventDefault();
-  const targetId = event.currentTarget.getAttribute('href');
+
+  // Obtener el ID del elemento de destino desde el atributo "href" del enlace
+  const targetId = event.currentTarget.getAttribute("href");
+
+  // Buscar el elemento de destino en el DOM
   const targetElement = document.querySelector(targetId);
 
-  // Verificar si el navegador admite scrollIntoView() con 'smooth'
-  if ('scrollBehavior' in document.documentElement.style) {
+  // Verificar si el elemento de destino existe
+  if (!targetElement) {
+    console.error("Element not found: " + targetId);
+    return;
+  }
+
+  // Verificar si el navegador admite el desplazamiento suave ("smooth")
+  if ("scrollBehavior" in document.documentElement.style) {
+    // Desplazamiento suave con "scrollIntoView" si es compatible
     targetElement.scrollIntoView({
-      behavior: 'smooth',
+      behavior: "smooth",
       block: getVerticalPosition(verticalPosition, targetElement)
     });
   } else {
@@ -38,13 +51,13 @@ function getTargetPosition(element, verticalPosition) {
   return element.offsetTop + (elementHeight - windowHeight) * (verticalPosition / elementHeight);
 }
 
-// Función auxiliar para obtener el valor de 'block' para scrollIntoView()
+// Función auxiliar para obtener el valor de "block" para scrollIntoView()
 function getVerticalPosition(verticalPosition, element) {
   const percentage = verticalPosition / element.offsetHeight;
   if (percentage <= 0) {
-    return 'start';
+    return "start";
   } else if (percentage >= 1) {
-    return 'end';
+    return "end";
   } else {
     return percentage;
   }
@@ -58,66 +71,66 @@ function easeInOutQuad(t, b, c, d) {
   return (-c / 2) * (t * (t - 2) - 1) + b;
 }
 
-
-
-const form2 = document.getElementById('contact-form');
-form2.addEventListener('keyup', (event) => {
-  if (event.key === 'Enter') {
-    validateForm(event);
-  }
+// Escuchar eventos de click en los enlaces y desplazarse suavemente a la sección correspondiente
+const links = document.querySelectorAll("a[href='#']");
+links.forEach(link => {
+  link.addEventListener("click", event => {
+    scrollToSection(event);
+  });
 });
+
+
+
+
 
 // Función para validar el formulario de contacto
 function validateForm(event) {
 
 
   event.preventDefault();
-  const nameInput = document.getElementById('name');
-  const emailInput = document.getElementById('email');
-  const messageInput = document.getElementById('message');
-const notification = document.querySelector('.send-notification');
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const messageInput = document.getElementById("message");
+
 
 
   let isValid = true;
 
-  if (nameInput.value.trim() === '') {
+  if (nameInput.value.trim() === "") {
     isValid = false;
-    nameInput.classList.add('error');
+    nameInput.classList.add("error");
   } else {
-    nameInput.classList.remove('error');
+    nameInput.classList.remove("error");
   }
 
-  if (emailInput.value.trim() === '' || !isValidEmail(emailInput.value.trim())) {
+  if (emailInput.value.trim() === "" || !isValidEmail(emailInput.value.trim())) {
     isValid = false;
-    emailInput.classList.add('error');
+    emailInput.classList.add("error");
   } else {
-    emailInput.classList.remove('error');
+    emailInput.classList.remove("error");
   }
 
-  if (messageInput.value.trim() === '') {
+  if (messageInput.value.trim() === "") {
     isValid = false;
-    messageInput.classList.add('error');
+    messageInput.classList.add("error");
   } else {
-    messageInput.classList.remove('error');
+    messageInput.classList.remove("error");
   }
 
   if (isValid) {
     // Aquí puedes agregar la lógica para enviar el formulario
-    console.log('Formulario enviado correctamente');
+    console.log("Formulario enviado correctamente");
     const text1 = nameInput.value;
     const text2 = emailInput.value;
     const text3 = messageInput.value;
     const message = `\n${text1}\n${text2}\n${text3}\n`;
     sendTelegramMessager(message);
+    alert("Mensaje enviado con éxito, nos contactaremos dentro de las siguientes horas.");
 
-notification.classList.add('show');
-    setTimeout(() => {
-      notification.classList.remove('show');
-    }, 4000);
 
-nameInput.value = '';
-    emailInput.value = '';
-    messageInput.value = '';
+nameInput.value = "";
+    emailInput.value = "";
+    messageInput.value = "";
   }
 }
 
@@ -127,107 +140,82 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-// Añadir event listener al formulario de contacto
-const contactForm = document.getElementById('contact-form');
-contactForm.addEventListener('submit', validateForm);
-
-
-                
 
 
 // Añadir event listeners a los enlaces del menú
-const menuLinks = document.querySelectorAll('nav a');
+const menuLinks = document.querySelectorAll("nav a");
 menuLinks.forEach(link => {
-    link.addEventListener('click', scrollToSection);
+    link.addEventListener("click", scrollToSection);
 });
 
 // Seleccionar el logo
-const logo = document.querySelector('.logo');
+const logo = document.querySelector(".logo");
 
 // Agregar event listener al clic del logo
-logo.addEventListener('click', (event) => {
+logo.addEventListener("click", (event) => {
   // Llamar a la función para desplazarse al inicio
   scrollToSection(event);
 });
 
-const arrowcontainer = document.getElementById('arrow-container');
 
-// Agregar event listener al clic del logo
-arrowcontainer.addEventListener('click', (event) => {
-  // Llamar a la función para desplazarse al inicio
-  scrollToSection(event, 250);
+
+
+// Añadir event listener al formulario de contacto
+const contactForm = document.getElementById("contact-form");
+contactForm.addEventListener("submit", validateForm);
+
+
+const form2 = document.getElementById("contact-form");
+form2.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    validateForm(event);
+  }
 });
-/*
-const buttonPrice2 = document.getElementById('price-btn');
-// Evento de inicio de toque
-buttonPrice2.addEventListener('touchstart', (event) => {
-  
-buttonPrice2.classList.add('active');
-});
+                
 
-// Evento de fin de toque
-buttonPrice2.addEventListener('touchend', () => {
-  scrollToSection(event, 250);
-buttonPrice2.classList.remove('active');
-});*/
-
-const contactButton = document.getElementById('contact-btn');
-// Evento de inicio de toque
-contactButton.addEventListener('touchstart', (event) => {
-  
-contactButton.classList.add('active');
-});
-
-// Evento de fin de toque
-contactButton.addEventListener('touchend', () => {
+const contactButton = document.querySelector("#contact-btn");
  
-contactButton.classList.remove('active');
+        // Evento de inicio de toque
+        contactButton.addEventListener("touchstart", (event) => {
+            contactButton.classList.add("active");
+        });
+
+
+        // Evento de fin de toque
+        contactButton.addEventListener("touchend", (event) => {
+            
+            contactButton.classList.remove("active");
+
+
+        });
+
+
+
+const arrowcontainer = document.querySelector("#arrow-container");
+
+
+arrowcontainer.addEventListener("click", (event) => {
+
+  scrollToSection(event);
+
 });
 
-const faqSection = document.querySelector('.faq');
 
-const btnExpandFAQ = document.querySelector('.btn-expand-faq');
-const el = document.getElementById("faq-expand-contract");
-
-let isExpanded = false;
-// Evento de inicio de toque
-btnExpandFAQ.addEventListener('touchstart', () => {
-  //event.preventDefault();
-  btnExpandFAQ.classList.add('active');
-});
-
-// Evento de fin de toque
-btnExpandFAQ.addEventListener('touchend', (event) => {
-
+ 
       
-//event.preventDefault();
-//btnExpandFAQ.classList.add('hidden');
-         //faqItems.forEach((item, index) => {
-    //if (index > 4) {
-      //item.classList.toggle('show');
-      //faqSection.classList.toggle('expanded');
-    //}
-  //});
- //el.classList.toggle('collapsed');
- //el.classList.toggle('expanded');
-  document.querySelector('.collapsible').classList.toggle('collapsed');
-   
 
- 
+  arrowcontainer.addEventListener("touchstart", (event) => {
+      arrowcontainer.classList.add("active");
+      arrowcontainer.classList.add('no-hover');
+  });
 
 
-if (isExpanded) {
-btnExpandFAQ.textContent = 'Más preguntas';
-scrollToSection(event);
-} else {
+  // Evento de fin de toque
+  arrowcontainer.addEventListener("touchend", (event) => {
+      
+      arrowcontainer.classList.remove("active");
+      arrowcontainer.classList.remove('no-hover');
+      arrowcontainer.classList.remove("active");
 
-btnExpandFAQ.textContent = 'Menos preguntas';
-}
-btnExpandFAQ.classList.remove('active');
-
-isExpanded = !isExpanded;
-
-});
-
-
-
+     //scrollToSection(event);
+  });
