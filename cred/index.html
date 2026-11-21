@@ -44,6 +44,7 @@ const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${PATH}`
 const $=id=>document.getElementById(id),enc=new TextEncoder(),dec=new TextDecoder();
 const b64=u=>btoa(String.fromCharCode(...new Uint8Array(u))),ub64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 function say(t,c){$("msg").textContent=t;$("msg").className=c||""}
+if(!window.isSecureContext||!crypto.subtle){say("Abre esta página con https:// para poder cifrar.","err")}
 $("tok").value=localStorage.getItem("ghtok")||"";
 $("savetok").onclick=()=>{localStorage.setItem("ghtok",$("tok").value.trim());say("Token guardado en este navegador.","ok")};
 async function derive(pw,salt){const k=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveKey"]);
