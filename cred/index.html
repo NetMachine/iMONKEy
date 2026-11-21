@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>iMonkeyTV · Credencial</title>
+<style>
+:root{--bg:#0d1030;--card:#1a1f55;--acc:#3d6bff;--txt:#eef;--mut:#99a}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);padding:16px}
+main{max-width:520px;margin:auto}h1{font-size:22px;margin:8px 0 4px}p.s{color:var(--mut);margin:0 0 16px;font-size:14px}
+.card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid #334;background:#0f1340;color:var(--txt);font-size:16px}
+button{width:100%;padding:13px;border:0;border-radius:10px;background:var(--acc);color:#fff;font-size:16px;font-weight:600;margin-top:14px}
+button.sec{background:#2a3070}#msg{white-space:pre-wrap;font-size:14px;min-height:20px}
+.ok{color:#6f6}.err{color:#f77}details summary{cursor:pointer;color:var(--mut)}
+</style>
+</head>
+<body><main>
+<h1>Credencial Xtream</h1>
+<p class="s">Se cifra en este navegador con tu clave y se guarda en GitHub. La app la detecta y recarga los canales sola.</p>
+
+<div class="card">
+<label>Servidor (ej. http://servidor.com:8080)</label><input id="server" autocomplete="off">
+<label>Usuario</label><input id="user" autocomplete="off">
+<label>Contraseña</label><input id="pass" type="password" autocomplete="off">
+<label>Nombre (opcional)</label><input id="name" autocomplete="off" placeholder="Mi suscripción">
+<label>Clave de cifrado (la misma que pones una vez en la tele, mín. 10 caracteres)</label><input id="key" type="password" autocomplete="off">
+<button id="save">Cifrar y guardar</button>
+<button id="check" class="sec">Probar descifrado del archivo actual</button>
+<p id="msg"></p>
+</div>
+
+<div class="card"><details><summary>Token de GitHub (una sola vez)</summary>
+<label>Token fino con permiso Contents: Read and write, solo repo NetMachine/iMONKEy. Queda guardado solo en este navegador.</label>
+<input id="tok" type="password" autocomplete="off">
+<button id="savetok" class="sec">Guardar token</button>
+</details></div>
+</main>
+<script>
+const OWNER="NetMachine",REPO="iMONKEy",BRANCH="pif-pages",PATH="cred/c.json",ITER=310000;
+const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${PATH}`;
+const $=id=>document.getElementById(id),enc=new TextEncoder(),dec=new TextDecoder();
+const b64=u=>btoa(String.fromCharCode(...new Uint8Array(u))),ub64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+function say(t,c){$("msg").textContent=t;$("msg").className=c||""}
+$("tok").value=localStorage.getItem("ghtok")||"";
+$("savetok").onclick=()=>{localStorage.setItem("ghtok",$("tok").value.trim());say("Token guardado en este navegador.","ok")};
+async function derive(pw,salt){const k=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveKey"]);
+ return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:ITER,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["encrypt","decrypt"])}
+$("save").onclick=async()=>{try{
+ const server=$("server").value.trim().replace(/\/+$/,""),username=$("user").value.trim(),password=$("pass").value,pw=$("key").value,tok=localStorage.getItem("ghtok");
+ if(!/^https?:\/\//i.test(server)||!username||!password) return say("Falta servidor (con http://), usuario o contraseña.","err");
+ if(pw.length<10) return say("La clave de cifrado debe tener al menos 10 caracteres.","err");
+ if(!tok) return say("Primero guarda el token de GitHub.","err");
+ say("Cifrando…");
+ const updated=new Date().toISOString();
+ const plain=JSON.stringify({server,username,password,name:$("name").value.trim()||"Xtream",updated});
+ const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+ const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},await derive(pw,salt),enc.encode(plain));
+ const file=JSON.stringify({v:1,kdf:"PBKDF2-SHA256",iter:ITER,alg:"AES-256-GCM",salt:b64(salt),iv:b64(iv),ct:b64(ct),updated},null,1);
+ const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,h={Authorization:"Bearer "+tok,Accept:"application/vnd.github+json"};
+ let sha;const g=await fetch(api+"?ref="+BRANCH,{headers:h});if(g.ok) sha=(await g.json()).sha;
+ const r=await fetch(api,{method:"PUT",headers:h,body:JSON.stringify({message:"cred update",branch:BRANCH,content:btoa(file),sha})});
+ if(!r.ok) return say("GitHub rechazó el guardado ("+r.status+"). Revisa el token.","err");
+ $("pass").value="";say("Guardada ("+updated.slice(0,16).replace("T"," ")+" UTC). La app la tomará en su próxima revisión.","ok");
+}catch(e){say("Error: "+e.message,"err")}};
+$("check").onclick=async()=>{try{
+ say("Leyendo…");const f=await (await fetch(RAW+"?t="+Date.now(),{cache:"no-store"})).json();
+ const p=JSON.parse(dec.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub64(f.iv)},await derive($("key").value,ub64(f.salt)),ub64(f.ct))));
+ say("OK: "+p.name+" · "+p.server+" · usuario "+p.username+" · "+p.updated.slice(0,16).replace("T"," ")+" UTC","ok");
+}catch(e){say("No se pudo descifrar (clave incorrecta o archivo inexistente).","err")}};
+</script>
+</body></html>
