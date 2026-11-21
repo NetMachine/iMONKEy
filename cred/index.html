@@ -33,13 +33,13 @@ button.sec{background:#2a3070}#msg{white-space:pre-wrap;font-size:14px;min-heigh
 </div>
 
 <div class="card"><details><summary>Token de GitHub (una sola vez)</summary>
-<label>Token fino con permiso Contents: Read and write, solo repo NetMachine/iMONKEy. Queda guardado solo en este navegador.</label>
+<label>Token fino con permiso Contents: Read and write, solo repo NetMachine/mk-cfg. Queda guardado solo en este navegador.</label>
 <input id="tok" type="password" autocomplete="off">
 <button id="savetok" class="sec">Guardar token</button>
 </details></div>
 </main>
 <script>
-const OWNER="NetMachine",REPO="iMONKEy",BRANCH="pif-pages",PATH="cred/c.json",ITER=310000;
+const OWNER="NetMachine",REPO="mk-cfg",BRANCH="main",PATH="cred/c.json",ITER=310000;
 const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${PATH}`;
 const $=id=>document.getElementById(id),enc=new TextEncoder(),dec=new TextDecoder();
 const b64=u=>btoa(String.fromCharCode(...new Uint8Array(u))),ub64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
