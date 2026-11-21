@@ -15,6 +15,9 @@ input{width:100%;padding:12px;border-radius:10px;border:1px solid #334;backgroun
 button{width:100%;padding:13px;border:0;border-radius:10px;background:var(--acc);color:#fff;font-size:16px;font-weight:600;margin-top:14px}
 button.sec{background:#2a3070}#msg{white-space:pre-wrap;font-size:14px;min-height:20px}
 .ok{color:#6f6}.err{color:#f77}details summary{cursor:pointer;color:var(--mut)}
+table.st{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}table.st td{padding:6px 4px;border-bottom:1px solid #2a3070;vertical-align:top}
+table.st td:first-child{color:var(--mut);width:38%}.warn{color:#fc6}h2{font-size:18px;margin:0 0 6px}ul.er{margin:4px 0;padding-left:18px;font-size:13px}
+.row{display:flex;gap:8px}.row>div{flex:1}
 </style>
 </head>
 <body><main>
@@ -30,6 +33,20 @@ button.sec{background:#2a3070}#msg{white-space:pre-wrap;font-size:14px;min-heigh
 <button id="save">Cifrar y guardar</button>
 <button id="check" class="sec">Probar descifrado del archivo actual</button>
 <p id="msg"></p>
+</div>
+
+<div class="card" id="estado">
+<h2>Estado</h2>
+<p class="s" style="margin-bottom:6px">Lo que reporta la app (si activaste «Reporte de estado» en la tele): cuenta instalada, vencimiento y datos del equipo. Se descifra aquí con la misma clave de arriba. La página no consulta el servidor Xtream.</p>
+<button id="stload">Ver estado</button>
+<p id="stmsg"></p>
+<div id="stout"></div>
+<details style="margin-top:10px"><summary>Origen del archivo de estado</summary>
+<div class="row"><div><label>Dueño/repo</label><input id="strepo" autocomplete="off"></div><div><label>Rama</label><input id="stbranch" autocomplete="off"></div></div>
+<label>Ruta</label><input id="stpath" autocomplete="off">
+<button id="stsave" class="sec">Guardar origen</button>
+<p class="s" style="margin-top:8px">Con token guardado se lee por la API de GitHub (al instante); sin token, por raw.githubusercontent.com (puede tardar ~5 min en actualizarse).</p>
+</details>
 </div>
 
 <div class="card"><details><summary>Token de GitHub (una sola vez)</summary>
@@ -71,5 +88,52 @@ $("check").onclick=async()=>{try{
  const p=JSON.parse(dec.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub64(f.iv)},await derive($("key").value,ub64(f.salt)),ub64(f.ct))));
  say("OK: "+p.name+" · "+p.server+" · usuario "+p.username+" · "+p.updated.slice(0,16).replace("T"," ")+" UTC","ok");
 }catch(e){say("No se pudo descifrar (clave incorrecta o archivo inexistente).","err")}};
+
+/* ---- Estado (2.2): lee cred/s.json (o el origen configurado), lo descifra y lo muestra ---- */
+const ST_DEF={repo:"NetMachine/mk-cfg",branch:"main",path:"cred/s.json"};
+function stCfg(){return{repo:localStorage.getItem("st_repo")||ST_DEF.repo,branch:localStorage.getItem("st_branch")||ST_DEF.branch,path:localStorage.getItem("st_path")||ST_DEF.path}}
+(function(){const c=stCfg();$("strepo").value=c.repo;$("stbranch").value=c.branch;$("stpath").value=c.path})();
+$("stsave").onclick=()=>{localStorage.setItem("st_repo",$("strepo").value.trim()||ST_DEF.repo);localStorage.setItem("st_branch",$("stbranch").value.trim()||ST_DEF.branch);
+ localStorage.setItem("st_path",$("stpath").value.trim().replace(/^\/+/,"")||ST_DEF.path);stSay("Origen guardado.","ok")};
+function stSay(t,c){$("stmsg").textContent=t;$("stmsg").className=c||""}
+function fmtDate(iso){if(!iso)return"—";const d=new Date(iso);return isNaN(d)?iso:d.toLocaleString("es-CL",{dateStyle:"medium",timeStyle:"short"})}
+function ago(iso){if(!iso)return"";const m=Math.round((Date.now()-new Date(iso))/60000);if(isNaN(m))return"";if(m<1)return" (recién)";if(m<60)return` (hace ${m} min)`;const h=Math.round(m/60);if(h<48)return` (hace ${h} h)`;return` (hace ${Math.round(h/24)} días)`}
+function row(tb,k,v,cls){const tr=document.createElement("tr"),a=document.createElement("td"),b=document.createElement("td");a.textContent=k;
+ if(v instanceof Node)b.appendChild(v);else b.textContent=(v===undefined||v===null||v==="")?"—":String(v);if(cls)b.className=cls;tr.append(a,b);tb.appendChild(tr)}
+async function stFetch(){const c=stCfg(),tok=localStorage.getItem("ghtok");
+ if(tok){const r=await fetch(`https://api.github.com/repos/${c.repo}/contents/${c.path}?ref=${encodeURIComponent(c.branch)}&t=${Date.now()}`,
+   {headers:{Authorization:"Bearer "+tok,Accept:"application/vnd.github.raw+json"},cache:"no-store"});
+  if(r.status===404)throw new Error("Aún no hay reporte en "+c.repo+"/"+c.path+" (activa «Reporte de estado» en la tele).");
+  if(r.ok)return r.json(); if(r.status!==401&&r.status!==403)throw new Error("GitHub respondió "+r.status)}
+ const r=await fetch(`https://raw.githubusercontent.com/${c.repo}/${c.branch}/${c.path}?t=${Date.now()}`,{cache:"no-store"});
+ if(r.status===404)throw new Error("Aún no hay reporte en "+c.repo+"/"+c.path+" (activa «Reporte de estado» en la tele).");
+ if(!r.ok)throw new Error("No se pudo leer el archivo ("+r.status+")");return r.json()}
+$("stload").onclick=async()=>{const out=$("stout");out.textContent="";try{
+ const pw=$("key").value;if(!pw)return stSay("Escribe arriba tu clave de cifrado (la misma de la tele).","err");
+ stSay("Leyendo…");const f=await stFetch();
+ let p;try{p=JSON.parse(dec.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub64(f.iv)},await derive(pw,ub64(f.salt)),ub64(f.ct))))}
+ catch(e){return stSay("No se pudo descifrar: clave incorrecta o archivo dañado.","err")}
+ stSay("Reporte del "+fmtDate(p.updated)+ago(p.updated),"ok");
+ const tb=document.createElement("table");tb.className="st";const a=p.account;
+ if(a){row(tb,"Cuenta",(a.name||"")+(a.host?" · "+a.host:"")+(a.user?" · usuario "+a.user:""));
+  const bad=a.ok===false||/vencid/i.test(a.status||"");row(tb,"Estado",(a.status||"—")+(a.ok===false&&a.message?" ("+a.message+")":""),bad?"err":"ok");
+  if(a.exp){const d=a.daysLeft;const t=fmtDate(a.expDate)+(d===null||d===undefined?"":d<0?" · vencida hace "+(-d)+" días":" · quedan "+d+" días");
+   row(tb,"Vence",t,d<0?"err":d<=7?"warn":"ok")}else row(tb,"Vence",a.ok===false?"—":"sin vencimiento");
+  row(tb,"Conexiones",(a.activeConn||"?")+" / "+(a.maxConn||"?")+(a.trial?" · cuenta de prueba":""));
+  row(tb,"Cuenta revisada",fmtDate(a.checkedAt)+ago(a.checkedAt))}else row(tb,"Cuenta","Sin cuenta Xtream en la app");
+ const cr=p.cred||{};row(tb,"Credencial remota",(cr.enabled?"activada":"desactivada")+(cr.status?" · "+cr.status:""));
+ row(tb,"Última revisión",fmtDate(cr.lastCheck)+ago(cr.lastCheck));row(tb,"Última aplicación",fmtDate(cr.lastApply)+ago(cr.lastApply));
+ const ap=p.app||{},dv=p.device||{},rm=p.ram||{},nt=p.net||{};
+ row(tb,"App","iMonkeyTV "+(ap.version||"?")+" ("+(ap.code||"?")+")");
+ row(tb,"Equipo",[dv.manufacturer,dv.model].filter(Boolean).join(" ")+" · Android "+(dv.android||"?")+" (API "+(dv.api||"?")+")");
+ if(rm.freeMb!==undefined)row(tb,"RAM libre",rm.freeMb+" MB de "+rm.totalMb+" MB"+(rm.low?" · ¡memoria baja!":"")+" · app "+rm.appHeapMb+"/"+rm.appHeapMaxMb+" MB",rm.low?"warn":"");
+ row(tb,"Red",(nt.type||"?")+(nt.type==="wifi"&&nt.wifiLevel!==undefined?" (señal "+nt.wifiLevel+"/4)":"")+" · internet "+(nt.internet===true?"OK":nt.internet===false?"NO":"?")+(nt.latencyMs>=0?" · "+nt.latencyMs+" ms":""),nt.internet===false?"err":"");
+ const ch=p.channel;row(tb,"Canal actual",ch?ch.name+(ch.list?" · "+ch.list:"")+(ch.error?" · error: "+ch.error:ch.playing?" · reproduciendo":" · en pausa"):"ninguno",ch&&ch.error?"err":"");
+ if(p.lists)row(tb,"Listas",p.lists.enabled+" activas de "+p.lists.total);
+ const er=p.errors||[];if(er.length){const ul=document.createElement("ul");ul.className="er";
+  er.forEach(e=>{const li=document.createElement("li");li.textContent=fmtDate(e.t)+" · "+e.tag+": "+e.msg;ul.appendChild(li)});row(tb,"Últimos errores",ul)}
+ else row(tb,"Últimos errores","ninguno");
+ out.appendChild(tb);
+}catch(e){stSay(e.message||String(e),"err")}};
 </script>
 </body></html>
