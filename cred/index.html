@@ -21,17 +21,18 @@ table.st td:first-child{color:var(--mut);width:38%}.warn{color:#fc6}h2{font-size
 </style>
 </head>
 <body><main>
-<h1>Credencial Xtream</h1>
-<p class="s">Se cifra en este navegador con tu clave y se guarda en GitHub. La app la detecta y recarga los canales sola.</p>
+<h1>Credenciales Xtream</h1>
+<p class="s">Cada credencial es una lista en la app. Si usas el nombre de una lista que ya existe en la app, esa lista se sobrescribe; con un nombre nuevo se agrega otra. Se cifra aquí con tu clave y se guarda en GitHub.</p>
 
 <div class="card">
 <label>Servidor (ej. http://servidor.com:8080)</label><input id="server" autocomplete="off">
 <label>Usuario</label><input id="user" autocomplete="off">
 <label>Contraseña</label><input id="pass" type="password" autocomplete="off">
-<label>Nombre (opcional)</label><input id="name" autocomplete="off" placeholder="Mi suscripción">
+<label>Nombre de la lista (mismo nombre = sobrescribe esa lista)</label><input id="name" autocomplete="off" placeholder="Mi suscripción">
 <label>Clave de cifrado (la misma que pones una vez en la tele, mín. 10 caracteres)</label><input id="key" type="password" autocomplete="off">
 <button id="save">Cifrar y guardar</button>
-<button id="check" class="sec">Probar descifrado del archivo actual</button>
+<button id="check" class="sec">Ver credenciales guardadas</button>
+<div id="items"></div>
 <p id="msg"></p>
 </div>
 
@@ -66,28 +67,49 @@ $("tok").value=localStorage.getItem("ghtok")||"";
 $("savetok").onclick=()=>{localStorage.setItem("ghtok",$("tok").value.trim());say("Token guardado en este navegador.","ok")};
 async function derive(pw,salt){const k=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveKey"]);
  return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:ITER,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["encrypt","decrypt"])}
-$("save").onclick=async()=>{try{
- const server=$("server").value.trim().replace(/\/+$/,""),username=$("user").value.trim(),password=$("pass").value,pw=$("key").value,tok=localStorage.getItem("ghtok");
- if(!/^https?:\/\//i.test(server)||!username||!password) return say("Falta servidor (con http://), usuario o contraseña.","err");
- if(pw.length<10) return say("La clave de cifrado debe tener al menos 10 caracteres.","err");
- if(!tok) return say("Primero guarda el token de GitHub.","err");
- say("Cifrando…");
+const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
+function hdr(){return{Authorization:"Bearer "+localStorage.getItem("ghtok"),Accept:"application/vnd.github+json"}}
+/* Lee el archivo actual: {sha, items}. Formato antiguo (una sola credencial) se convierte en lista. */
+async function readAll(pw){
+ const g=await fetch(API+"?ref="+BRANCH+"&t="+Date.now(),{headers:hdr(),cache:"no-store"});
+ if(g.status===404)return{sha:undefined,items:[]};
+ if(!g.ok)throw new Error("GitHub respondió "+g.status+" al leer. Revisa el token.");
+ const j=await g.json(),f=JSON.parse(atob(j.content.replace(/\n/g,"")));
+ let p;try{p=JSON.parse(dec.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub64(f.iv)},await derive(pw,ub64(f.salt)),ub64(f.ct))))}
+ catch(e){throw new Error("No se pudo descifrar lo guardado con esa clave. No guardo nada para no perder tus otras credenciales.")}
+ return{sha:j.sha,items:Array.isArray(p.items)?p.items:[p]}}
+async function writeAll(pw,sha,items){
  const updated=new Date().toISOString();
- const plain=JSON.stringify({server,username,password,name:$("name").value.trim()||"Xtream",updated});
  const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
- const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},await derive(pw,salt),enc.encode(plain));
+ const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},await derive(pw,salt),enc.encode(JSON.stringify({items,updated})));
  const file=JSON.stringify({v:1,kdf:"PBKDF2-SHA256",iter:ITER,alg:"AES-256-GCM",salt:b64(salt),iv:b64(iv),ct:b64(ct),updated},null,1);
- const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,h={Authorization:"Bearer "+tok,Accept:"application/vnd.github+json"};
- let sha;const g=await fetch(api+"?ref="+BRANCH,{headers:h});if(g.ok) sha=(await g.json()).sha;
- const r=await fetch(api,{method:"PUT",headers:h,body:JSON.stringify({message:"cred update",branch:BRANCH,content:btoa(file),sha})});
- if(!r.ok) return say("GitHub rechazó el guardado ("+r.status+"). Revisa el token.","err");
- $("pass").value="";say("Guardada ("+updated.slice(0,16).replace("T"," ")+" UTC). La app la tomará en su próxima revisión.","ok");
+ const r=await fetch(API,{method:"PUT",headers:hdr(),body:JSON.stringify({message:"cred update",branch:BRANCH,content:btoa(file),sha})});
+ if(!r.ok)throw new Error("GitHub rechazó el guardado ("+r.status+"). Revisa el token.");return updated}
+function same(a,b){return a.trim().toLowerCase()===b.trim().toLowerCase()}
+function showItems(items,pw){const box=$("items");box.textContent="";if(!items.length){box.textContent="No hay credenciales guardadas.";return}
+ const tb=document.createElement("table");tb.className="st";
+ items.forEach(it=>{const tr=document.createElement("tr"),a=document.createElement("td"),b=document.createElement("td");
+  a.textContent=it.name;let h="";try{h=new URL(it.server).host}catch(e){h=it.server}
+  b.textContent=h+" · usuario "+it.username+" · "+(it.updated||"").slice(0,16).replace("T"," ")+" UTC ";
+  const x=document.createElement("button");x.className="sec";x.style.cssText="width:auto;padding:6px 10px;margin:6px 0 0";x.textContent="Quitar de la página";
+  x.onclick=async()=>{if(!confirm("¿Quitar «"+it.name+"» de la página? La lista NO se borra de la app."))return;try{say("Guardando…");
+   const cur=await readAll(pw),rest=cur.items.filter(o=>!same(o.name,it.name));await writeAll(pw,cur.sha,rest);showItems(rest,pw);say("Quitada de la página. En la app la lista sigue igual.","ok")}catch(e){say(e.message,"err")}};
+  b.appendChild(document.createElement("br"));b.appendChild(x);tr.append(a,b);tb.appendChild(tr)});box.appendChild(tb)}
+$("save").onclick=async()=>{try{
+ const server=$("server").value.trim().replace(/\/+$/,""),username=$("user").value.trim(),password=$("pass").value,pw=$("key").value,name=$("name").value.trim();
+ if(!/^https?:\/\//i.test(server)||!username||!password) return say("Falta servidor (con http://), usuario o contraseña.","err");
+ if(!name) return say("Escribe el nombre de la lista (si ya existe en la app, se sobrescribe).","err");
+ if(pw.length<10) return say("La clave de cifrado debe tener al menos 10 caracteres.","err");
+ if(!localStorage.getItem("ghtok")) return say("Primero guarda el token de GitHub.","err");
+ say("Leyendo lo guardado…");const cur=await readAll(pw);
+ const exists=cur.items.some(o=>same(o.name,name));
+ const items=cur.items.filter(o=>!same(o.name,name));items.push({server,username,password,name,updated:new Date().toISOString()});
+ say("Cifrando…");const updated=await writeAll(pw,cur.sha,items);
+ $("pass").value="";showItems(items,pw);
+ say((exists?"«"+name+"» reemplazada":"«"+name+"» agregada")+" ("+updated.slice(0,16).replace("T"," ")+" UTC). "+items.length+" credencial(es) guardadas. La app la tomará en su próxima revisión; si en la app ya hay una lista con ese nombre, la sobrescribe.","ok");
 }catch(e){say("Error: "+e.message,"err")}};
-$("check").onclick=async()=>{try{
- say("Leyendo…");const f=await (await fetch(RAW+"?t="+Date.now(),{cache:"no-store"})).json();
- const p=JSON.parse(dec.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub64(f.iv)},await derive($("key").value,ub64(f.salt)),ub64(f.ct))));
- say("OK: "+p.name+" · "+p.server+" · usuario "+p.username+" · "+p.updated.slice(0,16).replace("T"," ")+" UTC","ok");
-}catch(e){say("No se pudo descifrar (clave incorrecta o archivo inexistente).","err")}};
+$("check").onclick=async()=>{try{if(!localStorage.getItem("ghtok"))return say("Primero guarda el token de GitHub.","err");
+ say("Leyendo…");const cur=await readAll($("key").value);showItems(cur.items,$("key").value);say(cur.items.length+" credencial(es) guardadas.","ok")}catch(e){say(e.message,"err")}};
 
 /* ---- Estado (2.2): lee cred/s.json (o el origen configurado), lo descifra y lo muestra ---- */
 const ST_DEF={repo:"NetMachine/mk-cfg",branch:"main",path:"cred/s.json"};
