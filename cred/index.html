@@ -117,12 +117,21 @@ function same(a,b){return a.trim().toLowerCase()===b.trim().toLowerCase()}
 function showItems(items,pw){const box=$("items");box.textContent="";if(!items.length){box.textContent="No hay credenciales guardadas.";return}
  const tb=document.createElement("table");tb.className="st";
  items.forEach(it=>{const tr=document.createElement("tr"),a=document.createElement("td"),b=document.createElement("td");
-  a.textContent=it.name;const stb=it.type==="stalker",m3u=it.type==="m3u",src=stb?it.portal:m3u?(it.url||""):it.server;let h="";try{h=new URL(src).host}catch(e){h=src}
+  a.textContent=it.name;if(it.deleted){b.textContent="Marcada para BORRAR en la app · "+(it.updated||"").slice(0,16).replace("T"," ")+" UTC ";
+   const y=document.createElement("button");y.className="sec";y.style.cssText="width:auto;padding:6px 10px;margin:6px 0 0";y.textContent="Quitar la marca";
+   y.onclick=async()=>{try{say("Guardando…");const cur=await readAll(pw),rest=cur.items.filter(o=>!same(o.name,it.name));await writeAll(pw,cur.sha,rest);showItems(rest,pw);say("Marca quitada. Lo ya borrado en la app no vuelve solo: guarda la credencial de nuevo.","ok")}catch(e){say(e.message,"err")}};
+   b.appendChild(document.createElement("br"));b.appendChild(y);tr.append(a,b);tb.appendChild(tr);return}
+  const stb=it.type==="stalker",m3u=it.type==="m3u",src=stb?it.portal:m3u?(it.url||""):it.server;let h="";try{h=new URL(src).host}catch(e){h=src}
   b.textContent=(m3u?(it.url?"M3U · "+h:"M3U pegada · "+((it.text||"").split("\n").filter(l=>l&&!l.startsWith("#")).length)+" canales"):stb?"STB · "+h+" · MAC "+maskMac(it.mac):h+" · usuario "+it.username)+" · "+(it.updated||"").slice(0,16).replace("T"," ")+" UTC ";
   const x=document.createElement("button");x.className="sec";x.style.cssText="width:auto;padding:6px 10px;margin:6px 0 0";x.textContent="Quitar de la página";
   x.onclick=async()=>{if(!confirm("¿Quitar «"+it.name+"» de la página? La lista NO se borra de la app."))return;try{say("Guardando…");
    const cur=await readAll(pw),rest=cur.items.filter(o=>!same(o.name,it.name));await writeAll(pw,cur.sha,rest);showItems(rest,pw);say("Quitada de la página. En la app la lista sigue igual.","ok")}catch(e){say(e.message,"err")}};
-  b.appendChild(document.createElement("br"));b.appendChild(x);tr.append(a,b);tb.appendChild(tr)});box.appendChild(tb)}
+  /* 203: borrar también de la app (solo la lista que la página agregó; favoritos se conservan) */
+  const d=document.createElement("button");d.className="sec";d.style.cssText="width:auto;padding:6px 10px;margin:6px 0 0 8px;color:#ff6b6b";d.textContent="Borrar de la app";
+  d.onclick=async()=>{if(!confirm("¿Borrar «"+it.name+"» de la app? Se borra SOLO la lista que esta página agregó con ese nombre (no las que agregaste a mano). Sus favoritos se conservan."))return;try{say("Guardando…");
+   const cur=await readAll(pw),rest=cur.items.filter(o=>!same(o.name,it.name));rest.push({type:it.type||"xtream",name:it.name,deleted:true,updated:new Date().toISOString()});
+   await writeAll(pw,cur.sha,rest);showItems(rest,pw);say("Marcada para borrar. La app la borrará en su próxima revisión.","ok")}catch(e){say(e.message,"err")}};
+  b.appendChild(document.createElement("br"));b.appendChild(x);b.appendChild(d);tr.append(a,b);tb.appendChild(tr)});box.appendChild(tb)}
 $("save").onclick=async()=>{try{
  const stb=$("ctype").value==="stalker",m3u=$("ctype").value==="m3u";
  const m3uurl=$("m3uurl").value.trim(),m3uc=cleanM3u($("m3utext").value);
