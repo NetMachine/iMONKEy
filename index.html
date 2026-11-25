@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>document.documentElement.className+=" js";</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>iMONKEy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-180x180.png" />
 <link rel="icon" href="favicon.png" type="image/x-icon">
 <style>
@@ -20,12 +21,13 @@
     -webkit-user-select: none; -ms-user-select: none; user-select: none;
   }
   /* Capa negra de entrada (igual que la página principal) */
-  #loading-overlay {
+  #loading-overlay { display: none !important; }
+  .js #loading-overlay {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: black;
     display: -webkit-box; display: -webkit-flex; display: flex; -webkit-justify-content: center; justify-content: center; -webkit-align-items: center; align-items: center;
     z-index: 9999; opacity: 1; transition: opacity 0.3s ease-in-out;
   }
-  #loading-overlay.fade-out { opacity: 0; }
+  .js #loading-overlay.fade-out { opacity: 0; }
   .loading-text-container {
     position: fixed; bottom: 0; left: 0; width: 100%;
     color: #666; padding: 20px 0; display: flex; justify-content: center; opacity: 0;
@@ -38,20 +40,21 @@
   }
   #contenedor {
     width: 90%; max-width: 400px;
-    opacity: 0; transition: opacity 0.6s ease-in-out;
     z-index: 99999;
   }
-  #contenedor.fade-in { opacity: 1; }
+  .js #contenedor { opacity: 0; -webkit-transition: opacity 0.6s ease-in-out; transition: opacity 0.6s ease-in-out; }
+  .js #contenedor.fade-in { opacity: 1; }
   #animation-container { width: 100%; display: -webkit-box; display: -webkit-flex; display: flex; }
 
   #descarga {
     margin-top: 8px;
     display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-orient: vertical; -webkit-flex-direction: column; flex-direction: column; -webkit-align-items: center; align-items: center;
-    opacity: 0; -webkit-transform: translateY(12px); transform: translateY(12px);
+
     -webkit-transition: opacity 0.6s ease-in-out 0.35s, -webkit-transform 0.6s ease 0.35s;
     transition: opacity 0.6s ease-in-out 0.35s, transform 0.6s cubic-bezier(0.770, 0.000, 0.175, 1.000) 0.35s;
   }
-  #descarga.fade-in { opacity: 1; -webkit-transform: none; transform: none; }
+  .js #descarga { opacity: 0; -webkit-transform: translateY(12px); transform: translateY(12px); }
+  .js #descarga.fade-in { opacity: 1; -webkit-transform: none; transform: none; }
 
   .btn {
     display: -webkit-inline-box; display: -webkit-inline-flex; display: inline-flex; -webkit-align-items: center; align-items: center;
@@ -79,6 +82,10 @@
   @-webkit-keyframes brillo { to { background-position: -200% center; } }
   @keyframes brillo { to { background-position: -200% center; } }
 
+  #logo-fijo { display: none; width: 100%; }
+  .sin-lottie #logo-fijo { display: block; -webkit-animation: parpadeo 2.4s infinite; animation: parpadeo 2.4s infinite; }
+  @-webkit-keyframes parpadeo { 0%,70%,100% { opacity: 1; } 80% { opacity: 0.15; } 90% { opacity: 1; } }
+  @keyframes parpadeo { 0%,70%,100% { opacity: 1; } 80% { opacity: 0.15; } 90% { opacity: 1; } }
   #version { margin-top: 14px; font-size: 12px; font-weight: 300; color: #888; min-height: 15px; }
 </style>
 </head>
@@ -89,7 +96,7 @@
 </div>
 
 <main>
-  <div id="contenedor"><div id="animation-container"></div></div>
+  <div id="contenedor"><div id="animation-container"></div><img id="logo-fijo" src="site/iMONKEy-Logo.svg" alt="iMONKEy"></div>
   <div id="descarga">
     <a id="btn-descargar" class="btn cargando" href="https://github.com/NetMachine/mk-cfg" draggable="false">
       <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18v11.17l-4.59-4.58L6 10l7 7 7-7-1.41-1.41L13 13.17V2h-1z"/></svg>
@@ -99,22 +106,27 @@
   </div>
 </main>
 
-<script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
+<script src="site/lottie.min.js"></script>
 <script>
 /* ES5 puro: compatible con navegadores de Android 6 (sin =>, fetch, finally) */
-var animation = lottie.loadAnimation({
-  container: document.getElementById('animation-container'),
-  renderer: 'svg', loop: false, autoplay: false,
-  path: 'site/iMONKEy.json'
-});
 var velocidad = 6;
 function azar(min, max) { return Math.random() * (max - min) + min; }
-animation.addEventListener('complete', function () {
-  velocidad = azar(6.5, 7);
-  animation.setSpeed(velocidad);
-  setTimeout(function () { animation.goToAndPlay(0, true); }, Math.floor(azar(50, 6000)));
-});
-setTimeout(function () { animation.setSpeed(velocidad); animation.play(); }, 1200);
+function sinLottie() { document.getElementById('contenedor').className += ' sin-lottie'; }
+try {
+  if (typeof lottie === 'undefined') throw new Error('sin lottie');
+  var animation = lottie.loadAnimation({
+    container: document.getElementById('animation-container'),
+    renderer: 'svg', loop: false, autoplay: false,
+    path: 'site/iMONKEy.json'
+  });
+  animation.addEventListener('complete', function () {
+    velocidad = azar(6.5, 7);
+    animation.setSpeed(velocidad);
+    setTimeout(function () { animation.goToAndPlay(0, true); }, Math.floor(azar(50, 6000)));
+  });
+  animation.addEventListener('data_failed', sinLottie);
+  setTimeout(function () { try { animation.setSpeed(velocidad); animation.play(); } catch (e) { sinLottie(); } }, 1200);
+} catch (e) { sinLottie(); }
 
 /* Última versión desde version.json */
 var btn = document.getElementById('btn-descargar');
@@ -157,10 +169,11 @@ function quitarCapa() {
     contenedor.style.zIndex = 'auto';
   }, 400);
 }
-window.addEventListener('load', function () {
-  setTimeout(function () { mostrar(); setTimeout(quitarCapa, 300); }, 300);
-});
+function entrar() { mostrar(); setTimeout(quitarCapa, 300); }
+window.addEventListener('load', function () { setTimeout(entrar, 300); });
+setTimeout(entrar, 2500);
 document.addEventListener('click', function () { mostrar(); quitarCapa(); });
+document.addEventListener('keydown', function () { mostrar(); quitarCapa(); });
 document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 </script>
 </body>
