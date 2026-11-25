@@ -22,12 +22,12 @@ select{width:100%;padding:12px;border-radius:10px;border:1px solid #334;backgrou
 </style>
 </head>
 <body><main>
-<h1>Credenciales Xtream / STB</h1>
+<h1>Credenciales Xtream / STB / M3U</h1>
 <p class="s">Cada credencial es una lista en la app. Si usas el nombre de una lista que ya existe en la app, esa lista se sobrescribe; con un nombre nuevo se agrega otra. Se cifra aquí con tu clave y se guarda en GitHub.</p>
 
 <div class="card">
 <label>Tipo de cuenta</label>
-<select id="ctype"><option value="xtream">Xtream (servidor, usuario y contraseña)</option><option value="stalker">STB (MAC) · portal Stalker / Ministra</option></select>
+<select id="ctype"><option value="xtream">Xtream (servidor, usuario y contraseña)</option><option value="stalker">STB (MAC) · portal Stalker / Ministra</option><option value="m3u">Lista M3U (pegar enlace o texto)</option></select>
 <div id="fx">
 <label>Servidor (ej. http://servidor.com:8080)</label><input id="server" autocomplete="off">
 <label>Usuario</label><input id="user" autocomplete="off">
@@ -40,6 +40,11 @@ select{width:100%;padding:12px;border-radius:10px;border:1px solid #334;backgrou
 <label>Número de serie</label><input id="serial" autocomplete="off">
 <label>Device ID</label><input id="devid" autocomplete="off">
 </details>
+</div>
+<div id="fm" class="hid">
+<label>Enlace de la lista (ej. el botón «Raw» de un gist). Si pones enlace, el texto se ignora.</label><input id="m3uurl" autocomplete="off" placeholder="https://">
+<label>…o pega aquí el texto completo de la lista (#EXTM3U…)</label><textarea id="m3utext" rows="8" style="width:100%;box-sizing:border-box;font-family:monospace;font-size:12px" autocomplete="off"></textarea>
+<p class="s" id="m3uinfo"></p>
 </div>
 <label>Nombre de la lista (mismo nombre = sobrescribe esa lista)</label><input id="name" autocomplete="off" placeholder="Mi suscripción">
 <label>Clave de cifrado (la misma que pones una vez en la tele, mín. 10 caracteres)</label><input id="key" type="password" autocomplete="off">
@@ -98,24 +103,35 @@ async function writeAll(pw,sha,items){
  const file=JSON.stringify({v:1,kdf:"PBKDF2-SHA256",iter:ITER,alg:"AES-256-GCM",salt:b64(salt),iv:b64(iv),ct:b64(ct),updated},null,1);
  const r=await fetch(API,{method:"PUT",headers:hdr(),body:JSON.stringify({message:"cred update",branch:BRANCH,content:btoa(file),sha})});
  if(!r.ok)throw new Error("GitHub rechazó el guardado ("+r.status+"). Revisa el token.");return updated}
-$("ctype").onchange=()=>{const st=$("ctype").value==="stalker";$("fx").className=st?"hid":"";$("fs").className=st?"":"hid"};
+$("ctype").onchange=()=>{const v=$("ctype").value;$("fx").className=v==="xtream"?"":"hid";$("fs").className=v==="stalker"?"":"hid";$("fm").className=v==="m3u"?"":"hid"};
+/* 209: deja solo lo que la app usa (#EXTINF, opciones de reproducción y enlaces) y cuenta los canales */
+function cleanM3u(txt){const out=["#EXTM3U"];let n=0;
+ for(const raw of (txt||"").split(/\r?\n/)){const l=raw.trim();if(!l)continue;
+  if(l.startsWith("#")){if(/^#(EXTINF|EXTVLCOPT|KODIPROP|EXTGRP|EXTHTTP)/i.test(l))out.push(l);continue}
+  if(/^[a-z][a-z0-9+.\-]*:\/\//i.test(l)){out.push(l);n++}}
+ return{text:out.join("\n"),n}}
+$("m3utext").oninput=()=>{const c=cleanM3u($("m3utext").value);$("m3uinfo").textContent=c.n?c.n+" canal(es) detectados · "+Math.round(c.text.length/1024)+" KB":""};
 function normMac(m){const h=(m||"").toUpperCase().replace(/[^0-9A-F]/g,"");if(h.length!==12||/[^0-9A-F:.\- ]/i.test(m||""))return null;return h.match(/../g).join(":")}
 function maskMac(m){const p=(m||"").split(":");return p.length===6?p.slice(0,3).join(":")+":**:**:"+p[5]:"**"}
 function same(a,b){return a.trim().toLowerCase()===b.trim().toLowerCase()}
 function showItems(items,pw){const box=$("items");box.textContent="";if(!items.length){box.textContent="No hay credenciales guardadas.";return}
  const tb=document.createElement("table");tb.className="st";
  items.forEach(it=>{const tr=document.createElement("tr"),a=document.createElement("td"),b=document.createElement("td");
-  a.textContent=it.name;const stb=it.type==="stalker",src=stb?it.portal:it.server;let h="";try{h=new URL(src).host}catch(e){h=src}
-  b.textContent=(stb?"STB · "+h+" · MAC "+maskMac(it.mac):h+" · usuario "+it.username)+" · "+(it.updated||"").slice(0,16).replace("T"," ")+" UTC ";
+  a.textContent=it.name;const stb=it.type==="stalker",m3u=it.type==="m3u",src=stb?it.portal:m3u?(it.url||""):it.server;let h="";try{h=new URL(src).host}catch(e){h=src}
+  b.textContent=(m3u?(it.url?"M3U · "+h:"M3U pegada · "+((it.text||"").split("\n").filter(l=>l&&!l.startsWith("#")).length)+" canales"):stb?"STB · "+h+" · MAC "+maskMac(it.mac):h+" · usuario "+it.username)+" · "+(it.updated||"").slice(0,16).replace("T"," ")+" UTC ";
   const x=document.createElement("button");x.className="sec";x.style.cssText="width:auto;padding:6px 10px;margin:6px 0 0";x.textContent="Quitar de la página";
   x.onclick=async()=>{if(!confirm("¿Quitar «"+it.name+"» de la página? La lista NO se borra de la app."))return;try{say("Guardando…");
    const cur=await readAll(pw),rest=cur.items.filter(o=>!same(o.name,it.name));await writeAll(pw,cur.sha,rest);showItems(rest,pw);say("Quitada de la página. En la app la lista sigue igual.","ok")}catch(e){say(e.message,"err")}};
   b.appendChild(document.createElement("br"));b.appendChild(x);tr.append(a,b);tb.appendChild(tr)});box.appendChild(tb)}
 $("save").onclick=async()=>{try{
- const stb=$("ctype").value==="stalker";
+ const stb=$("ctype").value==="stalker",m3u=$("ctype").value==="m3u";
+ const m3uurl=$("m3uurl").value.trim(),m3uc=cleanM3u($("m3utext").value);
  const server=$("server").value.trim().replace(/\/+$/,""),username=$("user").value.trim(),password=$("pass").value,pw=$("key").value,name=$("name").value.trim();
  const portal=$("portal").value.trim(),mac=normMac($("mac").value),serial=$("serial").value.trim(),device_id=$("devid").value.trim();
- if(stb){if(!/^https?:\/\//i.test(portal)) return say("Falta la URL del portal (con http://).","err");
+ if(m3u){if(m3uurl){if(!/^https?:\/\//i.test(m3uurl))return say("El enlace debe empezar con http:// o https://.","err")}
+  else if(!m3uc.n) return say("Pega un enlace o el texto de la lista: no encontré canales.","err");
+  else if(m3uc.text.length>300*1024) return say("La lista pegada es muy grande ("+Math.round(m3uc.text.length/1024)+" KB; máximo 300 KB). Usa su enlace (Raw) en vez del texto.","err")}
+ else if(stb){if(!/^https?:\/\//i.test(portal)) return say("Falta la URL del portal (con http://).","err");
   if(!mac) return say("La MAC no es válida: deben ser 6 pares hexadecimales, ej. 00:1A:79:12:34:56.","err")}
  else if(!/^https?:\/\//i.test(server)||!username||!password) return say("Falta servidor (con http://), usuario o contraseña.","err");
  if(!name) return say("Escribe el nombre de la lista (si ya existe en la app, se sobrescribe).","err");
@@ -124,10 +140,11 @@ $("save").onclick=async()=>{try{
  say("Leyendo lo guardado…");const cur=await readAll(pw);
  const exists=cur.items.some(o=>same(o.name,name));
  const items=cur.items.filter(o=>!same(o.name,name));const now=new Date().toISOString();
- if(stb){const o={type:"stalker",portal,mac,name,updated:now};if(serial)o.serial=serial;if(device_id)o.device_id=device_id;items.push(o)}
+ if(m3u){items.push(m3uurl?{type:"m3u",url:m3uurl,name,updated:now}:{type:"m3u",text:m3uc.text,name,updated:now})}
+ else if(stb){const o={type:"stalker",portal,mac,name,updated:now};if(serial)o.serial=serial;if(device_id)o.device_id=device_id;items.push(o)}
  else items.push({server,username,password,name,updated:now});
  say("Cifrando…");const updated=await writeAll(pw,cur.sha,items);
- $("pass").value="";showItems(items,pw);
+ $("pass").value="";$("m3utext").value="";$("m3uinfo").textContent="";showItems(items,pw);
  say((exists?"«"+name+"» reemplazada":"«"+name+"» agregada")+" ("+updated.slice(0,16).replace("T"," ")+" UTC). "+items.length+" credencial(es) guardadas. La app la tomará en su próxima revisión; si en la app ya hay una lista con ese nombre, la sobrescribe.","ok");
 }catch(e){say("Error: "+e.message,"err")}};
 $("check").onclick=async()=>{try{if(!localStorage.getItem("ghtok"))return say("Primero guarda el token de GitHub.","err");
