@@ -18,16 +18,29 @@ button.sec{background:#2a3070}#msg{white-space:pre-wrap;font-size:14px;min-heigh
 table.st{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}table.st td{padding:6px 4px;border-bottom:1px solid #2a3070;vertical-align:top}
 table.st td:first-child{color:var(--mut);width:38%}.warn{color:#fc6}h2{font-size:18px;margin:0 0 6px}ul.er{margin:4px 0;padding-left:18px;font-size:13px}
 .row{display:flex;gap:8px}.row>div{flex:1}
+select{width:100%;padding:12px;border-radius:10px;border:1px solid #334;background:#0f1340;color:var(--txt);font-size:16px}.hid{display:none}
 </style>
 </head>
 <body><main>
-<h1>Credenciales Xtream</h1>
+<h1>Credenciales Xtream / STB</h1>
 <p class="s">Cada credencial es una lista en la app. Si usas el nombre de una lista que ya existe en la app, esa lista se sobrescribe; con un nombre nuevo se agrega otra. Se cifra aquí con tu clave y se guarda en GitHub.</p>
 
 <div class="card">
+<label>Tipo de cuenta</label>
+<select id="ctype"><option value="xtream">Xtream (servidor, usuario y contraseña)</option><option value="stalker">STB (MAC) · portal Stalker / Ministra</option></select>
+<div id="fx">
 <label>Servidor (ej. http://servidor.com:8080)</label><input id="server" autocomplete="off">
 <label>Usuario</label><input id="user" autocomplete="off">
 <label>Contraseña</label><input id="pass" type="password" autocomplete="off">
+</div>
+<div id="fs" class="hid">
+<label>URL del portal (ej. http://portal.com:8080/c/)</label><input id="portal" autocomplete="off">
+<label>Dirección MAC (00:1A:79:XX:XX:XX)</label><input id="mac" autocomplete="off" placeholder="00:1A:79:">
+<details><summary>Datos opcionales (solo si el portal los pide)</summary>
+<label>Número de serie</label><input id="serial" autocomplete="off">
+<label>Device ID</label><input id="devid" autocomplete="off">
+</details>
+</div>
 <label>Nombre de la lista (mismo nombre = sobrescribe esa lista)</label><input id="name" autocomplete="off" placeholder="Mi suscripción">
 <label>Clave de cifrado (la misma que pones una vez en la tele, mín. 10 caracteres)</label><input id="key" type="password" autocomplete="off">
 <button id="save">Cifrar y guardar</button>
@@ -85,25 +98,34 @@ async function writeAll(pw,sha,items){
  const file=JSON.stringify({v:1,kdf:"PBKDF2-SHA256",iter:ITER,alg:"AES-256-GCM",salt:b64(salt),iv:b64(iv),ct:b64(ct),updated},null,1);
  const r=await fetch(API,{method:"PUT",headers:hdr(),body:JSON.stringify({message:"cred update",branch:BRANCH,content:btoa(file),sha})});
  if(!r.ok)throw new Error("GitHub rechazó el guardado ("+r.status+"). Revisa el token.");return updated}
+$("ctype").onchange=()=>{const st=$("ctype").value==="stalker";$("fx").className=st?"hid":"";$("fs").className=st?"":"hid"};
+function normMac(m){const h=(m||"").toUpperCase().replace(/[^0-9A-F]/g,"");if(h.length!==12||/[^0-9A-F:.\- ]/i.test(m||""))return null;return h.match(/../g).join(":")}
+function maskMac(m){const p=(m||"").split(":");return p.length===6?p.slice(0,3).join(":")+":**:**:"+p[5]:"**"}
 function same(a,b){return a.trim().toLowerCase()===b.trim().toLowerCase()}
 function showItems(items,pw){const box=$("items");box.textContent="";if(!items.length){box.textContent="No hay credenciales guardadas.";return}
  const tb=document.createElement("table");tb.className="st";
  items.forEach(it=>{const tr=document.createElement("tr"),a=document.createElement("td"),b=document.createElement("td");
-  a.textContent=it.name;let h="";try{h=new URL(it.server).host}catch(e){h=it.server}
-  b.textContent=h+" · usuario "+it.username+" · "+(it.updated||"").slice(0,16).replace("T"," ")+" UTC ";
+  a.textContent=it.name;const stb=it.type==="stalker",src=stb?it.portal:it.server;let h="";try{h=new URL(src).host}catch(e){h=src}
+  b.textContent=(stb?"STB · "+h+" · MAC "+maskMac(it.mac):h+" · usuario "+it.username)+" · "+(it.updated||"").slice(0,16).replace("T"," ")+" UTC ";
   const x=document.createElement("button");x.className="sec";x.style.cssText="width:auto;padding:6px 10px;margin:6px 0 0";x.textContent="Quitar de la página";
   x.onclick=async()=>{if(!confirm("¿Quitar «"+it.name+"» de la página? La lista NO se borra de la app."))return;try{say("Guardando…");
    const cur=await readAll(pw),rest=cur.items.filter(o=>!same(o.name,it.name));await writeAll(pw,cur.sha,rest);showItems(rest,pw);say("Quitada de la página. En la app la lista sigue igual.","ok")}catch(e){say(e.message,"err")}};
   b.appendChild(document.createElement("br"));b.appendChild(x);tr.append(a,b);tb.appendChild(tr)});box.appendChild(tb)}
 $("save").onclick=async()=>{try{
+ const stb=$("ctype").value==="stalker";
  const server=$("server").value.trim().replace(/\/+$/,""),username=$("user").value.trim(),password=$("pass").value,pw=$("key").value,name=$("name").value.trim();
- if(!/^https?:\/\//i.test(server)||!username||!password) return say("Falta servidor (con http://), usuario o contraseña.","err");
+ const portal=$("portal").value.trim(),mac=normMac($("mac").value),serial=$("serial").value.trim(),device_id=$("devid").value.trim();
+ if(stb){if(!/^https?:\/\//i.test(portal)) return say("Falta la URL del portal (con http://).","err");
+  if(!mac) return say("La MAC no es válida: deben ser 6 pares hexadecimales, ej. 00:1A:79:12:34:56.","err")}
+ else if(!/^https?:\/\//i.test(server)||!username||!password) return say("Falta servidor (con http://), usuario o contraseña.","err");
  if(!name) return say("Escribe el nombre de la lista (si ya existe en la app, se sobrescribe).","err");
  if(pw.length<10) return say("La clave de cifrado debe tener al menos 10 caracteres.","err");
  if(!localStorage.getItem("ghtok")) return say("Primero guarda el token de GitHub.","err");
  say("Leyendo lo guardado…");const cur=await readAll(pw);
  const exists=cur.items.some(o=>same(o.name,name));
- const items=cur.items.filter(o=>!same(o.name,name));items.push({server,username,password,name,updated:new Date().toISOString()});
+ const items=cur.items.filter(o=>!same(o.name,name));const now=new Date().toISOString();
+ if(stb){const o={type:"stalker",portal,mac,name,updated:now};if(serial)o.serial=serial;if(device_id)o.device_id=device_id;items.push(o)}
+ else items.push({server,username,password,name,updated:now});
  say("Cifrando…");const updated=await writeAll(pw,cur.sha,items);
  $("pass").value="";showItems(items,pw);
  say((exists?"«"+name+"» reemplazada":"«"+name+"» agregada")+" ("+updated.slice(0,16).replace("T"," ")+" UTC). "+items.length+" credencial(es) guardadas. La app la tomará en su próxima revisión; si en la app ya hay una lista con ese nombre, la sobrescribe.","ok");
