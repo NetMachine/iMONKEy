@@ -1,370 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>iMONKEy</title>
-   
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-180x180.png" />
-    <link rel="icon" href="favicon.png" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>iMONKEy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-180x180.png" />
+<link rel="icon" href="favicon.png" type="image/x-icon">
+<style>
+  :root { touch-action: pan-x pan-y; height: 100%; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; padding: 0; overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #202020; color: #fff;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; -ms-user-select: none; user-select: none;
+  }
+  /* Capa negra de entrada (igual que la página principal) */
+  #loading-overlay {
+    position: fixed; inset: 0; background: black;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999; opacity: 1; transition: opacity 0.3s ease-in-out;
+  }
+  #loading-overlay.fade-out { opacity: 0; }
+  .loading-text-container {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    color: #666; padding: 20px 0; display: flex; justify-content: center; opacity: 0;
+  }
+  .loading-text { margin: 0; font-size: 13px; font-weight: 300; }
+
+  main {
+    height: 100%; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; padding: 0 20px; box-sizing: border-box;
+  }
+  #contenedor {
+    width: 90%; max-width: 400px;
+    opacity: 0; transition: opacity 0.6s ease-in-out;
+    z-index: 99999;
+  }
+  #contenedor.fade-in { opacity: 1; }
+  #animation-container { width: 100%; display: flex; }
+
+  #descarga {
+    margin-top: 8px;
+    display: flex; flex-direction: column; align-items: center;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.6s ease-in-out 0.35s, transform 0.6s cubic-bezier(0.770, 0.000, 0.175, 1.000) 0.35s;
+  }
+  #descarga.fade-in { opacity: 1; transform: none; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 34px; border-radius: 40px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff; text-decoration: none;
+    font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.15s ease;
+  }
+  .btn:hover, .btn:focus { background: rgba(255,255,255,0.18); border-color: #fff; outline: none; }
+  .btn:active { transform: scale(0.96); }
+  .btn svg { width: 20px; height: 20px; fill: #fff; }
+  .btn.cargando { pointer-events: none; opacity: 0.6; }
+
+  /* Mismo brillo que el título de la página principal */
+  .shimmer {
+    background: repeating-linear-gradient(to right, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.6) 25%, #fff 50%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.45) 100%);
+    background-clip: text; -webkit-background-clip: text;
+    background-size: 200% auto;
+    -webkit-text-fill-color: transparent;
+    animation: brillo 5s infinite linear;
+  }
+  @keyframes brillo { to { background-position: -200% center; } }
+
+  #version { margin-top: 14px; font-size: 12px; font-weight: 300; color: #888; min-height: 15px; }
+</style>
 </head>
+<body>
 
-<body class="prevent-select">
-
-<div id="loading-overlay" class="loading-overlay">
-    <div class="loading-text-container">
-        <p class="loading-text">Toca en cualquier lugar</p>
-    </div>
+<div id="loading-overlay">
+  <div class="loading-text-container"><p class="loading-text">Toca en cualquier lugar</p></div>
 </div>
 
-<header class="blurred">
-    <nav id="main-nav">
-        <div class="logo" href="#hero">
-            <!-- SVG incluido directamente -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200">
-                <path d="M150.914 16.2325L150.956 109.451L150.998 154.106L199.613 154.106L199.782 83.4844L238.301 124.732L275.596 83.4844L276.061 154.106L321.677 154.106L321.634 132.315C332.763 144.838 351.446 154.122 382.075 154.106C408.784 154.093 426.726 146.683 438.461 135.34L438.419 154.106L488.765 154.106L488.934 91.2589L543.842 154.106L602.931 154.106L602.931 102.595L647.195 154.106L805.245 154.106L805.329 112.017L733.78 112.017L733.78 92.9057L791.307 92.9057L774.243 73.1821L733.78 73.1438L733.78 52.7308L801.655 52.7308L837.429 97.3484L838.232 154.106L900.024 154.106L900.151 96.7739L930.265 38.8668L883.805 38.2157L869.825 68.2799L826.067 16.2325L646.941 16.2325L602.931 59.433L602.931 16.2708L543.588 16.2325L543.588 87.5057L488.934 16.2325L438.461 16.2325L438.461 33.9646C426.726 22.7136 408.653 16.2324 381.948 16.2325C351.393 16.2325 332.621 23.6902 321.508 36.4157L321.508 16.2325L274.836 16.2325L236.95 56.9819L199.444 16.2325L150.914 16.2325ZM683.899 37.6795C683.858 61.7385 683.875 102.107 683.899 129.098L641.704 80.0375L683.899 37.6795ZM381.948 56.4074C405.766 56.8697 418.867 57.6497 418.948 83.3312C419.028 108.727 406.118 109.396 381.948 110.255C354.276 111.238 345.141 105 344.907 83.3312C344.622 56.9638 361.493 56.0105 381.948 56.4074ZM97.6532 16.4623C70.026 16.4623 70.0304 27.202 70.0304 40.4753C70.0304 53.7484 70.026 64.1223 97.6532 64.5267C124.972 64.9267 125.276 53.7485 125.276 40.4753C125.276 27.2022 124.978 16.4623 97.6532 16.4623ZM69.7347 81.5255L69.7347 154.109L125.023 154.109L125.023 81.5255L69.7347 81.5255Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none"/>
-            </svg>
-        </div>
-        <div class="nav-content">
-            <ul class="nav-links">
-                <li><a href="#hero" draggable="false"><i class="material-icons">home</i> Inicio</a></li>
-                <li><a href="#pricing-widget" draggable="false"><i class="material-icons">assessment</i> Presupuesto</a></li>
-                <li><a href="#faq" draggable="false"><i class="material-icons">precision_manufacturing</i> Preguntas</a></li>
-                <li><a href="#contact" draggable="false"><i class="material-icons">mail</i> Contacto</a></li>
-            </ul>
-        </div>
-        <div class="nav-toggle">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-    </nav>
-</header>
-
 <main>
-<section id="hero" class="hero">
-    <div class="hero-content">
-        <div id="contenedor">
-            <div id="animation-container"></div>
-        </div>
-        <div class="hero-text">
-            <h1 class="shimmer">Brindamos servicio de reparación especializado para tu iPhone</h1>
-        </div>
-        <a class="arrow-container prevent-select" id="arrow-container" href="#pricing-widget" draggable="false">
-            <p class="arrow-text" >Obtén tu presupuesto</p>
-            <div class="ico animated">
-                <div class="circle"></div>
-                <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path class="st-arrow" d="M12 2L12 17.586L5.707 11.293L4.293 12.707L12 20.414L19.707 12.707L18.293 11.293L12 17.586L12 2z"/>
-                </svg>
-            </div>
-        </a>
-    </div>
-</section>
-
-
-<section id="pricing-widget" class="pricing-widget">
-    <div class="pricing-container">
-        <!-- Título del formulario -->
-        <h3>Obtén tu presupuesto</h3>
-        <p class="hint">Elige el servicio y iPhone que quieres consultar.</p>
-<div class="form-group-container">
-        <!-- Selección de tipo de servicio técnico -->
-        <div class="form-group">
-            <select class="form-control form-control-dark" id="services-dropdown" required>
-                <option value="Tipo de servicio técnico" disabled selected>Tipo de servicio técnico</option>
-                <option value="Pantalla agrietada (solo el frente)">Pantalla agrietada (solo el frente)</option>
-                <option value="Daño de vidrio posterior">Daño de vidrio posterior</option>
-                <option value="Pantalla agrietada/daño de vidrio posterior">Pantalla agrietada/daño de vidrio posterior</option>
-                <option value="Bateria">Bateria</option>
-                <option value="Cámara trasera">Cámara trasera</option>
-                <option value="Cambio de chasis">Cambio de chasis</option>
-            </select>
-        </div>
-
-        <!-- Selección de producto -->
-        <div class="form-group">
-            <select class="form-control form-control-dark" id="products-dropdown" onchange="updateIPhoneTypes()" required>
-                <option value="Producto" disabled selected>Producto</option>
-                <option value="iPhone15">iPhone 15</option>
-                <option value="iPhone14">iPhone 14</option>
-                <option value="iPhone13">iPhone 13</option>
-                <option value="iPhone12">iPhone 12</option>
-                <option value="iPhone11">iPhone 11</option>
-                <option value="iPhoneX">iPhone X</option>
-                <option value="iPhone8">iPhone 8</option>
-                <option value="iPhone7">iPhone 7</option>
-                <option value="iPhone6s">iPhone 6s</option>
-                <option value="iPhoneSE">iPhone SE</option>
-            </select>
-        </div>
-
-        <!-- Selección de modelo -->
-        <div class="form-group">
-            <select class="form-control form-control-dark" id="models-details-dropdown" required>
-                <option value="Modelo" disabled selected>Modelo</option>
-            </select>
-        </div>
-
-        <!-- Display del precio -->
-        <div class="price-display">
-            <p>$<span id="service-coverage-value"></span></p>
-        </div>
-
-        <!-- Botón de calcular y enlace de ayuda -->
-        <div class="pricing-options">
-            <button id="estimate-button" class="btn btn-primary btn-block estimate-button prevent-select">Calcular</button>
-            <div class="text-center">
-                <a href="https://support.apple.com/es-es/108044" target="_blank" class="help-link">¿Necesitas ayuda para identificar tu modelo?</a>
-            </div>
-        </div>
-    </div>
-    </div>
-</section>
-
-
-
-
-
-
-
-
-
-    <section id="contact" class="contact">
-        <div class="contact-content">
-            <h2>Contáctanos</h2>
-            <p class="hint contact-description" >¿Tienes preguntas o necesitas más información sobre nuestros servicios? ¡No dudes en comunicarte con nosotros!</p>
-            <form id="contact-form" onsubmit="return false">
-                
-                <input type="text" id="name" name="name" placeholder="Nombre" required>         
-                <input type="email" id="email" name="email" placeholder="Correo" required>    
-                <textarea id="message" placeholder="Mensaje"name="message" required></textarea>
-
-                <button class="contact-btn btn btn-primary btn-block prevent-select" id="contact-btn" type="submit">Enviar</button> 
-            </form>
-        </div>
-    </section>
-
-    <section id="faq" class="faq">
-  <div class="faq-content">
-    <h2>Preguntas Frecuentes</h2>
-    <div class="faq-items">
-      <div class="faq-item">
-        <h3 class="faq-question">¿Cuánto cuesta la reparación de pantalla de un iPhone?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">El costo de la reparación de pantalla de un iPhone varía según el modelo y el estado del dispositivo. Por lo general, los precios oscilan entre $80.000 y $200.000 para la mayoría de los modelos. Contáctanos para una cotización personalizada.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Cuánto tiempo tarda la reparación de un iPhone?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">El tiempo de reparación varía según el servicio y la disponibilidad de piezas. En la mayoría de los casos, las reparaciones se pueden realizar en 1-3 horas. Sin embargo, en algunos casos más complejos, el proceso podría tomar varios días. Si no hay disponibilidad de piezas, encargarlas puede demorar alrededor de dos semanas.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Ofrecen garantía en las reparaciones?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Sí, ofrecemos una garantía de 3 meses en las reparaciones realizadas en nuestro taller. Si el dispositivo nunca ha sido abierto la garantia es de 6 meses. Si tienes algún problema con la reparación durante ese período, te lo solucionaremos sin costo adicional.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Hacen reparaciones en el mismo día?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Sí, en la mayoría de los casos, ofrecemos el servicio de reparación en el mismo día. Dependiendo de la complejidad de la reparación y la disponibilidad de piezas, podremos tener tu dispositivo listo en unas pocas horas.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Ofrecen recogida y entrega a domicilio?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Sí, contamos con un servicio de recogida y entrega a domicilio sin cargo adicional. Puedes programar una cita y nuestro equipo recogerá tu dispositivo, lo reparará y te lo devolverá en la comodidad de tu hogar u oficina.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Qué métodos de pago aceptan?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Aceptamos una variedad de métodos de pago, incluyendo efectivo, tarjetas de crédito y débito, y también aceptamos pagos a través de plataformas digitales como PayPal y Transferencia Bancaria.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Ofrecen descuentos o promociones?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Sí, ofrecemos descuentos y promociones especiales de forma recurrente. Puedes consultar nuestra página web o seguirnos en redes sociales para estar al tanto de las últimas ofertas y descuentos disponibles.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Qué tipos de dispositivos reparan?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Nos especializamos en la reparación de iPhones. Dado que los iPhones son uno de los dispositivos móviles más populares y sofisticados del mercado, hemos desarrollado un profundo conocimiento y experiencia en la reparación de estos dispositivos. Nos enorgullece ofrecer un servicio de alta calidad y confiabilidad para mantener tus dispositivos Apple en óptimo funcionamiento.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Cuentan con técnicos certificados?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Aunque no contamos con certificaciones directas, hemos desarrollado una extraordinaria especialización en la reparación de iPhones a través de años de experiencia. Esto nos permite ofrecer un servicio de reparación de alto nivel, con un profundo conocimiento de la arquitectura y el funcionamiento de los dispositivos iPhone. A diferencia de los centros de servicio autorizados, que a menudo tienen que seguir protocolos y procedimientos rígidos, nosotros podemos adaptar nuestro enfoque a las necesidades específicas de cada cliente.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Qué pasa si mi dispositivo tiene problemas después de la reparación?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">En caso de que tu dispositivo presente algún problema después de la reparación, no te preocupes. Nuestra garantía de 3 meses cubre cualquier falla relacionada con el servicio que brindamos. Solo tienes que contactarnos y haremos lo necesario para solucionar el problema sin costo adicional.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Ofrecen servicio de reparación a domicilio?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">En este momento no contamos con un servicio de reparación a domicilio. Nos hemos enfocado en brindar un excelente servicio en nuestras instalaciones, donde nuestros técnicos especializados pueden atender a los clientes de manera personalizada. Sin embargo, estamos trabajando en desarrollar una opción de reparación a domicilio en un futuro cercano. Sabemos que esto sería una gran conveniencia para muchos de nuestros clientes, y es algo que estamos evaluando activamente para poder ofrecerlo pronto. Mantente atento a nuestros próximos anuncios, donde informaremos sobre el lanzamiento de este nuevo servicio</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Cuentan con un servicio de respaldo de datos?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Sí, ofrecemos un servicio de respaldo de datos para asegurarnos de que no pierdas tus archivos importantes durante el proceso de reparación. Nuestro equipo realizará una copia de seguridad de tu información y la restaurará una vez que tu dispositivo esté reparado.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-question">¿Tienen sucursales en otras ciudades?</h3>
-        <div class="faq-answer">
-          <p class="answer-content">Actualmente nuestros servicios están ubicados en la ciudad de Coquimbo y La Serena, pero estamos en proceso de expandir nuestros servicios a otras ciudades en un futuro cercano. Puedes estar pendiente de nuestras redes sociales y página web para estar al tanto de nuestras próximas aperturas.</p>
-        </div>
-      </div>  
-    </div>
-    <div class="faq-space">.</div>
+  <div id="contenedor"><div id="animation-container"></div></div>
+  <div id="descarga">
+    <a id="btn-descargar" class="btn cargando" href="https://github.com/NetMachine/mk-cfg" draggable="false">
+      <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18v11.17l-4.59-4.58L6 10l7 7 7-7-1.41-1.41L13 13.17V2h-1z"/></svg>
+      <span class="shimmer">Descargar iMonkeyTV</span>
+    </a>
+    <p id="version">Buscando la última versión…</p>
   </div>
-</section>
-
 </main>
-<footer>
-    <p>&copy; iMONKEy 2024 - Todos los derechos reservados.</p>
-    <p>Coquimbo - La Serena</p>
-</footer>
 
 <script src="https://unpkg.com/lottie-web@5.7.8/build/player/lottie.min.js"></script>
-<script src="script.js"></script>
-
-<script src="script2.js"></script>
-<script src="price-list.js"></script>
 <script>
-
-const animationContainer = document.getElementById('animation-container');
-
+/* Animación del logo (la misma de la página principal: se repite con pausas al azar = parpadeo) */
 const animation = lottie.loadAnimation({
-  container: animationContainer,
-  renderer: 'svg',
-  loop: false,
-  autoplay: false,
+  container: document.getElementById('animation-container'),
+  renderer: 'svg', loop: false, autoplay: false,
   path: 'site/iMONKEy.json'
 });
-
-let currentPlaySpeed = 6;
-
-const playAnimation = () => {
-  animation.play();
-  animation.setSpeed(currentPlaySpeed);
-
-  animation.addEventListener('complete', () => {
-
-    currentPlaySpeed = getRandomPlaySpeed(6.5, 7);
-    animation.setSpeed(currentPlaySpeed);
-    setTimeout(() => animation.goToAndPlay(0, true), getRandomPause(50, 6000));
-  });
-};
-
-const getRandomPlaySpeed = (min, max) => Math.random() * (max - min) + min;
-const getRandomPause = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-
-setTimeout(playAnimation, 1,200);
-
-</script> 
-
-<script src="script3.js"></script>
-<script src="script4.js"></script>
-<script src="script5.js"></script>
-<script>
-/* DESVANECIMIENTO CAPA NEGRA */
-const loadingOverlay = document.getElementById("loading-overlay");
-const contenedor = document.getElementById("contenedor");
-const root = document.documentElement;
-const body = document.body;
-
-let overlayRemoved = false;
-const loadingTextContainer = document.querySelector('.loading-text-container');
-
-window.addEventListener("load", function() {
-    
-    setTimeout(function() {
-          
-
-
-
-body.style.overflow = 'hidden';
-    contenedor.classList.add("fade-in");
-    setTimeout(function() {
-            if (loadingOverlay && !overlayRemoved) {
-        loadingOverlay.classList.add("fade-out");
-
-        // Esperar 400ms y luego eliminar el overlay
-        setTimeout(function() {
-            if (loadingOverlay) {
-                document.body.removeChild(loadingOverlay);
-                contenedor.style.zIndex = 'auto';
-                root.style.touchAction = 'auto';
-                root.style.height = 'auto';
-                body.style.overflow = 'auto';
-                overlayRemoved = true;
-            }
-        }, 400);
-    }
-    }, 300);
-
-  
-    }, 300);
-
-    
-
-
-
+let velocidad = 6;
+const azar = (min, max) => Math.random() * (max - min) + min;
+animation.addEventListener('complete', () => {
+  velocidad = azar(6.5, 7);
+  animation.setSpeed(velocidad);
+  setTimeout(() => animation.goToAndPlay(0, true), Math.floor(azar(50, 6000)));
 });
+setTimeout(() => { animation.setSpeed(velocidad); animation.play(); }, 1200);
 
-document.addEventListener("click", function() {
-    if (loadingOverlay && !overlayRemoved) {
-        loadingOverlay.classList.add("fade-out");
+/* Última versión: se lee version.json, así el botón siempre baja la más nueva */
+const btn = document.getElementById('btn-descargar');
+const ver = document.getElementById('version');
+fetch('https://raw.githubusercontent.com/NetMachine/mk-cfg/main/version.json?t=' + Date.now(), { cache: 'no-store' })
+  .then(r => r.json())
+  .then(v => {
+    if (v && v.apkUrl) {
+      btn.href = v.apkUrl;
+      btn.setAttribute('download', 'iMonkeyTV-' + (v.versionName || '') + '.apk');
+      ver.textContent = 'Versión ' + (v.versionName || '');
+    } else { ver.textContent = ''; }
+  })
+  .catch(() => { ver.textContent = ''; })
+  .finally(() => btn.classList.remove('cargando'));
 
-        // Esperar 400ms y luego eliminar el overlay
-        setTimeout(function() {
-            if (loadingOverlay) {
-                document.body.removeChild(loadingOverlay);
-                contenedor.style.zIndex = 'auto';
-                root.style.touchAction = 'auto';
-                root.style.height = 'auto';
-                body.style.overflow = 'auto';
-                overlayRemoved = true;
-            }
-        }, 400);
-    }
+/* Desvanecimiento de la capa negra (igual que la principal) */
+const overlay = document.getElementById('loading-overlay');
+const contenedor = document.getElementById('contenedor');
+const descarga = document.getElementById('descarga');
+let quitado = false;
+function quitarCapa() {
+  if (quitado || !overlay) return;
+  quitado = true;
+  overlay.classList.add('fade-out');
+  setTimeout(() => { overlay.remove(); contenedor.style.zIndex = 'auto'; }, 400);
+}
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    contenedor.classList.add('fade-in');
+    descarga.classList.add('fade-in');
+    setTimeout(quitarCapa, 300);
+  }, 300);
 });
-
-
+document.addEventListener('click', () => {
+  contenedor.classList.add('fade-in');
+  descarga.classList.add('fade-in');
+  quitarCapa();
+});
+document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
-  <script>
-    // Deshabilitar clic derecho en toda la página
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
-
-    // Deshabilitar target en los enlaces
-    document.querySelectorAll('a').forEach(function(link) {
-      link.removeAttribute('target');
-    });
-        document.getElementById('arrow-container').addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
-  </script>
 </body>
 </html>
